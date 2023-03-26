@@ -206,7 +206,6 @@ if (!isset($_SESSION['teacher'])) {
     <?php include("./includes/scripts3.php") ?>
     <script src="<?php echo SITEURL ?>asset2/js/bootstrap-datetimepicker.js"></script>
 
-
     <script>
         $.fn.dataTable.Buttons.defaults.dom.button.className = 'btn btn-white btn-sm';
         $(document).ready(function() {
@@ -267,12 +266,62 @@ if (!isset($_SESSION['teacher'])) {
                 location.href = "<?php echo SITEURL; ?>teacher/index.php?page=question&exam_code=" + id;
             });
 
-            $(document).on('click', '#activate_request', function() {
-                console.log('activate button clicked')
+            $(document).on('click', '.activate_request', function() {
+            // console.log('activate button clicked')
+            const request_id = $(this).data('request_id');
+            const request_value = $(this).data('request_value')
+            $.ajax({
+                url: "<?php echo SITEURL; ?>teacher/ajax_teacher.php",
+                method: "POST",
+                data: {
+                    page: "activate_exam_request",
+                    action: "update",
+                    request_value: request_value,
+                    request_id: request_id
+                },
+                success: function(data) {
+                    // alert(typeof jQuery.parseJSON(data).number_of_requests)
+                    if (jQuery.parseJSON(data).number_of_requests == 0) {
+                        $('#number_of_requests').hide()
+                    } else {
+                        $('#number_of_requests').show()
+                        $('#number_of_requests').html(jQuery.parseJSON(data).number_of_requests);
+                    }
+                    $('.dropdown-messages').html(jQuery.parseJSON(data).drop_down_component);
+                    // alert(jQuery.parseJSON(data).drop_down_component)
+                },
+
             });
-            $(document).on('click', '#cancel_request', function() {
-                console.log('cancel button clicked')
+
+        });
+        $(document).on('click', '.cancel_request', function() {
+            // console.log('cancel button clicked')
+
+            const request_id = $(this).data('request_id');
+            const request_value = $(this).data('request_value')
+            $.ajax({
+                url: "<?php echo SITEURL; ?>teacher/ajax_teacher.php",
+                method: "POST",
+                data: {
+                    page: "activate_exam_request",
+                    action: "update",
+                    request_value: request_value,
+                    request_id: request_id
+                },
+                success: function(data) {
+                    // alert(typeof jQuery.parseJSON(data).number_of_requests)
+                    if (jQuery.parseJSON(data).number_of_requests == 0) {
+                        $('#number_of_requests').hide()
+                    } else {
+                        $('#number_of_requests').show()
+                        $('#number_of_requests').html(jQuery.parseJSON(data).number_of_requests);
+                    }
+                    $('.dropdown-messages').html(jQuery.parseJSON(data).drop_down_component);
+                    // alert(jQuery.parseJSON(data).drop_down_component)
+                },
+
             });
+        });
 
             $(document).on('click', '.edit_exam', function() {
                 var exam_id = $(this).data('exam-id');

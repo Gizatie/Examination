@@ -103,7 +103,7 @@ function get_user_answer($conn, $obj, $student_id, $exam_id, $question_id)
 }
 function request_already_sent($conn,$obj,$student_id,$exam_id){
     $tbl_name = 'tbl_exam_activation_request';
-    $where = 'exam_id = "' . $exam_id . '" and student_id="' . $student_id . '"';
+    $where = 'exam_id = "' . $exam_id . '" and student_id="' . $student_id . '"  and request_status="Pending"';
     $query = $obj->select_data($tbl_name, $where);
     $res = $obj->execute_query($conn, $query);
     if ($obj->num_rows($res) > 0) {
