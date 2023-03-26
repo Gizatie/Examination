@@ -656,7 +656,9 @@ if ($_POST['action'] == 'Add') {
                 $response = array('success' => 'request_failed');
             }
         }
-
+        else {
+            $response = array('success' => 'already_exists');
+        }
         echo json_encode($response);
     }
 }

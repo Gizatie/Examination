@@ -252,6 +252,12 @@
                     } else if (jQuery.parseJSON(data).success == 'request_failed') {
                         alert('you request failed')
                     }
+                    else if (jQuery.parseJSON(data).success == 'already_exists') {
+                        swal(
+                            '',
+                            'Your request is already sent. Please wait for approval...',
+                        )
+                    }
                 }
             });
         });
