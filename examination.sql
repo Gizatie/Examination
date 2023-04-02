@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 26, 2023 at 10:47 AM
+-- Generation Time: Mar 31, 2023 at 06:19 AM
 -- Server version: 5.7.36
--- PHP Version: 8.0.13
+-- PHP Version: 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `tbl_course` (
   KEY `department_id` (`department_id`),
   KEY `teacher_id` (`teacher_id`),
   KEY `study_year` (`study_year`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_course`
@@ -130,7 +130,8 @@ INSERT INTO `tbl_course` (`course_id`, `course_code`, `course_name`, `department
 (5, 'MAT201', 'Linear Aljebra', 2, 5, 2),
 (6, 'CS202', 'OOP', 4, 7, 2),
 (7, 'Em001', 'Emerging Technology', 4, 6, 2),
-(8, 'C001', 'C++', 4, 6, 2);
+(8, 'C001', 'C++', 4, 6, 2),
+(9, 'CS3021', 'Network and System Admin', 4, 37, 4);
 
 -- --------------------------------------------------------
 
@@ -202,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `tbl_exam` (
   `exam_type` varchar(255) NOT NULL,
   PRIMARY KEY (`exam_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_exam`
@@ -218,7 +219,8 @@ INSERT INTO `tbl_exam` (`exam_id`, `course_id`, `time_duration`, `qns_per_set`, 
 (10, 3, 5, 5, 'completed', '2023-03-23', '2023-03-23 11:20:00', 'Exit Exam'),
 (12, 7, 5, 2, 'completed', '2023-03-23', '2023-03-23 11:00:00', 'Exit Exam'),
 (13, 4, 30, 5, 'completed', '2023-03-23', '2023-03-23 13:25:00', 'Exit Exam'),
-(14, 3, 30, 3, 'completed', '2023-03-23', '2023-03-23 14:30:00', 'Quiz');
+(14, 3, 30, 3, 'completed', '2023-03-23', '2023-03-23 14:30:00', 'Quiz'),
+(15, 9, 5, 14, 'completed', '2023-03-30', '2023-03-30 16:55:00', 'Exit Exam');
 
 -- --------------------------------------------------------
 
@@ -235,7 +237,7 @@ CREATE TABLE IF NOT EXISTS `tbl_exam_activation_request` (
   `teacher_id` int(11) NOT NULL,
   `request_status` varchar(255) NOT NULL DEFAULT 'Pending',
   PRIMARY KEY (`request_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=71 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_exam_activation_request`
@@ -267,7 +269,9 @@ INSERT INTO `tbl_exam_activation_request` (`request_id`, `student_id`, `request_
 (49, 8, '2023-03-23 10:00:09', 11, 5, 'Activated'),
 (50, 8, '2023-03-23 10:02:09', 11, 5, 'Activated'),
 (51, 8, '2023-03-23 10:03:51', 11, 5, 'Activated'),
-(68, 8, '2023-03-23 16:11:19', 14, 5, 'Pending');
+(68, 8, '2023-03-23 16:11:19', 14, 5, 'Activated'),
+(69, 9, '2023-03-30 16:50:54', 15, 37, 'Activated'),
+(70, 9, '2023-03-30 16:56:07', 15, 37, 'Activated');
 
 -- --------------------------------------------------------
 
@@ -362,7 +366,7 @@ CREATE TABLE IF NOT EXISTS `tbl_question` (
   `updated_date` date NOT NULL,
   `image_name` blob NOT NULL,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_question`
@@ -426,7 +430,21 @@ INSERT INTO `tbl_question` (`question_id`, `exam_id`, `question`, `first_answer`
 (159, '13', '<p>What is linkedlist?</p>\r\n', 'a', 'b', 'd', 'd', 'd', 3, '<p>you describe your asnwer here.</p>\r\n', '5', 'yes', '2023-03-23', '2023-03-23', ''),
 (160, '13', '<p>What is doublyLinkedList?</p>\r\n', 'ad', 'sds', 'sdfs', 'dsfs', 'sfdsfs', 3, '<p>Put your reason for the answer here.</p>\r\n', '5', 'yes', '2023-03-23', '2023-03-23', ''),
 (161, '13', '<p>What is pointer?</p>\r\n', 'sfdsf', 'sdfsdf', 'sdfsf', 'sfsdfs', 'sdfsdfs', 3, '<p>Description goes here.</p>\r\n', '4', 'yes', '2023-03-23', '2023-03-23', ''),
-(162, '14', '<p>What is Java</p>\r\n', 'aaa', 'bb', 'gg', 'dd', 'jj', 2, '<p>Becaus ethis best <a href=\"https://stackoverflow.com/questions/1969476/ajax-success-event-not-working\">answer&nbsp;</a></p>\r\n', '2', 'yes', '2023-03-23', '2023-03-23', '');
+(162, '14', '<p>What is Java</p>\r\n', 'aaa', 'bb', 'gg', 'dd', 'jj', 2, '<p>Becaus ethis best <a href=\"https://stackoverflow.com/questions/1969476/ajax-success-event-not-working\">answer&nbsp;</a></p>\r\n', '2', 'yes', '2023-03-23', '2023-03-23', ''),
+(165, '15', '<p><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\"><span style=\"color:black\">The actors or system users which are outside of our system and interact with the system are always human beings??</span></span></span></p>\r\n', 'False', 'True', 'All', 'None', '', 1, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(166, '15', '<p><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\"><span style=\"color:black\">Linux OS is recommended for system administration because Linux system is more secure than Windows OS. (1pt)</span></span></span></p>\r\n', 'True', 'False', 'All', 'None', '', 1, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(167, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">What is the disadvantage of using a shell script in a Linux system? (1.5 pts)</span></span></span></span></p>\r\n', 'It exposes the system to hackers or crackers.', 'It is difficult to use for system administrator', 'It affects system performance', 'None of the above.', '', 2, '', '2', 'yes', '2023-03-30', '2023-03-30', ''),
+(168, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">Which of the following symbolic method command changes file permission to <strong>read</strong> and <strong>excute</strong> for <strong>owners</strong>, <strong>read</strong> and <strong>write</strong> for <strong>group</strong>, <strong>write</strong> and <strong>execute</strong> for <strong>other(world)</strong> attributes?</span></span></span></span>(1.5 pts)</p>\r\n', 'Chmod 613 file-name', 'Chmod 527 file-name', 'Chmod 563 file-name', 'Chmod 643 file-name', '', 3, '', '2', 'yes', '2023-03-30', '2023-03-30', ''),
+(169, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">Which of the following is/are the role of network admin in a small organization?&nbsp;</span></span></span></span>(1.5 pts)</p>\r\n', 'Managing the userâ€™s account', 'Allocating storage space for each user', 'Configuring Network services like DHCP, DNS, FTP, and SMTP', 'All are role of network admin.', '', 4, '', '2', 'yes', '2023-03-30', '2023-03-30', ''),
+(170, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">Which component of Linux OS provides the abstraction to hide the complexity of hardware detail?</span></span></span></span></p>\r\n', 'System library', 'System Utility', 'Kernel', ' Compiler', '', 3, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(171, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">Let&rsquo;s assume that you are using Linux OS for managing users and file of your organization, but the OS doesn&rsquo;t allow you to create other or new directors under the root directory. So, in which type of file system is classified? It is classified in: -</span></span></span></span></p>\r\n', 'Seamless', 'Extensible', 'Single rooted', 'Seamless and Extensible', '', 3, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(172, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">Let&rsquo;s assume that you install MYSQL and other DB to your Linux OS. So, in which directory the file of MYSQL can be stored?</span></span></span></span></p>\r\n', '/tmp', '/var', '/bin', '/MYSQL', '', 2, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(173, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">Which of the following Linux command adds write, execute &amp; remove read permission to the <strong>world</strong> attribute file named my_file?</span></span></span></span></p>\r\n', 'Chmod U+wx my_file.', 'Chmod U=wx my_file.', 'Chmod O+wx my_file.', 'Chmod O=wx my_file.', '', 4, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(174, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">_________________<strong> </strong>is a limit set by a system administrator that restricts certain aspects of file system usage on modern operating systems.</span></span></span></span></p>\r\n', 'Disk quota ', 'Disk storage', 'File management', 'Password Aging', '', 1, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(175, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">All of the following are <strong>TRUE</strong> about the difference between Unix OS and Windows OS <strong>EXCEPT</strong>?</span></span></span></span></p>\r\n', 'Unix uses CLI while Windows uses GUI.', 'Unix OS is licensed while Windows OS is free.', 'Unix supports multiprocessing while Windows not', 'Unix OS is case-sensitive by default while Window is not case-sensitive.', '', 2, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(176, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">Which of the following is the responsibility of Network Admin in Large organizations? (1.5 pts)</span></span></span></span></p>\r\n', 'Determining disk usage', 'Configuring password aging for the userâ€™s account', 'Keeping organizations computer network up-to-date.', 'Managing users file', '', 3, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(177, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">In which Linux distribution is Ubuntu OS is categorized?(1.5 pts)</span></span></span></span></p>\r\n', 'Debian', 'Red Hat', 'Fedora', 'SUSE Linux', '', 1, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(178, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">You know that the role of system and Network admin was depend on the size of the organization (large, medium, or small), so what are the charitarian used to classify the size of the organization as large, medium, or smallest?(1.5 pts)</span></span></span></span></p>\r\n', 'Geographical area covered by the organization.', 'Number of employers in the organization', 'Physical location of the organization', 'The number of buildings in the organization', '', 2, '', '1', 'yes', '2023-03-30', '2023-03-30', '');
 
 -- --------------------------------------------------------
 
@@ -446,7 +464,7 @@ CREATE TABLE IF NOT EXISTS `tbl_result` (
   `added_date` date NOT NULL,
   PRIMARY KEY (`result_id`),
   KEY `exam_id` (`exam_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_result`
@@ -507,7 +525,21 @@ INSERT INTO `tbl_result` (`result_id`, `exam_id`, `student_id`, `question_id`, `
 (72, 1, 8, 68, 4, 4, '1', '2023-03-23'),
 (73, 1, 8, 71, 4, 2, '2', '2023-03-23'),
 (74, 1, 8, 74, 4, 4, '4', '2023-03-23'),
-(75, 1, 8, 80, 4, 4, '2', '2023-03-23');
+(75, 1, 8, 80, 4, 4, '2', '2023-03-23'),
+(76, 15, 9, 165, 2, 1, '1', '2023-03-30'),
+(77, 15, 9, 166, 1, 1, '1', '2023-03-30'),
+(78, 15, 9, 167, 3, 2, '2', '2023-03-30'),
+(79, 15, 9, 168, 2, 3, '2', '2023-03-30'),
+(80, 15, 9, 169, 1, 4, '2', '2023-03-30'),
+(81, 15, 9, 171, 1, 3, '1', '2023-03-30'),
+(82, 15, 9, 172, 4, 2, '1', '2023-03-30'),
+(83, 15, 9, 173, 4, 4, '1', '2023-03-30'),
+(84, 15, 9, 175, 4, 2, '1', '2023-03-30'),
+(85, 15, 9, 176, 4, 3, '1', '2023-03-30'),
+(86, 15, 9, 177, 4, 1, '1', '2023-03-30'),
+(87, 15, 9, 178, 3, 2, '1', '2023-03-30'),
+(88, 15, 9, 170, 2, 3, '1', '2023-03-30'),
+(89, 15, 9, 174, 2, 1, '1', '2023-03-30');
 
 -- --------------------------------------------------------
 
@@ -630,31 +662,7 @@ CREATE TABLE IF NOT EXISTS `tbl_student` (
 --
 
 INSERT INTO `tbl_student` (`student_id`, `exam_id`, `first_name`, `last_name`, `email`, `username`, `password`, `contact`, `gender`, `study_year`, `department_id`, `academic_year`, `is_active`, `added_date`, `updated_date`) VALUES
-(8, 1, 'Nathan', 'Zewdie', 'nathan@gmail.com', 'Nathan', 'dtu1234', '123151555', 'Male', 2, 4, 2021, 'yes', '2021-05-19', '2021-05-19'),
-(9, 1, 'Yeshambel', 'Habtie', 'yeshambel@gmail.com', 'Yeshambel', 'dtu1234', '936733488', 'Male', 2, 4, 2021, 'no', '2021-05-19', '2021-05-19'),
-(12, 1, 'Genet', 'Worku', 'heavenworku21@gmail.com', 'Genet', 'dtu1234', '960428380', 'Female', 3, 4, 2021, 'no', '2021-05-19', '2021-05-19'),
-(13, NULL, 'Daniel', 'Ravuri', 'danielravuri@gmail.com', 'dddd', 'dtu1234', '0934635838', 'Male', 2, 4, 2022, 'yes', '2022-05-28', '2022-05-28'),
-(14, NULL, 'Abebe', 'Molla', 'abe@gmail.com', 'Abebe', 'dtu1234', '0934635838', 'Male', 2, 4, 2022, 'yes', '2022-05-28', '2022-05-28'),
-(15, NULL, 'Tsegereda', 'Fentahun', 'tfntahun@gmail.com', 'Tsegereda', 'dtu1234', '935861717', 'Female', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(16, NULL, 'Masresha', 'Abebe', 'massabebe8@gmail.com', 'Masresha', 'dtu1234', '911909310', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(17, NULL, 'Mahider', 'Astatkew', 'mahderastak@gmail.com', 'Mahider', 'dtu1234', '918195184', 'Female', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(18, NULL, 'Suleman', 'Yesuf', 'Suleyesuf@gmail.com', 'Suleman', 'dtu1234', '918096718', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(19, NULL, 'Gent', 'Atnafu', 'Genetatna8@gmail.com', 'Gent', 'dtu1234', '918243261', 'Female', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(20, NULL, 'Bezuayehu', 'Getnet', 'bz0912@gmail.com', 'Bezuayehu', 'dtu1234', '924279118', 'Female', 3, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(21, NULL, 'Teshale', 'Wubie', 'teshalewubie@gmail.com', 'Teshale', 'dtu1234', '920752970', 'Female', 3, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(22, NULL, 'Kenyawkal', 'Wodaje', 'Yawkal2012@gmail.com', 'Kenyawkal', 'dtu1234', '911987372', 'Male', 3, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(23, NULL, 'Berhanu', 'Baye', 'berhan.baye@gmail.com', 'Berhanu', 'dtu1234', '918252650', 'Male', 3, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(24, NULL, 'Hayleysuse', 'Zelalem', 'haileysuszelalem@gmail.com', 'Hayleysuse', 'dtu1234', '935706866', 'Male', 3, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(25, NULL, 'Getu', 'Molla', 'getumolla12@gmail.com', 'Getu', 'dtu1234', '934594917', 'Male', 3, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(26, NULL, 'Smegnew', 'Ejigu', 'achamyeleh49@gmail.com', 'Smegnew', 'dtu1234', '945547465', 'Male', 3, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(27, NULL, 'Aberarew', 'Nega', 'abrarewnega0140@gmail.com   ', 'Aberarew', 'dtu1234', '937380437', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(28, NULL, 'Amsayaw', 'Gashaw', 'amesayaw@gmail.com', 'Amsayaw', 'dtu1234', '918163513', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(29, NULL, 'Samuael', 'Girmay', 'samuelgirmay21@gmail.com', 'Samuael', 'dtu1234', '937425870', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(30, NULL, 'Nurhusn', 'Muhamed', 'nuraneya02@gmail.com', 'Nurhusn', 'dtu1234', '918095806', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(31, NULL, 'Adugnaw', 'Mesefin', 'adumesfin189@gmail.com', 'Adugnaw', 'dtu1234', '918187325', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(32, NULL, 'Adugnaw', 'Abebe', 'adugnaw12@gmail.com', 'Adugnaw', 'dtu1234', '928476559', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(33, NULL, 'Alemnew', 'Fekadu', 'alexfekadu077@gmail.com', 'Alemnew', 'dtu1234', '918396927', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(34, NULL, 'Abibual', 'Desalegan', '  abibualandabet@gmail.com', 'Abibual', 'dtu1234', '975591842', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23');
+(8, 1, 'Nathan', 'Zewdie', 'nathan@gmail.com', 'Nathan', 'dtu1234', '123151555', 'Male', 2, 4, 2021, 'yes', '2021-05-19', '2021-05-19');
 
 -- --------------------------------------------------------
 
@@ -671,7 +679,7 @@ CREATE TABLE IF NOT EXISTS `tbl_student_exam_enrol` (
   `login_history` int(11) DEFAULT NULL,
   PRIMARY KEY (`student_exam_enrol_id`),
   KEY `student_id` (`student_id`,`exam_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_student_exam_enrol`
@@ -687,7 +695,8 @@ INSERT INTO `tbl_student_exam_enrol` (`student_exam_enrol_id`, `student_id`, `ex
 (92, 8, 12, 'Present', 1),
 (93, 8, 10, 'Present', 0),
 (97, 8, 13, 'Present', 1),
-(98, 8, 14, 'Present', 1);
+(98, 8, 14, 'Present', 0),
+(99, 9, 15, 'Present', 1);
 
 -- --------------------------------------------------------
 
