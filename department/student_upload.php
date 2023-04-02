@@ -23,16 +23,17 @@ if (isset($_POST['uploadstudent'])) {
         $first_name = $line[1];
         $last_name  = $line[2];
         $email  = $line[3];
-        $contact = $line[4];
-        $gender = $line[5];
-        $study_year = $line[6][0];
+        $username  = $line[4];
+        $contact = $line[5];
+        $gender = $line[6];
+        $study_year = $line[7][0];
         // Check whether member already exists in the database with the same email
         $tbl_name = "tbl_student";
         $data = "first_name = '$first_name',
       last_name = '$last_name',
       email = '$email',
-      username = '$first_name',
-      password = 'dtu1234',
+      username = '$username',
+      password = 'computer4',
       contact = '$contact',
       gender = '$gender',
       study_year = '$study_year',
@@ -42,7 +43,7 @@ if (isset($_POST['uploadstudent'])) {
       added_date = '" . date('Y-m-d') . "',
       updated_date = '" . date('Y-m-d') . "'
       ";
-        $where = "email = '$email'";
+        $where = "username = '$username'";
         $query = $obj->select_data($tbl_name, $where);
         $res = $obj->execute_query($conn, $query);
         $num_rows = $obj->num_rows($res);
