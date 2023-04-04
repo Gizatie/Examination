@@ -296,7 +296,11 @@
                                                             <option value="5">Fifth Answer</option>
                                                         </select>
                                                         <span class="name">Marks</span>
+<<<<<<< Updated upstream
                                                         <input type="number" name="marks" id="marks" step="0.05"class="form-control" required="true" placeholder="Marks for this question" />
+=======
+                                                        <input type="number" name="marks" id="marks" class="form-control" step="0.05" required="true" placeholder="Marks for this question" />
+>>>>>>> Stashed changes
                                                         <input type="hidden" name="exam_id" id="exam_id" value="<?php echo $_GET['exam_code'] ?>" />
                                                         <input type="hidden" name="page" value="question" />
                                                         <input type="hidden" name="question_id" id='question_id' value="" />

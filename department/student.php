@@ -226,26 +226,6 @@
     $.fn.dataTable.Buttons.defaults.dom.button.className = 'btn btn-white btn-sm';
     $(document).ready(function() {
 
-      // $('#cvs_upload').on('click', function(event) {
-      //     // code
-      //     event.preventDefault();
-      //     $.ajax({
-      //         url: "<?php echo SITEURL; ?>department/student_upload.php",
-      //         method: "POST",
-      //         data: $('#upload_form').serialize(),
-      //         dataType: "json",
-      //         success: function(data) {
-      //           $('.dataTables-example').DataTable().ajax.reload();
-      //           $("#upload_information").html(data.success);
-      //             },
-      //             error: function(responseObj) {
-      //               alert("Something went wrong while processing your requestt.\n\nError => " +
-      //                 responseObj.responseText);
-      //             }
-
-      //         });
-      //     });
-
       var dataTable = $('.dataTables-example').DataTable({
         "processing": true,
         "serverSide": true,
@@ -262,7 +242,8 @@
 
         dom: '<"html5buttons"B>lTfgitp',
         buttons: [{
-            extend: 'copy'
+            extend: 'copy',
+            title: 'Students'
           },
           {
             extend: 'csv',
