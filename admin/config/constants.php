@@ -1,7 +1,7 @@
 <?php 
-    define('SITEURL','http://10.1.192.23/Examination/');
-    define('LOCALHOST','10.1.192.23');
-    define('USERNAME','root');
+    define('SITEURL','http://10.1.49.160/Examination/');
+    define('LOCALHOST','10.1.49.160');
+    define('USERNAME','exam');
     define('PASSWORD','');
     define('DBNAME','Examination');
 ?>

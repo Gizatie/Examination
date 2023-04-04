@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Mar 26, 2023 at 10:47 AM
--- Server version: 5.7.36
--- PHP Version: 8.0.13
+-- Host: localhost:3306
+-- Generation Time: Apr 02, 2023 at 07:32 AM
+-- Server version: 8.0.31
+-- PHP Version: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 DROP TABLE IF EXISTS `faculty`;
 CREATE TABLE IF NOT EXISTS `faculty` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `faculty_name` varchar(50) NOT NULL,
   `Description` text NOT NULL,
   `Location` varchar(255) NOT NULL,
@@ -56,7 +56,7 @@ INSERT INTO `faculty` (`id`, `faculty_name`, `Description`, `Location`) VALUES
 
 DROP TABLE IF EXISTS `tbl_admin`;
 CREATE TABLE IF NOT EXISTS `tbl_admin` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
@@ -80,7 +80,7 @@ INSERT INTO `tbl_admin` (`id`, `first_name`, `last_name`, `username`, `email`, `
 
 DROP TABLE IF EXISTS `tbl_app`;
 CREATE TABLE IF NOT EXISTS `tbl_app` (
-  `app_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `app_id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `app_name` varchar(255) NOT NULL,
   `email` varchar(200) NOT NULL,
   `username` varchar(100) NOT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `tbl_app` (
   `updated_date` date NOT NULL,
   `image_name` varchar(255) NOT NULL,
   PRIMARY KEY (`app_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `tbl_app`
@@ -107,17 +107,17 @@ INSERT INTO `tbl_app` (`app_id`, `app_name`, `email`, `username`, `password`, `c
 
 DROP TABLE IF EXISTS `tbl_course`;
 CREATE TABLE IF NOT EXISTS `tbl_course` (
-  `course_id` int(11) NOT NULL AUTO_INCREMENT,
+  `course_id` int NOT NULL AUTO_INCREMENT,
   `course_code` varchar(50) NOT NULL,
   `course_name` varchar(50) NOT NULL,
-  `department_id` int(11) NOT NULL,
-  `teacher_id` int(11) NOT NULL,
-  `study_year` int(11) NOT NULL,
+  `department_id` int NOT NULL,
+  `teacher_id` int NOT NULL,
+  `study_year` int NOT NULL,
   PRIMARY KEY (`course_id`),
   KEY `department_id` (`department_id`),
   KEY `teacher_id` (`teacher_id`),
   KEY `study_year` (`study_year`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_course`
@@ -130,7 +130,8 @@ INSERT INTO `tbl_course` (`course_id`, `course_code`, `course_name`, `department
 (5, 'MAT201', 'Linear Aljebra', 2, 5, 2),
 (6, 'CS202', 'OOP', 4, 7, 2),
 (7, 'Em001', 'Emerging Technology', 4, 6, 2),
-(8, 'C001', 'C++', 4, 6, 2);
+(8, 'C001', 'C++', 4, 6, 2),
+(9, 'CS3021', 'Network and System Admin', 4, 37, 4);
 
 -- --------------------------------------------------------
 
@@ -140,9 +141,9 @@ INSERT INTO `tbl_course` (`course_id`, `course_code`, `course_name`, `department
 
 DROP TABLE IF EXISTS `tbl_department`;
 CREATE TABLE IF NOT EXISTS `tbl_department` (
-  `dept_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dept_id` int NOT NULL AUTO_INCREMENT,
   `department_name` varchar(50) NOT NULL,
-  `faculty_id` int(11) NOT NULL,
+  `faculty_id` int NOT NULL,
   PRIMARY KEY (`dept_id`),
   KEY `faculty_id` (`faculty_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
@@ -164,13 +165,13 @@ INSERT INTO `tbl_department` (`dept_id`, `department_name`, `faculty_id`) VALUES
 
 DROP TABLE IF EXISTS `tbl_department_head`;
 CREATE TABLE IF NOT EXISTS `tbl_department_head` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `department_id` int(11) NOT NULL,
+  `department_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `department_id` (`department_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -192,17 +193,17 @@ INSERT INTO `tbl_department_head` (`id`, `first_name`, `last_name`, `username`, 
 
 DROP TABLE IF EXISTS `tbl_exam`;
 CREATE TABLE IF NOT EXISTS `tbl_exam` (
-  `exam_id` int(11) NOT NULL AUTO_INCREMENT,
-  `course_id` int(11) NOT NULL,
-  `time_duration` int(11) NOT NULL,
-  `qns_per_set` int(11) NOT NULL,
+  `exam_id` int NOT NULL AUTO_INCREMENT,
+  `course_id` int NOT NULL,
+  `time_duration` int NOT NULL,
+  `qns_per_set` int NOT NULL,
   `status` enum('created','started','completed') NOT NULL,
   `added_date` date NOT NULL,
   `exam_date` datetime NOT NULL,
   `exam_type` varchar(255) NOT NULL,
   PRIMARY KEY (`exam_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_exam`
@@ -218,7 +219,8 @@ INSERT INTO `tbl_exam` (`exam_id`, `course_id`, `time_duration`, `qns_per_set`, 
 (10, 3, 5, 5, 'completed', '2023-03-23', '2023-03-23 11:20:00', 'Exit Exam'),
 (12, 7, 5, 2, 'completed', '2023-03-23', '2023-03-23 11:00:00', 'Exit Exam'),
 (13, 4, 30, 5, 'completed', '2023-03-23', '2023-03-23 13:25:00', 'Exit Exam'),
-(14, 3, 30, 3, 'completed', '2023-03-23', '2023-03-23 14:30:00', 'Quiz');
+(14, 3, 30, 3, 'completed', '2023-03-23', '2023-03-23 14:30:00', 'Quiz'),
+(15, 9, 30, 14, 'completed', '2023-03-31', '2023-03-31 14:15:00', 'Exit Exam');
 
 -- --------------------------------------------------------
 
@@ -228,14 +230,14 @@ INSERT INTO `tbl_exam` (`exam_id`, `course_id`, `time_duration`, `qns_per_set`, 
 
 DROP TABLE IF EXISTS `tbl_exam_activation_request`;
 CREATE TABLE IF NOT EXISTS `tbl_exam_activation_request` (
-  `request_id` int(11) NOT NULL AUTO_INCREMENT,
-  `student_id` int(11) NOT NULL,
+  `request_id` int NOT NULL AUTO_INCREMENT,
+  `student_id` int NOT NULL,
   `request_time` datetime NOT NULL,
-  `exam_id` int(11) NOT NULL,
-  `teacher_id` int(11) NOT NULL,
+  `exam_id` int NOT NULL,
+  `teacher_id` int NOT NULL,
   `request_status` varchar(255) NOT NULL DEFAULT 'Pending',
   PRIMARY KEY (`request_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_exam_activation_request`
@@ -267,7 +269,13 @@ INSERT INTO `tbl_exam_activation_request` (`request_id`, `student_id`, `request_
 (49, 8, '2023-03-23 10:00:09', 11, 5, 'Activated'),
 (50, 8, '2023-03-23 10:02:09', 11, 5, 'Activated'),
 (51, 8, '2023-03-23 10:03:51', 11, 5, 'Activated'),
-(68, 8, '2023-03-23 16:11:19', 14, 5, 'Pending');
+(68, 8, '2023-03-23 16:11:19', 14, 5, 'Activated'),
+(69, 9, '2023-03-30 16:50:54', 15, 37, 'Activated'),
+(70, 9, '2023-03-30 16:56:07', 15, 37, 'Activated'),
+(71, 57, '2023-03-31 11:33:43', 15, 37, 'Activated'),
+(72, 57, '2023-03-31 11:34:20', 15, 37, 'Activated'),
+(73, 57, '2023-03-31 12:45:54', 15, 37, 'Activated'),
+(74, 57, '2023-03-31 14:09:45', 15, 37, 'Activated');
 
 -- --------------------------------------------------------
 
@@ -277,17 +285,17 @@ INSERT INTO `tbl_exam_activation_request` (`request_id`, `student_id`, `request_
 
 DROP TABLE IF EXISTS `tbl_faculty`;
 CREATE TABLE IF NOT EXISTS `tbl_faculty` (
-  `faculty_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `faculty_id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `faculty_name` varchar(150) NOT NULL,
-  `time_duration` int(11) NOT NULL,
-  `qns_per_set` int(11) NOT NULL,
-  `total_english` int(10) UNSIGNED NOT NULL,
-  `total_math` int(10) UNSIGNED NOT NULL,
+  `time_duration` int NOT NULL,
+  `qns_per_set` int NOT NULL,
+  `total_english` int UNSIGNED NOT NULL,
+  `total_math` int UNSIGNED NOT NULL,
   `is_active` varchar(10) NOT NULL,
   `added_date` date NOT NULL,
   `updated_date` date NOT NULL,
   PRIMARY KEY (`faculty_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `tbl_faculty`
@@ -305,13 +313,13 @@ INSERT INTO `tbl_faculty` (`faculty_id`, `faculty_name`, `time_duration`, `qns_p
 
 DROP TABLE IF EXISTS `tbl_faculty_dean`;
 CREATE TABLE IF NOT EXISTS `tbl_faculty_dean` (
-  `dean_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dean_id` int NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `faculty_id` int(11) NOT NULL,
+  `faculty_id` int NOT NULL,
   PRIMARY KEY (`dean_id`),
   KEY `faculty_id` (`faculty_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
@@ -334,8 +342,8 @@ INSERT INTO `tbl_faculty_dean` (`dean_id`, `first_name`, `last_name`, `email`, `
 
 DROP TABLE IF EXISTS `tbl_invigilator`;
 CREATE TABLE IF NOT EXISTS `tbl_invigilator` (
-  `exam_id` int(11) NOT NULL,
-  `teacher_id` int(11) NOT NULL
+  `exam_id` int NOT NULL,
+  `teacher_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -346,7 +354,7 @@ CREATE TABLE IF NOT EXISTS `tbl_invigilator` (
 
 DROP TABLE IF EXISTS `tbl_question`;
 CREATE TABLE IF NOT EXISTS `tbl_question` (
-  `question_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `question_id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `exam_id` varchar(50) NOT NULL,
   `question` longtext NOT NULL,
   `first_answer` varchar(255) NOT NULL,
@@ -354,7 +362,7 @@ CREATE TABLE IF NOT EXISTS `tbl_question` (
   `third_answer` varchar(255) NOT NULL,
   `fourth_answer` varchar(255) NOT NULL,
   `fifth_answer` varchar(255) NOT NULL,
-  `answer` int(11) NOT NULL,
+  `answer` int NOT NULL,
   `reason` longtext NOT NULL,
   `marks` decimal(10,0) NOT NULL,
   `is_active` varchar(10) NOT NULL,
@@ -362,7 +370,7 @@ CREATE TABLE IF NOT EXISTS `tbl_question` (
   `updated_date` date NOT NULL,
   `image_name` blob NOT NULL,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `tbl_question`
@@ -426,7 +434,21 @@ INSERT INTO `tbl_question` (`question_id`, `exam_id`, `question`, `first_answer`
 (159, '13', '<p>What is linkedlist?</p>\r\n', 'a', 'b', 'd', 'd', 'd', 3, '<p>you describe your asnwer here.</p>\r\n', '5', 'yes', '2023-03-23', '2023-03-23', ''),
 (160, '13', '<p>What is doublyLinkedList?</p>\r\n', 'ad', 'sds', 'sdfs', 'dsfs', 'sfdsfs', 3, '<p>Put your reason for the answer here.</p>\r\n', '5', 'yes', '2023-03-23', '2023-03-23', ''),
 (161, '13', '<p>What is pointer?</p>\r\n', 'sfdsf', 'sdfsdf', 'sdfsf', 'sfsdfs', 'sdfsdfs', 3, '<p>Description goes here.</p>\r\n', '4', 'yes', '2023-03-23', '2023-03-23', ''),
-(162, '14', '<p>What is Java</p>\r\n', 'aaa', 'bb', 'gg', 'dd', 'jj', 2, '<p>Becaus ethis best <a href=\"https://stackoverflow.com/questions/1969476/ajax-success-event-not-working\">answer&nbsp;</a></p>\r\n', '2', 'yes', '2023-03-23', '2023-03-23', '');
+(162, '14', '<p>What is Java</p>\r\n', 'aaa', 'bb', 'gg', 'dd', 'jj', 2, '<p>Becaus ethis best <a href=\"https://stackoverflow.com/questions/1969476/ajax-success-event-not-working\">answer&nbsp;</a></p>\r\n', '2', 'yes', '2023-03-23', '2023-03-23', ''),
+(165, '15', '<p><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\"><span style=\"color:black\">The actors or system users which are outside of our system and interact with the system are always human beings??</span></span></span></p>\r\n', 'False', 'True', 'All', 'None', '', 1, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(166, '15', '<p><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\"><span style=\"color:black\">Linux OS is recommended for system administration because Linux system is more secure than Windows OS. (1pt)</span></span></span></p>\r\n', 'True', 'False', 'All', 'None', '', 1, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(167, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">What is the disadvantage of using a shell script in a Linux system? (1.5 pts)</span></span></span></span></p>\r\n', 'It exposes the system to hackers or crackers.', 'It is difficult to use for system administrator', 'It affects system performance', 'None of the above.', '', 2, '', '2', 'yes', '2023-03-30', '2023-03-30', ''),
+(168, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">Which of the following symbolic method command changes file permission to <strong>read</strong> and <strong>excute</strong> for <strong>owners</strong>, <strong>read</strong> and <strong>write</strong> for <strong>group</strong>, <strong>write</strong> and <strong>execute</strong> for <strong>other(world)</strong> attributes?</span></span></span></span>(1.5 pts)</p>\r\n', 'Chmod 613 file-name', 'Chmod 527 file-name', 'Chmod 563 file-name', 'Chmod 643 file-name', '', 3, '', '2', 'yes', '2023-03-30', '2023-03-30', ''),
+(169, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">Which of the following is/are the role of network admin in a small organization?&nbsp;</span></span></span></span>(1.5 pts)</p>\r\n', 'Managing the userâ€™s account', 'Allocating storage space for each user', 'Configuring Network services like DHCP, DNS, FTP, and SMTP', 'All are role of network admin.', '', 4, '', '2', 'yes', '2023-03-30', '2023-03-30', ''),
+(170, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">Which component of Linux OS provides the abstraction to hide the complexity of hardware detail?</span></span></span></span></p>\r\n', 'System library', 'System Utility', 'Kernel', ' Compiler', '', 3, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(171, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">Let&rsquo;s assume that you are using Linux OS for managing users and file of your organization, but the OS doesn&rsquo;t allow you to create other or new directors under the root directory. So, in which type of file system is classified? It is classified in: -</span></span></span></span></p>\r\n', 'Seamless', 'Extensible', 'Single rooted', 'Seamless and Extensible', '', 3, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(172, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">Let&rsquo;s assume that you install MYSQL and other DB to your Linux OS. So, in which directory the file of MYSQL can be stored?</span></span></span></span></p>\r\n', '/tmp', '/var', '/bin', '/MYSQL', '', 2, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(173, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">Which of the following Linux command adds write, execute &amp; remove read permission to the <strong>world</strong> attribute file named my_file?</span></span></span></span></p>\r\n', 'Chmod U+wx my_file.', 'Chmod U=wx my_file.', 'Chmod O+wx my_file.', 'Chmod O=wx my_file.', '', 4, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(174, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">_________________<strong> </strong>is a limit set by a system administrator that restricts certain aspects of file system usage on modern operating systems.</span></span></span></span></p>\r\n', 'Disk quota ', 'Disk storage', 'File management', 'Password Aging', '', 1, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(175, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">All of the following are <strong>TRUE</strong> about the difference between Unix OS and Windows OS <strong>EXCEPT</strong>?</span></span></span></span></p>\r\n', 'Unix uses CLI while Windows uses GUI.', 'Unix OS is licensed while Windows OS is free.', 'Unix supports multiprocessing while Windows not', 'Unix OS is case-sensitive by default while Window is not case-sensitive.', '', 2, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(176, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">Which of the following is the responsibility of Network Admin in Large organizations? (1.5 pts)</span></span></span></span></p>\r\n', 'Determining disk usage', 'Configuring password aging for the userâ€™s account', 'Keeping organizations computer network up-to-date.', 'Managing users file', '', 3, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(177, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">In which Linux distribution is Ubuntu OS is categorized?(1.5 pts)</span></span></span></span></p>\r\n', 'Debian', 'Red Hat', 'Fedora', 'SUSE Linux', '', 1, '', '1', 'yes', '2023-03-30', '2023-03-30', ''),
+(178, '15', '<p><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:10.0pt\"><span style=\"font-family:&quot;Comic Sans MS&quot;\">You know that the role of system and Network admin was depend on the size of the organization (large, medium, or small), so what are the charitarian used to classify the size of the organization as large, medium, or smallest?(1.5 pts)</span></span></span></span></p>\r\n', 'Geographical area covered by the organization.', 'Number of employers in the organization', 'Physical location of the organization', 'The number of buildings in the organization', '', 2, '', '1', 'yes', '2023-03-30', '2023-03-30', '');
 
 -- --------------------------------------------------------
 
@@ -436,17 +458,17 @@ INSERT INTO `tbl_question` (`question_id`, `exam_id`, `question`, `first_answer`
 
 DROP TABLE IF EXISTS `tbl_result`;
 CREATE TABLE IF NOT EXISTS `tbl_result` (
-  `result_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `exam_id` int(11) NOT NULL,
-  `student_id` int(11) UNSIGNED NOT NULL,
-  `question_id` int(11) UNSIGNED NOT NULL,
-  `user_answer` int(11) UNSIGNED NOT NULL,
-  `right_answer` int(11) UNSIGNED NOT NULL,
+  `result_id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `exam_id` int NOT NULL,
+  `student_id` int UNSIGNED NOT NULL,
+  `question_id` int UNSIGNED NOT NULL,
+  `user_answer` int UNSIGNED NOT NULL,
+  `right_answer` int UNSIGNED NOT NULL,
   `marks` varchar(20) NOT NULL,
   `added_date` date NOT NULL,
   PRIMARY KEY (`result_id`),
   KEY `exam_id` (`exam_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=508 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `tbl_result`
@@ -507,7 +529,439 @@ INSERT INTO `tbl_result` (`result_id`, `exam_id`, `student_id`, `question_id`, `
 (72, 1, 8, 68, 4, 4, '1', '2023-03-23'),
 (73, 1, 8, 71, 4, 2, '2', '2023-03-23'),
 (74, 1, 8, 74, 4, 4, '4', '2023-03-23'),
-(75, 1, 8, 80, 4, 4, '2', '2023-03-23');
+(75, 1, 8, 80, 4, 4, '2', '2023-03-23'),
+(76, 15, 9, 165, 2, 1, '1', '2023-03-30'),
+(77, 15, 9, 166, 1, 1, '1', '2023-03-30'),
+(78, 15, 9, 167, 3, 2, '2', '2023-03-30'),
+(79, 15, 9, 168, 2, 3, '2', '2023-03-30'),
+(80, 15, 9, 169, 1, 4, '2', '2023-03-30'),
+(81, 15, 9, 171, 1, 3, '1', '2023-03-30'),
+(82, 15, 9, 172, 4, 2, '1', '2023-03-30'),
+(83, 15, 9, 173, 4, 4, '1', '2023-03-30'),
+(84, 15, 9, 175, 4, 2, '1', '2023-03-30'),
+(85, 15, 9, 176, 4, 3, '1', '2023-03-30'),
+(86, 15, 9, 177, 4, 1, '1', '2023-03-30'),
+(87, 15, 9, 178, 3, 2, '1', '2023-03-30'),
+(88, 15, 9, 170, 2, 3, '1', '2023-03-30'),
+(89, 15, 9, 174, 2, 1, '1', '2023-03-30'),
+(90, 15, 57, 165, 1, 1, '1', '2023-03-31'),
+(91, 15, 57, 166, 1, 1, '1', '2023-03-31'),
+(92, 15, 57, 167, 3, 2, '2', '2023-03-31'),
+(93, 15, 57, 168, 2, 3, '2', '2023-03-31'),
+(94, 15, 57, 169, 4, 4, '2', '2023-03-31'),
+(95, 15, 57, 170, 3, 3, '1', '2023-03-31'),
+(96, 15, 57, 171, 3, 3, '1', '2023-03-31'),
+(97, 15, 57, 172, 3, 2, '1', '2023-03-31'),
+(98, 15, 57, 173, 4, 4, '1', '2023-03-31'),
+(99, 15, 57, 174, 1, 1, '1', '2023-03-31'),
+(100, 15, 57, 175, 2, 2, '1', '2023-03-31'),
+(101, 15, 57, 176, 3, 3, '1', '2023-03-31'),
+(102, 15, 57, 177, 1, 1, '1', '2023-03-31'),
+(103, 15, 57, 178, 4, 2, '1', '2023-03-31'),
+(104, 15, 70, 165, 1, 1, '1', '2023-03-31'),
+(105, 15, 72, 165, 1, 1, '1', '2023-03-31'),
+(106, 15, 66, 165, 1, 1, '1', '2023-03-31'),
+(107, 15, 71, 165, 1, 1, '1', '2023-03-31'),
+(108, 15, 78, 165, 1, 1, '1', '2023-03-31'),
+(109, 15, 64, 165, 1, 1, '1', '2023-03-31'),
+(110, 15, 85, 165, 1, 1, '1', '2023-03-31'),
+(111, 15, 84, 165, 1, 1, '1', '2023-03-31'),
+(112, 15, 70, 166, 1, 1, '1', '2023-03-31'),
+(113, 15, 75, 165, 1, 1, '1', '2023-03-31'),
+(114, 15, 77, 165, 1, 1, '1', '2023-03-31'),
+(115, 15, 86, 165, 1, 1, '1', '2023-03-31'),
+(116, 15, 71, 166, 2, 1, '1', '2023-03-31'),
+(117, 15, 60, 165, 1, 1, '1', '2023-03-31'),
+(118, 15, 85, 166, 2, 1, '1', '2023-03-31'),
+(119, 15, 68, 165, 2, 1, '1', '2023-03-31'),
+(120, 15, 81, 165, 1, 1, '1', '2023-03-31'),
+(121, 15, 69, 165, 1, 1, '1', '2023-03-31'),
+(122, 15, 61, 165, 1, 1, '1', '2023-03-31'),
+(123, 15, 62, 165, 1, 1, '1', '2023-03-31'),
+(124, 15, 63, 165, 1, 1, '1', '2023-03-31'),
+(125, 15, 60, 166, 1, 1, '1', '2023-03-31'),
+(126, 15, 65, 165, 1, 1, '1', '2023-03-31'),
+(127, 15, 86, 166, 1, 1, '1', '2023-03-31'),
+(128, 15, 77, 166, 1, 1, '1', '2023-03-31'),
+(129, 15, 84, 166, 1, 1, '1', '2023-03-31'),
+(130, 15, 78, 166, 1, 1, '1', '2023-03-31'),
+(131, 15, 61, 166, 1, 1, '1', '2023-03-31'),
+(132, 15, 75, 166, 1, 1, '1', '2023-03-31'),
+(133, 15, 68, 166, 2, 1, '1', '2023-03-31'),
+(134, 15, 66, 166, 1, 1, '1', '2023-03-31'),
+(135, 15, 74, 165, 1, 1, '1', '2023-03-31'),
+(136, 15, 83, 165, 1, 1, '1', '2023-03-31'),
+(137, 15, 69, 166, 1, 1, '1', '2023-03-31'),
+(138, 15, 82, 165, 1, 1, '1', '2023-03-31'),
+(139, 15, 60, 167, 1, 2, '2', '2023-03-31'),
+(140, 15, 81, 166, 1, 1, '1', '2023-03-31'),
+(141, 15, 71, 167, 1, 2, '2', '2023-03-31'),
+(142, 15, 62, 166, 1, 1, '1', '2023-03-31'),
+(143, 15, 74, 166, 1, 1, '1', '2023-03-31'),
+(144, 15, 58, 165, 1, 1, '1', '2023-03-31'),
+(145, 15, 77, 167, 2, 2, '2', '2023-03-31'),
+(146, 15, 79, 165, 1, 1, '1', '2023-03-31'),
+(147, 15, 64, 167, 4, 2, '2', '2023-03-31'),
+(148, 15, 66, 167, 4, 2, '2', '2023-03-31'),
+(149, 15, 67, 166, 1, 1, '1', '2023-03-31'),
+(150, 15, 83, 166, 1, 1, '1', '2023-03-31'),
+(151, 15, 65, 166, 1, 1, '1', '2023-03-31'),
+(152, 15, 58, 166, 1, 1, '1', '2023-03-31'),
+(153, 15, 80, 165, 1, 1, '1', '2023-03-31'),
+(154, 15, 72, 166, 1, 1, '1', '2023-03-31'),
+(155, 15, 74, 167, 4, 2, '2', '2023-03-31'),
+(156, 15, 82, 166, 1, 1, '1', '2023-03-31'),
+(157, 15, 83, 167, 4, 2, '2', '2023-03-31'),
+(158, 15, 84, 167, 2, 2, '2', '2023-03-31'),
+(159, 15, 81, 167, 4, 2, '2', '2023-03-31'),
+(160, 15, 76, 165, 1, 1, '1', '2023-03-31'),
+(161, 15, 62, 167, 1, 2, '2', '2023-03-31'),
+(162, 15, 76, 166, 1, 1, '1', '2023-03-31'),
+(163, 15, 70, 168, 3, 3, '2', '2023-03-31'),
+(164, 15, 60, 168, 3, 3, '2', '2023-03-31'),
+(165, 15, 80, 166, 1, 1, '1', '2023-03-31'),
+(166, 15, 58, 167, 3, 2, '2', '2023-03-31'),
+(167, 15, 72, 167, 1, 2, '2', '2023-03-31'),
+(168, 15, 75, 167, 2, 2, '2', '2023-03-31'),
+(169, 15, 73, 166, 1, 1, '1', '2023-03-31'),
+(170, 15, 65, 167, 3, 2, '2', '2023-03-31'),
+(171, 15, 60, 169, 4, 4, '2', '2023-03-31'),
+(172, 15, 85, 168, 3, 3, '2', '2023-03-31'),
+(173, 15, 63, 167, 4, 2, '2', '2023-03-31'),
+(174, 15, 79, 166, 1, 1, '1', '2023-03-31'),
+(175, 15, 83, 169, 3, 4, '2', '2023-03-31'),
+(176, 15, 83, 170, 2, 3, '1', '2023-03-31'),
+(177, 15, 61, 167, 3, 2, '2', '2023-03-31'),
+(178, 15, 60, 170, 3, 3, '1', '2023-03-31'),
+(179, 15, 77, 168, 3, 3, '2', '2023-03-31'),
+(180, 15, 69, 169, 1, 4, '2', '2023-03-31'),
+(181, 15, 85, 169, 3, 4, '2', '2023-03-31'),
+(182, 15, 84, 169, 4, 4, '2', '2023-03-31'),
+(183, 15, 59, 167, 4, 2, '2', '2023-03-31'),
+(184, 15, 73, 167, 3, 2, '2', '2023-03-31'),
+(185, 15, 64, 168, 3, 3, '2', '2023-03-31'),
+(186, 15, 84, 170, 3, 3, '1', '2023-03-31'),
+(187, 15, 78, 169, 3, 4, '2', '2023-03-31'),
+(188, 15, 69, 170, 3, 3, '1', '2023-03-31'),
+(189, 15, 77, 169, 3, 4, '2', '2023-03-31'),
+(190, 15, 83, 171, 3, 3, '1', '2023-03-31'),
+(191, 15, 75, 168, 3, 3, '2', '2023-03-31'),
+(192, 15, 60, 171, 3, 3, '1', '2023-03-31'),
+(193, 15, 78, 170, 3, 3, '1', '2023-03-31'),
+(194, 15, 60, 172, 2, 2, '1', '2023-03-31'),
+(195, 15, 77, 170, 3, 3, '1', '2023-03-31'),
+(196, 15, 71, 168, 3, 3, '2', '2023-03-31'),
+(197, 15, 82, 167, 2, 2, '2', '2023-03-31'),
+(198, 15, 74, 168, 3, 3, '2', '2023-03-31'),
+(199, 15, 86, 168, 3, 3, '2', '2023-03-31'),
+(200, 15, 83, 172, 4, 2, '1', '2023-03-31'),
+(201, 15, 68, 169, 3, 4, '2', '2023-03-31'),
+(202, 15, 64, 169, 4, 4, '2', '2023-03-31'),
+(203, 15, 75, 169, 4, 4, '2', '2023-03-31'),
+(204, 15, 76, 167, 4, 2, '2', '2023-03-31'),
+(205, 15, 78, 171, 3, 3, '1', '2023-03-31'),
+(206, 15, 85, 170, 3, 3, '1', '2023-03-31'),
+(207, 15, 66, 168, 3, 3, '2', '2023-03-31'),
+(208, 15, 59, 165, 1, 1, '1', '2023-03-31'),
+(209, 15, 67, 167, 2, 2, '2', '2023-03-31'),
+(210, 15, 59, 166, 1, 1, '1', '2023-03-31'),
+(211, 15, 70, 169, 4, 4, '2', '2023-03-31'),
+(212, 15, 84, 171, 3, 3, '1', '2023-03-31'),
+(213, 15, 80, 168, 3, 3, '2', '2023-03-31'),
+(214, 15, 61, 168, 3, 3, '2', '2023-03-31'),
+(215, 15, 75, 170, 3, 3, '1', '2023-03-31'),
+(216, 15, 81, 169, 4, 4, '2', '2023-03-31'),
+(217, 15, 74, 169, 4, 4, '2', '2023-03-31'),
+(218, 15, 63, 166, 1, 1, '1', '2023-03-31'),
+(219, 15, 64, 170, 3, 3, '1', '2023-03-31'),
+(220, 15, 84, 172, 2, 2, '1', '2023-03-31'),
+(221, 15, 60, 173, 3, 4, '1', '2023-03-31'),
+(222, 15, 68, 170, 3, 3, '1', '2023-03-31'),
+(223, 15, 81, 170, 3, 3, '1', '2023-03-31'),
+(224, 15, 78, 172, 3, 2, '1', '2023-03-31'),
+(225, 15, 71, 169, 4, 4, '2', '2023-03-31'),
+(226, 15, 80, 169, 3, 4, '2', '2023-03-31'),
+(227, 15, 74, 170, 3, 3, '1', '2023-03-31'),
+(228, 15, 79, 167, 4, 2, '2', '2023-03-31'),
+(229, 15, 69, 171, 3, 3, '1', '2023-03-31'),
+(230, 15, 62, 168, 3, 3, '2', '2023-03-31'),
+(231, 15, 83, 173, 3, 4, '1', '2023-03-31'),
+(232, 15, 68, 171, 3, 3, '1', '2023-03-31'),
+(233, 15, 73, 168, 3, 3, '2', '2023-03-31'),
+(234, 15, 83, 174, 1, 1, '1', '2023-03-31'),
+(235, 15, 85, 171, 3, 3, '1', '2023-03-31'),
+(236, 15, 86, 169, 4, 4, '2', '2023-03-31'),
+(237, 15, 68, 172, 2, 2, '1', '2023-03-31'),
+(238, 15, 71, 170, 3, 3, '1', '2023-03-31'),
+(239, 15, 62, 169, 4, 4, '2', '2023-03-31'),
+(240, 15, 72, 168, 3, 3, '2', '2023-03-31'),
+(241, 15, 85, 172, 3, 2, '1', '2023-03-31'),
+(242, 15, 86, 170, 3, 3, '1', '2023-03-31'),
+(243, 15, 83, 175, 2, 2, '1', '2023-03-31'),
+(244, 15, 59, 168, 3, 3, '2', '2023-03-31'),
+(245, 15, 60, 174, 1, 1, '1', '2023-03-31'),
+(246, 15, 75, 171, 3, 3, '1', '2023-03-31'),
+(247, 15, 61, 169, 4, 4, '2', '2023-03-31'),
+(248, 15, 76, 168, 3, 3, '2', '2023-03-31'),
+(249, 15, 64, 171, 3, 3, '1', '2023-03-31'),
+(250, 15, 80, 170, 3, 3, '1', '2023-03-31'),
+(251, 15, 62, 170, 3, 3, '1', '2023-03-31'),
+(252, 15, 65, 168, 3, 3, '2', '2023-03-31'),
+(253, 15, 69, 172, 2, 2, '1', '2023-03-31'),
+(254, 15, 66, 169, 4, 4, '2', '2023-03-31'),
+(255, 15, 64, 172, 2, 2, '1', '2023-03-31'),
+(256, 15, 75, 172, 2, 2, '1', '2023-03-31'),
+(257, 15, 71, 171, 3, 3, '1', '2023-03-31'),
+(258, 15, 68, 173, 4, 4, '1', '2023-03-31'),
+(259, 15, 73, 169, 4, 4, '2', '2023-03-31'),
+(260, 15, 60, 175, 2, 2, '1', '2023-03-31'),
+(261, 15, 66, 170, 3, 3, '1', '2023-03-31'),
+(262, 15, 83, 176, 3, 3, '1', '2023-03-31'),
+(263, 15, 58, 169, 4, 4, '2', '2023-03-31'),
+(264, 15, 78, 173, 4, 4, '1', '2023-03-31'),
+(265, 15, 72, 169, 4, 4, '2', '2023-03-31'),
+(266, 15, 59, 169, 4, 4, '2', '2023-03-31'),
+(267, 15, 82, 168, 3, 3, '2', '2023-03-31'),
+(268, 15, 83, 177, 1, 1, '1', '2023-03-31'),
+(269, 15, 61, 170, 3, 3, '1', '2023-03-31'),
+(270, 15, 78, 174, 1, 1, '1', '2023-03-31'),
+(271, 15, 62, 171, 3, 3, '1', '2023-03-31'),
+(272, 15, 68, 174, 1, 1, '1', '2023-03-31'),
+(273, 15, 71, 172, 2, 2, '1', '2023-03-31'),
+(274, 15, 64, 173, 4, 4, '1', '2023-03-31'),
+(275, 15, 63, 168, 4, 3, '2', '2023-03-31'),
+(276, 15, 59, 170, 3, 3, '1', '2023-03-31'),
+(277, 15, 79, 168, 3, 3, '2', '2023-03-31'),
+(278, 15, 80, 171, 3, 3, '1', '2023-03-31'),
+(279, 15, 58, 170, 3, 3, '1', '2023-03-31'),
+(280, 15, 68, 175, 2, 2, '1', '2023-03-31'),
+(281, 15, 83, 178, 1, 2, '1', '2023-03-31'),
+(282, 15, 81, 168, 3, 3, '2', '2023-03-31'),
+(283, 15, 86, 172, 2, 2, '1', '2023-03-31'),
+(284, 15, 85, 173, 4, 4, '1', '2023-03-31'),
+(285, 15, 76, 169, 4, 4, '2', '2023-03-31'),
+(286, 15, 70, 174, 1, 1, '1', '2023-03-31'),
+(287, 15, 59, 171, 3, 3, '1', '2023-03-31'),
+(288, 15, 80, 172, 2, 2, '1', '2023-03-31'),
+(289, 15, 65, 169, 4, 4, '2', '2023-03-31'),
+(290, 15, 62, 172, 2, 2, '1', '2023-03-31'),
+(291, 15, 84, 173, 3, 4, '1', '2023-03-31'),
+(292, 15, 77, 171, 4, 3, '1', '2023-03-31'),
+(293, 15, 68, 176, 3, 3, '1', '2023-03-31'),
+(294, 15, 70, 175, 2, 2, '1', '2023-03-31'),
+(295, 15, 74, 172, 2, 2, '1', '2023-03-31'),
+(296, 15, 65, 170, 3, 3, '1', '2023-03-31'),
+(297, 15, 85, 174, 1, 1, '1', '2023-03-31'),
+(298, 15, 73, 170, 2, 3, '1', '2023-03-31'),
+(299, 15, 75, 173, 4, 4, '1', '2023-03-31'),
+(300, 15, 60, 176, 3, 3, '1', '2023-03-31'),
+(301, 15, 64, 174, 1, 1, '1', '2023-03-31'),
+(302, 15, 63, 169, 4, 4, '2', '2023-03-31'),
+(303, 15, 67, 168, 3, 3, '2', '2023-03-31'),
+(304, 15, 60, 177, 1, 1, '1', '2023-03-31'),
+(305, 15, 66, 171, 3, 3, '1', '2023-03-31'),
+(306, 15, 79, 169, 4, 4, '2', '2023-03-31'),
+(307, 15, 59, 172, 3, 2, '1', '2023-03-31'),
+(308, 15, 84, 174, 1, 1, '1', '2023-03-31'),
+(309, 15, 76, 170, 3, 3, '1', '2023-03-31'),
+(310, 15, 61, 171, 3, 3, '1', '2023-03-31'),
+(311, 15, 78, 176, 1, 3, '1', '2023-03-31'),
+(312, 15, 75, 174, 1, 1, '1', '2023-03-31'),
+(313, 15, 77, 172, 2, 2, '1', '2023-03-31'),
+(314, 15, 68, 177, 1, 1, '1', '2023-03-31'),
+(315, 15, 81, 172, 2, 2, '1', '2023-03-31'),
+(316, 15, 60, 178, 2, 2, '1', '2023-03-31'),
+(317, 15, 85, 175, 2, 2, '1', '2023-03-31'),
+(318, 15, 65, 171, 3, 3, '1', '2023-03-31'),
+(319, 15, 70, 176, 3, 3, '1', '2023-03-31'),
+(320, 15, 84, 175, 2, 2, '1', '2023-03-31'),
+(321, 15, 64, 175, 2, 2, '1', '2023-03-31'),
+(322, 15, 70, 177, 1, 1, '1', '2023-03-31'),
+(323, 15, 82, 169, 3, 4, '2', '2023-03-31'),
+(324, 15, 75, 175, 2, 2, '1', '2023-03-31'),
+(325, 15, 72, 171, 3, 3, '1', '2023-03-31'),
+(326, 15, 59, 173, 4, 4, '1', '2023-03-31'),
+(327, 15, 79, 170, 3, 3, '1', '2023-03-31'),
+(328, 15, 66, 172, 3, 2, '1', '2023-03-31'),
+(329, 15, 58, 171, 3, 3, '1', '2023-03-31'),
+(330, 15, 86, 173, 4, 4, '1', '2023-03-31'),
+(331, 15, 68, 178, 1, 2, '1', '2023-03-31'),
+(332, 15, 61, 172, 2, 2, '1', '2023-03-31'),
+(333, 15, 73, 171, 3, 3, '1', '2023-03-31'),
+(334, 15, 84, 176, 3, 3, '1', '2023-03-31'),
+(335, 15, 78, 177, 1, 1, '1', '2023-03-31'),
+(336, 15, 80, 173, 4, 4, '1', '2023-03-31'),
+(337, 15, 59, 174, 1, 1, '1', '2023-03-31'),
+(338, 15, 86, 174, 1, 1, '1', '2023-03-31'),
+(339, 15, 62, 173, 4, 4, '1', '2023-03-31'),
+(340, 15, 58, 172, 2, 2, '1', '2023-03-31'),
+(341, 15, 74, 173, 4, 4, '1', '2023-03-31'),
+(342, 15, 77, 173, 3, 4, '1', '2023-03-31'),
+(343, 15, 75, 176, 1, 3, '1', '2023-03-31'),
+(344, 15, 67, 170, 3, 3, '1', '2023-03-31'),
+(345, 15, 65, 172, 3, 2, '1', '2023-03-31'),
+(346, 15, 84, 177, 1, 1, '1', '2023-03-31'),
+(347, 15, 63, 170, 3, 3, '1', '2023-03-31'),
+(348, 15, 77, 174, 1, 1, '1', '2023-03-31'),
+(349, 15, 80, 174, 1, 1, '1', '2023-03-31'),
+(350, 15, 72, 172, 4, 2, '1', '2023-03-31'),
+(351, 15, 62, 174, 1, 1, '1', '2023-03-31'),
+(352, 15, 69, 173, 3, 4, '1', '2023-03-31'),
+(353, 15, 82, 170, 2, 3, '1', '2023-03-31'),
+(354, 15, 86, 175, 2, 2, '1', '2023-03-31'),
+(355, 15, 81, 173, 4, 4, '1', '2023-03-31'),
+(356, 15, 79, 171, 3, 3, '1', '2023-03-31'),
+(357, 15, 70, 178, 2, 2, '1', '2023-03-31'),
+(358, 15, 71, 173, 2, 4, '1', '2023-03-31'),
+(359, 15, 77, 175, 2, 2, '1', '2023-03-31'),
+(360, 15, 75, 177, 1, 1, '1', '2023-03-31'),
+(361, 15, 80, 175, 2, 2, '1', '2023-03-31'),
+(362, 15, 58, 168, 3, 3, '2', '2023-03-31'),
+(363, 15, 81, 174, 1, 1, '1', '2023-03-31'),
+(364, 15, 61, 173, 4, 4, '1', '2023-03-31'),
+(365, 15, 74, 174, 1, 1, '1', '2023-03-31'),
+(366, 15, 85, 176, 3, 3, '1', '2023-03-31'),
+(367, 15, 71, 174, 1, 1, '1', '2023-03-31'),
+(368, 15, 77, 176, 3, 3, '1', '2023-03-31'),
+(369, 15, 69, 174, 1, 1, '1', '2023-03-31'),
+(370, 15, 85, 177, 1, 1, '1', '2023-03-31'),
+(371, 15, 78, 178, 2, 2, '1', '2023-03-31'),
+(372, 15, 61, 174, 1, 1, '1', '2023-03-31'),
+(373, 15, 59, 175, 2, 2, '1', '2023-03-31'),
+(374, 15, 62, 175, 2, 2, '1', '2023-03-31'),
+(375, 15, 80, 176, 3, 3, '1', '2023-03-31'),
+(376, 15, 84, 178, 2, 2, '1', '2023-03-31'),
+(377, 15, 71, 175, 2, 2, '1', '2023-03-31'),
+(378, 15, 73, 172, 1, 2, '1', '2023-03-31'),
+(379, 15, 77, 177, 1, 1, '1', '2023-03-31'),
+(380, 15, 76, 171, 3, 3, '1', '2023-03-31'),
+(381, 15, 80, 177, 1, 1, '1', '2023-03-31'),
+(382, 15, 79, 172, 2, 2, '1', '2023-03-31'),
+(383, 15, 65, 173, 4, 4, '1', '2023-03-31'),
+(384, 15, 76, 172, 2, 2, '1', '2023-03-31'),
+(385, 15, 74, 175, 2, 2, '1', '2023-03-31'),
+(386, 15, 67, 171, 3, 3, '1', '2023-03-31'),
+(387, 15, 66, 173, 4, 4, '1', '2023-03-31'),
+(388, 15, 64, 177, 1, 1, '1', '2023-03-31'),
+(389, 15, 69, 175, 2, 2, '1', '2023-03-31'),
+(390, 15, 59, 176, 3, 3, '1', '2023-03-31'),
+(391, 15, 66, 174, 1, 1, '1', '2023-03-31'),
+(392, 15, 86, 176, 3, 3, '1', '2023-03-31'),
+(393, 15, 77, 178, 2, 2, '1', '2023-03-31'),
+(394, 15, 75, 178, 1, 2, '1', '2023-03-31'),
+(395, 15, 67, 172, 2, 2, '1', '2023-03-31'),
+(396, 15, 70, 167, 4, 2, '2', '2023-03-31'),
+(397, 15, 59, 177, 1, 1, '1', '2023-03-31'),
+(398, 15, 65, 174, 1, 1, '1', '2023-03-31'),
+(399, 15, 61, 175, 2, 2, '1', '2023-03-31'),
+(400, 15, 66, 175, 2, 2, '1', '2023-03-31'),
+(401, 15, 79, 173, 4, 4, '1', '2023-03-31'),
+(402, 15, 71, 176, 3, 3, '1', '2023-03-31'),
+(403, 15, 72, 173, 4, 4, '1', '2023-03-31'),
+(404, 15, 71, 177, 1, 1, '1', '2023-03-31'),
+(405, 15, 63, 171, 3, 3, '1', '2023-03-31'),
+(406, 15, 65, 175, 2, 2, '1', '2023-03-31'),
+(407, 15, 85, 178, 2, 2, '1', '2023-03-31'),
+(408, 15, 68, 167, 3, 2, '2', '2023-03-31'),
+(409, 15, 63, 172, 2, 2, '1', '2023-03-31'),
+(410, 15, 82, 171, 2, 3, '1', '2023-03-31'),
+(411, 15, 69, 176, 3, 3, '1', '2023-03-31'),
+(412, 15, 58, 173, 3, 4, '1', '2023-03-31'),
+(413, 15, 71, 178, 1, 2, '1', '2023-03-31'),
+(414, 15, 72, 174, 1, 1, '1', '2023-03-31'),
+(415, 15, 62, 176, 3, 3, '1', '2023-03-31'),
+(416, 15, 70, 170, 3, 3, '1', '2023-03-31'),
+(417, 15, 66, 176, 3, 3, '1', '2023-03-31'),
+(418, 15, 84, 168, 2, 3, '2', '2023-03-31'),
+(419, 15, 65, 176, 3, 3, '1', '2023-03-31'),
+(420, 15, 80, 178, 2, 2, '1', '2023-03-31'),
+(421, 15, 78, 168, 3, 3, '2', '2023-03-31'),
+(422, 15, 65, 177, 1, 1, '1', '2023-03-31'),
+(423, 15, 58, 174, 1, 1, '1', '2023-03-31'),
+(424, 15, 69, 177, 1, 1, '1', '2023-03-31'),
+(425, 15, 76, 173, 3, 4, '1', '2023-03-31'),
+(426, 15, 73, 173, 2, 4, '1', '2023-03-31'),
+(427, 15, 61, 176, 3, 3, '1', '2023-03-31'),
+(428, 15, 66, 177, 1, 1, '1', '2023-03-31'),
+(429, 15, 79, 174, 1, 1, '1', '2023-03-31'),
+(430, 15, 76, 174, 1, 1, '1', '2023-03-31'),
+(431, 15, 62, 177, 1, 1, '1', '2023-03-31'),
+(432, 15, 61, 177, 1, 1, '1', '2023-03-31'),
+(433, 15, 86, 177, 1, 1, '1', '2023-03-31'),
+(434, 15, 73, 174, 1, 1, '1', '2023-03-31'),
+(435, 15, 81, 175, 2, 2, '1', '2023-03-31'),
+(436, 15, 74, 176, 3, 3, '1', '2023-03-31'),
+(437, 15, 80, 167, 2, 2, '2', '2023-03-31'),
+(438, 15, 67, 173, 4, 4, '1', '2023-03-31'),
+(439, 15, 66, 178, 2, 2, '1', '2023-03-31'),
+(440, 15, 72, 170, 2, 3, '1', '2023-03-31'),
+(441, 15, 83, 168, 2, 3, '2', '2023-03-31'),
+(442, 15, 79, 175, 2, 2, '1', '2023-03-31'),
+(443, 15, 72, 175, 2, 2, '1', '2023-03-31'),
+(444, 15, 85, 167, 2, 2, '2', '2023-03-31'),
+(445, 15, 62, 178, 2, 2, '1', '2023-03-31'),
+(446, 15, 63, 173, 3, 4, '1', '2023-03-31'),
+(447, 15, 73, 175, 2, 2, '1', '2023-03-31'),
+(448, 15, 74, 177, 1, 1, '1', '2023-03-31'),
+(449, 15, 67, 174, 1, 1, '1', '2023-03-31'),
+(450, 15, 65, 178, 2, 2, '1', '2023-03-31'),
+(451, 15, 79, 176, 3, 3, '1', '2023-03-31'),
+(452, 15, 76, 175, 2, 2, '1', '2023-03-31'),
+(453, 15, 64, 178, 2, 2, '1', '2023-03-31'),
+(454, 15, 69, 178, 1, 2, '1', '2023-03-31'),
+(455, 15, 73, 176, 2, 3, '1', '2023-03-31'),
+(456, 15, 79, 177, 1, 1, '1', '2023-03-31'),
+(457, 15, 82, 172, 3, 2, '1', '2023-03-31'),
+(458, 15, 63, 174, 1, 1, '1', '2023-03-31'),
+(459, 15, 74, 178, 2, 2, '1', '2023-03-31'),
+(460, 15, 73, 177, 1, 1, '1', '2023-03-31'),
+(461, 15, 58, 175, 2, 2, '1', '2023-03-31'),
+(462, 15, 86, 171, 3, 3, '1', '2023-03-31'),
+(463, 15, 81, 176, 3, 3, '1', '2023-03-31'),
+(464, 15, 72, 176, 3, 3, '1', '2023-03-31'),
+(465, 15, 81, 177, 1, 1, '1', '2023-03-31'),
+(466, 15, 64, 166, 1, 1, '1', '2023-03-31'),
+(467, 15, 72, 177, 1, 1, '1', '2023-03-31'),
+(468, 15, 74, 171, 3, 3, '1', '2023-03-31'),
+(469, 15, 58, 176, 3, 3, '1', '2023-03-31'),
+(470, 15, 67, 175, 2, 2, '1', '2023-03-31'),
+(471, 15, 78, 175, 2, 2, '1', '2023-03-31'),
+(472, 15, 58, 177, 1, 1, '1', '2023-03-31'),
+(473, 15, 72, 178, 1, 2, '1', '2023-03-31'),
+(474, 15, 86, 167, 1, 2, '2', '2023-03-31'),
+(475, 15, 58, 178, 2, 2, '1', '2023-03-31'),
+(476, 15, 82, 173, 3, 4, '1', '2023-03-31'),
+(477, 15, 69, 167, 2, 2, '2', '2023-03-31'),
+(478, 15, 76, 176, 2, 3, '1', '2023-03-31'),
+(479, 15, 79, 178, 2, 2, '1', '2023-03-31'),
+(480, 15, 63, 175, 2, 2, '1', '2023-03-31'),
+(481, 15, 76, 177, 1, 1, '1', '2023-03-31'),
+(482, 15, 61, 178, 1, 2, '1', '2023-03-31'),
+(483, 15, 70, 172, 2, 2, '1', '2023-03-31'),
+(484, 15, 70, 173, 4, 4, '1', '2023-03-31'),
+(485, 15, 68, 168, 3, 3, '2', '2023-03-31'),
+(486, 15, 70, 171, 3, 3, '1', '2023-03-31'),
+(487, 15, 64, 176, 2, 3, '1', '2023-03-31'),
+(488, 15, 63, 176, 3, 3, '1', '2023-03-31'),
+(489, 15, 67, 165, 1, 1, '1', '2023-03-31'),
+(490, 15, 82, 174, 1, 1, '1', '2023-03-31'),
+(491, 15, 63, 177, 1, 1, '1', '2023-03-31'),
+(492, 15, 86, 178, 1, 2, '1', '2023-03-31'),
+(493, 15, 78, 167, 3, 2, '2', '2023-03-31'),
+(494, 15, 82, 175, 4, 2, '1', '2023-03-31'),
+(495, 15, 67, 176, 3, 3, '1', '2023-03-31'),
+(496, 15, 67, 177, 1, 1, '1', '2023-03-31'),
+(497, 15, 69, 168, 3, 3, '2', '2023-03-31'),
+(498, 15, 76, 178, 2, 2, '1', '2023-03-31'),
+(499, 15, 82, 176, 2, 3, '1', '2023-03-31'),
+(500, 15, 81, 178, 1, 2, '1', '2023-03-31'),
+(501, 15, 63, 178, 2, 2, '1', '2023-03-31'),
+(502, 15, 82, 177, 1, 1, '1', '2023-03-31'),
+(503, 15, 67, 178, 1, 2, '1', '2023-03-31'),
+(504, 15, 82, 178, 1, 2, '1', '2023-03-31'),
+(505, 15, 67, 169, 4, 4, '2', '2023-03-31'),
+(506, 15, 73, 165, 2, 1, '1', '2023-03-31'),
+(507, 15, 81, 171, 1, 3, '1', '2023-03-31');
 
 -- --------------------------------------------------------
 
@@ -517,12 +971,12 @@ INSERT INTO `tbl_result` (`result_id`, `exam_id`, `student_id`, `question_id`, `
 
 DROP TABLE IF EXISTS `tbl_result_summary`;
 CREATE TABLE IF NOT EXISTS `tbl_result_summary` (
-  `summary_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `student_id` int(11) UNSIGNED NOT NULL,
+  `summary_id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `student_id` int UNSIGNED NOT NULL,
   `marks` decimal(10,2) NOT NULL,
   `added_date` date NOT NULL,
   PRIMARY KEY (`summary_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `tbl_result_summary`
@@ -605,8 +1059,8 @@ INSERT INTO `tbl_result_summary` (`summary_id`, `student_id`, `marks`, `added_da
 
 DROP TABLE IF EXISTS `tbl_student`;
 CREATE TABLE IF NOT EXISTS `tbl_student` (
-  `student_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `exam_id` int(11) DEFAULT NULL,
+  `student_id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `exam_id` int DEFAULT NULL,
   `first_name` varchar(150) NOT NULL,
   `last_name` varchar(150) NOT NULL,
   `email` varchar(150) NOT NULL,
@@ -614,16 +1068,16 @@ CREATE TABLE IF NOT EXISTS `tbl_student` (
   `password` varchar(255) NOT NULL,
   `contact` varchar(20) NOT NULL,
   `gender` varchar(10) NOT NULL,
-  `study_year` int(11) NOT NULL,
-  `department_id` int(11) NOT NULL,
-  `academic_year` year(4) NOT NULL,
+  `study_year` int NOT NULL,
+  `department_id` int NOT NULL,
+  `academic_year` year NOT NULL,
   `is_active` varchar(10) NOT NULL,
   `added_date` date NOT NULL,
   `updated_date` date NOT NULL,
   PRIMARY KEY (`student_id`),
   KEY `department_id` (`department_id`),
   KEY `study_year` (`study_year`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `tbl_student`
@@ -631,30 +1085,36 @@ CREATE TABLE IF NOT EXISTS `tbl_student` (
 
 INSERT INTO `tbl_student` (`student_id`, `exam_id`, `first_name`, `last_name`, `email`, `username`, `password`, `contact`, `gender`, `study_year`, `department_id`, `academic_year`, `is_active`, `added_date`, `updated_date`) VALUES
 (8, 1, 'Nathan', 'Zewdie', 'nathan@gmail.com', 'Nathan', 'dtu1234', '123151555', 'Male', 2, 4, 2021, 'yes', '2021-05-19', '2021-05-19'),
-(9, 1, 'Yeshambel', 'Habtie', 'yeshambel@gmail.com', 'Yeshambel', 'dtu1234', '936733488', 'Male', 2, 4, 2021, 'no', '2021-05-19', '2021-05-19'),
-(12, 1, 'Genet', 'Worku', 'heavenworku21@gmail.com', 'Genet', 'dtu1234', '960428380', 'Female', 3, 4, 2021, 'no', '2021-05-19', '2021-05-19'),
-(13, NULL, 'Daniel', 'Ravuri', 'danielravuri@gmail.com', 'dddd', 'dtu1234', '0934635838', 'Male', 2, 4, 2022, 'yes', '2022-05-28', '2022-05-28'),
-(14, NULL, 'Abebe', 'Molla', 'abe@gmail.com', 'Abebe', 'dtu1234', '0934635838', 'Male', 2, 4, 2022, 'yes', '2022-05-28', '2022-05-28'),
-(15, NULL, 'Tsegereda', 'Fentahun', 'tfntahun@gmail.com', 'Tsegereda', 'dtu1234', '935861717', 'Female', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(16, NULL, 'Masresha', 'Abebe', 'massabebe8@gmail.com', 'Masresha', 'dtu1234', '911909310', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(17, NULL, 'Mahider', 'Astatkew', 'mahderastak@gmail.com', 'Mahider', 'dtu1234', '918195184', 'Female', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(18, NULL, 'Suleman', 'Yesuf', 'Suleyesuf@gmail.com', 'Suleman', 'dtu1234', '918096718', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(19, NULL, 'Gent', 'Atnafu', 'Genetatna8@gmail.com', 'Gent', 'dtu1234', '918243261', 'Female', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(20, NULL, 'Bezuayehu', 'Getnet', 'bz0912@gmail.com', 'Bezuayehu', 'dtu1234', '924279118', 'Female', 3, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(21, NULL, 'Teshale', 'Wubie', 'teshalewubie@gmail.com', 'Teshale', 'dtu1234', '920752970', 'Female', 3, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(22, NULL, 'Kenyawkal', 'Wodaje', 'Yawkal2012@gmail.com', 'Kenyawkal', 'dtu1234', '911987372', 'Male', 3, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(23, NULL, 'Berhanu', 'Baye', 'berhan.baye@gmail.com', 'Berhanu', 'dtu1234', '918252650', 'Male', 3, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(24, NULL, 'Hayleysuse', 'Zelalem', 'haileysuszelalem@gmail.com', 'Hayleysuse', 'dtu1234', '935706866', 'Male', 3, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(25, NULL, 'Getu', 'Molla', 'getumolla12@gmail.com', 'Getu', 'dtu1234', '934594917', 'Male', 3, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(26, NULL, 'Smegnew', 'Ejigu', 'achamyeleh49@gmail.com', 'Smegnew', 'dtu1234', '945547465', 'Male', 3, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(27, NULL, 'Aberarew', 'Nega', 'abrarewnega0140@gmail.com   ', 'Aberarew', 'dtu1234', '937380437', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(28, NULL, 'Amsayaw', 'Gashaw', 'amesayaw@gmail.com', 'Amsayaw', 'dtu1234', '918163513', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(29, NULL, 'Samuael', 'Girmay', 'samuelgirmay21@gmail.com', 'Samuael', 'dtu1234', '937425870', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(30, NULL, 'Nurhusn', 'Muhamed', 'nuraneya02@gmail.com', 'Nurhusn', 'dtu1234', '918095806', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(31, NULL, 'Adugnaw', 'Mesefin', 'adumesfin189@gmail.com', 'Adugnaw', 'dtu1234', '918187325', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(32, NULL, 'Adugnaw', 'Abebe', 'adugnaw12@gmail.com', 'Adugnaw', 'dtu1234', '928476559', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(33, NULL, 'Alemnew', 'Fekadu', 'alexfekadu077@gmail.com', 'Alemnew', 'dtu1234', '918396927', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23'),
-(34, NULL, 'Abibual', 'Desalegan', '  abibualandabet@gmail.com', 'Abibual', 'dtu1234', '975591842', 'Male', 2, 4, 2023, 'no', '2023-03-23', '2023-03-23');
+(57, NULL, 'ABEL', 'FASIL', 'abel12@gmail.com', 'DTU12R1278', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(58, NULL, 'ANDEBET', 'SISAY', 'abel12@gmail.com', 'DTU12R0572', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(59, NULL, 'BEKALU', 'MULUYE', 'abel12@gmail.com', 'DTU12R1699', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(60, NULL, 'BEREKET', 'ABERA', 'abel12@gmail.com', 'DTU12R1701', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(61, NULL, 'BIZUAYEHU', 'FEREDE', 'abel12@gmail.com', 'DTU12R0356', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(62, NULL, 'DAGIMAWI', 'ENGIDAWORK', 'abel12@gmail.com', 'DTU12R0468', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(63, NULL, 'DANIEL', 'GETAHUN', 'abel12@gmail.com', 'DTU12R0640', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(64, NULL, 'DAWIT', 'ASSAYE', 'abel12@gmail.com', 'DTU12R1601', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(65, NULL, 'DAWIT', 'TEWODROS', 'abel12@gmail.com', 'DTU12R0470', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(66, NULL, 'EDEN', 'MISGANAW', 'abel12@gmail.com', 'DTU12R0643', 'computer4', '9000000', 'F', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(67, NULL, 'ESTIFANOS', 'ABABU', 'abel12@gmail.com', 'DTU12R1502', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(68, NULL, 'FEYSEL', 'MOHAMMED', 'abel12@gmail.com', 'DTU12R0917', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(69, NULL, 'GIZEWORK', 'MARYE', 'abel12@gmail.com', 'DTU12R0256', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(70, NULL, 'HAILEMESKEL', 'YILMA', 'abel12@gmail.com', 'DTU12R1766', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(71, NULL, 'HANAN', 'HUSSEN', 'abel12@gmail.com', 'DTU12R1298', 'computer4', '9000000', 'F', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(72, NULL, 'MAMARU', 'ANMAW', 'abel12@gmail.com', 'DTU12R0539', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(73, NULL, 'MULAT', 'ASMARE', 'abel12@gmail.com', 'COM(R)130 /11', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(74, NULL, 'NAHOM', 'ADANE', 'abel12@gmail.com', 'DTU12R1154', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(75, NULL, 'SEWLESEW', 'TILAHUN', 'abel12@gmail.com', 'DTU12R1422', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(76, NULL, 'SINTAYEHU', 'ADIMASU', 'abel12@gmail.com', 'DTU12R0222', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(77, NULL, 'SURAFEL', 'ABDELA', 'abel12@gmail.com', 'DTU12R0495', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(78, NULL, 'TEMESGEN', 'TEFERI', 'abel12@gmail.com', 'DTU12R0163', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(79, NULL, 'TEMESGEN', 'YILMA', 'abel12@gmail.com', 'DTU12R1267', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(80, NULL, 'TINSEA', 'TEREFE', 'abel12@gmail.com', 'DTU12R1634', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(81, NULL, 'WONDIMAGEGN', 'MEKONNEN', 'abel12@gmail.com', 'DTU12R1105', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(82, NULL, 'WONDWOSEN', 'BEWKETU', 'abel12@gmail.com', 'DTU12R0615', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(83, NULL, 'YARED', 'MEKONNEN', 'abel12@gmail.com', 'DTU12R0789', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(84, NULL, 'YEABSIRA', 'HAILE', 'abel12@gmail.com', 'DTU12R1483', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(85, NULL, 'YOHANNES', 'MULAT', 'abel12@gmail.com', 'DTU12R1275', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31'),
+(86, NULL, 'YORDANOS', 'FIKADU', 'abel12@gmail.com', 'DTU12R0172', 'computer4', '9000000', 'M', 4, 4, 2023, 'yes', '2023-03-31', '2023-03-31');
 
 -- --------------------------------------------------------
 
@@ -664,14 +1124,14 @@ INSERT INTO `tbl_student` (`student_id`, `exam_id`, `first_name`, `last_name`, `
 
 DROP TABLE IF EXISTS `tbl_student_exam_enrol`;
 CREATE TABLE IF NOT EXISTS `tbl_student_exam_enrol` (
-  `student_exam_enrol_id` int(11) NOT NULL AUTO_INCREMENT,
-  `student_id` int(11) NOT NULL,
-  `exam_id` int(11) NOT NULL,
+  `student_exam_enrol_id` int NOT NULL AUTO_INCREMENT,
+  `student_id` int NOT NULL,
+  `exam_id` int NOT NULL,
   `attendance_status` varchar(100) NOT NULL DEFAULT 'Absent',
-  `login_history` int(11) DEFAULT NULL,
+  `login_history` int DEFAULT NULL,
   PRIMARY KEY (`student_exam_enrol_id`),
   KEY `student_id` (`student_id`,`exam_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_student_exam_enrol`
@@ -687,7 +1147,38 @@ INSERT INTO `tbl_student_exam_enrol` (`student_exam_enrol_id`, `student_id`, `ex
 (92, 8, 12, 'Present', 1),
 (93, 8, 10, 'Present', 0),
 (97, 8, 13, 'Present', 1),
-(98, 8, 14, 'Present', 1);
+(98, 8, 14, 'Present', 0),
+(99, 9, 15, 'Present', 1),
+(100, 57, 15, 'Present', 1),
+(101, 58, 15, 'Present', 1),
+(102, 63, 15, 'Present', 1),
+(103, 67, 15, 'Present', 1),
+(104, 65, 15, 'Present', 1),
+(105, 71, 15, 'Present', 1),
+(106, 85, 15, 'Present', 1),
+(107, 62, 15, 'Present', 1),
+(108, 69, 15, 'Present', 1),
+(109, 83, 15, 'Present', 1),
+(110, 78, 15, 'Present', 1),
+(111, 66, 15, 'Present', 1),
+(112, 60, 15, 'Present', 1),
+(113, 68, 15, 'Present', 1),
+(114, 77, 15, 'Present', 1),
+(115, 75, 15, 'Present', 1),
+(116, 73, 15, 'Present', 1),
+(117, 84, 15, 'Present', 1),
+(118, 72, 15, 'Present', 1),
+(119, 80, 15, 'Present', 1),
+(120, 79, 15, 'Present', 1),
+(121, 81, 15, 'Present', 1),
+(122, 61, 15, 'Present', 1),
+(123, 86, 15, 'Present', 1),
+(124, 74, 15, 'Present', 1),
+(125, 59, 15, 'Present', 1),
+(126, 82, 15, 'Present', 1),
+(127, 64, 15, 'Present', 1),
+(128, 70, 15, 'Present', 1),
+(129, 76, 15, 'Present', 1);
 
 -- --------------------------------------------------------
 
@@ -697,13 +1188,13 @@ INSERT INTO `tbl_student_exam_enrol` (`student_exam_enrol_id`, `student_id`, `ex
 
 DROP TABLE IF EXISTS `tbl_teacher`;
 CREATE TABLE IF NOT EXISTS `tbl_teacher` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `department_id` int(11) NOT NULL,
+  `department_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `department_id` (`department_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
@@ -759,7 +1250,7 @@ INSERT INTO `tbl_teacher` (`id`, `first_name`, `last_name`, `username`, `email`,
 
 DROP TABLE IF EXISTS `tbl_year_study`;
 CREATE TABLE IF NOT EXISTS `tbl_year_study` (
-  `study_year_id` int(11) NOT NULL AUTO_INCREMENT,
+  `study_year_id` int NOT NULL AUTO_INCREMENT,
   `year` varchar(50) NOT NULL,
   PRIMARY KEY (`study_year_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
