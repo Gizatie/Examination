@@ -244,8 +244,6 @@
                 </div>
             </div>
         </div>
-
-
     </div>
 
 
@@ -353,6 +351,7 @@
                     }
                 })
             });
+            
             $(document).on('click', '#detailed_result', function(params) {
                 var exam_id = $(this).data('exam-id-detail');
                 location.href = "<?php echo SITEURL ?>student/index.php?page=result_detail&exam_id=" + exam_id;

@@ -25,6 +25,7 @@
     <link href="<?php echo SITEURL ?>asset2/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo SITEURL ?>asset2/css/plugins/nouslider/jquery.nouislider.css" rel="stylesheet">
     <link href="<?php echo SITEURL ?>asset2/css/plugins/dataTables/datatables.min.css" rel="stylesheet">
+    <link href="<?php echo SITEURL ?>asset2/css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <link href="<?php echo SITEURL ?>asset2/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <link href="<?php echo SITEURL ?>asset2/css/plugins/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
     <link href="<?php echo SITEURL ?>asset2/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
@@ -154,20 +155,71 @@
         </div>
     </div>
 
-    <?php include("includes/scripts3.php") ?>
+    <?php include("./includes/scripts3.php") ?>
     <script src="<?php echo SITEURL ?>asset2/js/bootstrap-datetimepicker.js"></script>
     <script src="<?php echo SITEURL ?>asset2/js/TimeCircles.js"></script>
     <script src="<?php echo SITEURL ?>asset2/js/inspinia.js"></script>
 
-
-</body>
-
 <script>
     $.fn.dataTable.Buttons.defaults.dom.button.className = 'btn btn-white btn-sm';
-    $(document).ready(function nme() {
+    $(document).ready(function() {
+
+        $("body").tooltip({
+            selector: '[data-toggle=tooltip]'
+        });
+
+        
+        $('.dataTables-example').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "order": [],
+            responsive: true,
+            "ajax": {
+                url: "<?php echo SITEURL; ?>teacher/ajax_teacher.php",
+                type: "POST",
+                data: {
+                    action: 'fetch',
+                    exam_id: '<?php echo $_GET['exam_id'] ?>',
+                    page: 'student_result'
+                }
+
+            },
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [{
+                    extend: 'copy',
+                    title: 'Student_Result'
+
+                },
+                {
+                    extend: 'csv',
+                    title: 'Student_Result'
+
+                },
+                {
+                    extend: 'excel',
+                    title: 'Student_Result'
+                },
+                {
+                    extend: 'pdf',
+                    title: 'Student_Result'
+                },
+
+                {
+                    extend: 'print',
+                    customize: function(win) {
+                        $(win.document.body).addClass('white-bg');
+                        $(win.document.body).css('font-size', '10px');
+
+                        $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                    }
+                }
+            ]
+
+        });
 
         $(document).on('click', '.activate_request', function() {
-            // console.log('activate button clicked')
             const request_id = $(this).data('request_id');
             const request_value = $(this).data('request_value')
             $.ajax({
@@ -222,63 +274,9 @@
 
             });
         });
-
-        $("body").tooltip({
-            selector: '[data-toggle=tooltip]'
-        });
-
-        $('.dataTables-example').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "order": [],
-            responsive: true,
-            "ajax": {
-                url: "<?php echo SITEURL; ?>teacher/ajax_teacher.php",
-                type: "POST",
-                data: {
-                    action: 'fetch',
-                    exam_id: '<?php echo $_GET['exam_id'] ?>',
-                    page: 'student_result'
-                },
-
-            },
-            dom: '<"html5buttons"B>lTfgitp',
-            buttons: [{
-                    extend: 'copy',
-                    title: 'Student_Result'
-
-                },
-                {
-                    extend: 'csv',
-                    title: 'Student_Result'
-
-                },
-                {
-                    extend: 'excel',
-                    title: 'Student_Result'
-                },
-                {
-                    extend: 'pdf',
-                    title: 'Student_Result'
-                },
-
-                {
-                    extend: 'print',
-                    customize: function(win) {
-                        $(win.document.body).addClass('white-bg');
-                        $(win.document.body).css('font-size', '10px');
-
-                        $(win.document.body).find('table')
-                            .addClass('compact')
-                            .css('font-size', 'inherit');
-                    }
-                }
-            ]
-
-        });
-
-
     });
+
 </script>
+</body>
 
 </html>

@@ -108,42 +108,7 @@
                         
                         <span class="name">Marks</span>
                         <input type="text" name="marks" value="<?php echo $marks; ?>" />
-                        <br />
-                        
-                        <span class="name">Category</span>
-                        <select name="category">
-                            <option <?php if($category=="English"){echo "selected='seleccted'";} ?> value="English">English</option>
-                            <option  <?php if($category=="Math"){echo "selected='seleccted'";} ?> value="Math">Math</option>
-                        </select>
-                        <br />
-                        
-                        <span class="name">Department</span>
-                        <select name="faculty">
-                             <?php 
-                                //Get Faculties from database
-                                $tbl_name="tbl_faculty";
-                                $query=$obj->select_data($tbl_name);
-                                $res=$obj->execute_query($conn,$query);
-                                $count_rows=$obj->num_rows($res);
-                                if($count_rows>0)
-                                {
-                                    while($row=$obj->fetch_data($res))
-                                    {
-                                        $faculty_id=$row['faculty_id'];
-                                        $faculty_name=$row['faculty_name'];
-                                        ?>
-                                        <option <?php if($faculty_db==$faculty_id){echo"selected='selected'";} ?> value="<?php echo $faculty_id; ?>"><?php echo $faculty_name; ?></option>
-                                        <?php
-                                    }
-                                }
-                                else
-                                {
-                                    ?>
-                                    <option value="0">Uncategorized</option>
-                                    <?php
-                                }
-                            ?>
-                        </select>
+    
                         <br />
                         
                         <span class="name">Is Active?</span>

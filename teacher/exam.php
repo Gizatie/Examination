@@ -138,6 +138,29 @@ if (!isset($_SESSION['teacher'])) {
                     </div>
                 </div>
             </div>
+            <div class="modal inmodal fade" id="result_modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h1 class="modal-title"><i class="fa fa-check-circle fa-2x" style="color: green;"></i></h1>
+                        </div>
+                        <div class="modal-body">
+                            <h3>
+                                <div id="course_name" class="alert alert-info"></div><br>
+                                <div>
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </h3>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                            <a id="detailed_result" data-exam-id-detail="" class="btn  btn-rounded btn-primary text-white">See Detailed Result</a>
+                            <!-- this button has to be changed to anchor and the href should include exam_id and student_id -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
@@ -203,6 +226,10 @@ if (!isset($_SESSION['teacher'])) {
             </div>
         </div>
     </div>
+
+    <div class="middle-box text-center loginscreen animated fadeInDown" style="width:300px;">
+
+</div>
     <?php include("./includes/scripts3.php") ?>
     <script src="<?php echo SITEURL ?>asset2/js/bootstrap-datetimepicker.js"></script>
 
@@ -257,6 +284,7 @@ if (!isset($_SESSION['teacher'])) {
                 ]
 
             });
+            
             $(document).on('click', '.add-question', function() {
                 var id = $(this).attr('id');
                 location.href = "<?php echo SITEURL; ?>teacher/index.php?page=add_question&exam_code=" + id;
@@ -410,6 +438,59 @@ if (!isset($_SESSION['teacher'])) {
                 var exam_id = $(this).data('exam-id');
                 location.href = '<?php echo SITEURL ?>teacher/index.php?page=student_result&exam_id=' + exam_id;
             });
+
+
+            $(document).on('click', '#view_result', function() {
+                var exam_id = $(this).data('exam-id');
+                var student_id = '<?php echo $_SESSION['student_id']; ?>';
+                $.ajax({
+                    url: "<?php echo SITEURL ?>student/ajax_student.php",
+                    method: "POST",
+                    dataType: 'json',
+                    data: {
+                        exam_id: exam_id,
+                        page: 'student_result',
+                        action: 'fetch'
+                    },
+                    success: function(data) {
+                        var ctx = $('#myChart');
+                        var unattempted = parseInt(data.ques_total) - parseInt(data.ques_attempted);
+                        var data_chart = {
+                            labels: [
+                                'Attempted Qns',
+                                'Total Qns',
+                                'Unattempted Qns'
+                            ],
+                            datasets: [{
+                                label: 'My First Dataset',
+                                data: [data.ques_attempted, data.ques_total, unattempted],
+                                backgroundColor: [
+                                    '#1bb394',
+                                    '#727d7b',
+                                    '#bd527f'
+                                ],
+                                hoverOffset: 4
+                            }]
+                        };
+
+                        var myChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: data_chart
+
+                        });
+                   
+                        $('#course_name').html(data.course + "<hr>You Scored " + data.score + " out of " + data.weight);
+                        $('#detailed_result').data('exam-id-detail', exam_id);
+
+                        $('#result_modal').modal('show');
+                    }
+                })
+            });
+            
+            $(document).on('click', '#detailed_result', function(params) {
+                var exam_id = $(this).data('exam-id-detail');
+                location.href = "<?php echo SITEURL ?>student/index.php?page=result_detail&exam_id=" + exam_id;
+            })
 
         });
 
