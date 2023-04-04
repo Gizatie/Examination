@@ -133,7 +133,7 @@
                     minlength: 6
                 },
                 username: {
-                    minlength: 2,
+                    minlength: 6,
                     required: true
                 }
             },

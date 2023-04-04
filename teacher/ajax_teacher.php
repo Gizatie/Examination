@@ -75,7 +75,7 @@ if ($_POST['action'] == 'login') {
         $res = $obj->execute_query($conn, $query);
         $row = $obj->fetch_data($res);
         $count_rows = $obj->num_rows($res);
-        if ($count_rows == 1) {
+        if ($count_rows == 1 && isset($_SESSION)) {
             $_SESSION['teacher'] = $username;
             $_SESSION['teacher_id'] = $row['id'];
             change_exam_status($_SESSION['teacher_id'], $conn, $obj);

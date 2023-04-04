@@ -157,6 +157,7 @@
     <?php include("includes/scripts3.php") ?>
     <script src="<?php echo SITEURL ?>asset2/js/bootstrap-datetimepicker.js"></script>
     <script src="<?php echo SITEURL ?>asset2/js/TimeCircles.js"></script>
+    <script src="<?php echo SITEURL ?>asset2/js/inspinia.js"></script>
 
 
 </body>
