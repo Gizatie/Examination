@@ -27,7 +27,7 @@ if (isset($_POST['uploadstudent'])) {
         $tbl_name = "tbl_teacher";
         $data = "first_name = '$first_name',
         last_name = '$last_name',
-        username = '$first_name',
+        username = '$id',
         email = '$email',
         password = 'dtu1234',
         department_id = '" . $_SESSION['dept_id'] . "'
