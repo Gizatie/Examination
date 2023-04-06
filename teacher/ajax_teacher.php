@@ -511,6 +511,7 @@ if ($_POST['action'] == 'fetch') {
             if (Is_allowed_add_question($row['exam_id'], $conn, $obj) && $row['status'] == 'created') {
                 # code...
                 $sub_array[] .= '<button type="button" class="btn btn-primary btn-outline btn-circle add-question" data-toggle="tooltip" data-placement="top" title="Click to add Question" id="' . $row['exam_id'] . '"><i class="fa fa-plus "> </i></button>';
+                $sub_array[] .= '<button type="button" class="btn btn-primary  btn-circle view-question" data-toggle="tooltip" data-placement="top" title="Click to view Questions" id="' . $row['exam_id'] . '"><i class="fa fa-eye "> </i></button>';
             } else {
                 $sub_array[] .= '<button type="button" class="btn btn-primary  btn-circle view-question" data-toggle="tooltip" data-placement="top" title="Click to view Questions" id="' . $row['exam_id'] . '"><i class="fa fa-eye "> </i></button>';
             }
