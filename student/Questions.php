@@ -95,19 +95,19 @@
                                 <div id="single_question_area">
                                     <!--The question gets displayed here. -->
                                 </div>
+                               
                             </div>
                             <div class="card-footer"></div>
+                            <div id="exam_timer" data-timer="<?php echo $remaining_minutes ?>" style="max-width:400px; width: 100%; height: 200px;">
+                        </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
-
                         <div id="question_navigation_area">
                             <!-- List of all questions appears here. -->
                         </div>
-                        <div id="prev_next"></div>
+                        <!-- <div id="prev_next"></div> -->
                         <div id="user_details_area"></div>
-                        <div id="exam_timer" data-timer="<?php echo $remaining_minutes ?>" style="max-width:400px; width: 100%; height: 200px;">
-                        </div>
                         <script>
                             setInterval(function() {
                                 var remaining_second = $("#exam_timer").TimeCircles().getTime();
