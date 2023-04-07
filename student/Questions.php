@@ -441,7 +441,7 @@
                         $('#question_navigation_area #' + question_id).removeClass('btn-warning');
                     }
                     $('#question_navigation_area #' + question_id).addClass(data.class);
-
+                    question_navigation();
 
                 }
             })
