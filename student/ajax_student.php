@@ -262,19 +262,19 @@ if ($_POST['action'] == "fetch") {
                 $if_next_disable = 'disabled';
             }
 
-            $prev_next = '
-					<br />
-				  	<div align="center">
-				   		<button type="button" name="previous" class="btn  btn-primary btn-outline btn-rounded btn-lg previous" id="' . $previous_id . '" ' . $if_previous_disable . '>Previous</button>
-				   		<button type="button" name="next" class="btn btn-primary  btn-lg btn-outline btn-rounded next" id="' . $next_id . '" ' . $if_next_disable . '>Next</button>
-				  	</div>
-				  	<br />';
-            $output .= $prev_next;
+            // $prev_next = '
+			// 		<br />
+			// 	  	<div align="center">
+			// 	   		<button type="button" name="previous" class="btn  btn-primary btn-outline btn-rounded btn-lg previous" id="' . $previous_id . '" ' . $if_previous_disable . '>Previous</button>
+			// 	   		<button type="button" name="next" class="btn btn-primary  btn-lg btn-outline btn-rounded next" id="' . $next_id . '" ' . $if_next_disable . '>Next</button>
+			// 	  	</div>
+			// 	  	<br />';
+            // $output .= $prev_next;
             $var = $row['question_id'];
             if (if_question_is_answered($conn, $obj, $_SESSION['student_id'], $_POST['exam_id'], $row['question_id'])) {
                 $class = 'btn-primary';
             } else
-                $class = 'btn-warning';
+                $class = 'btn-danger';
         }
         $data = array(
             "question" => $output,
@@ -311,7 +311,7 @@ if ($_POST['action'] == "fetch") {
                     $class = 'btn-success';
                 $output .= '
                     <div class="col-sm-2" style="margin-bottom:10px;">
-                        <button type="button" class="btn ' . $class . ' btn-sm btn-circle btn-outline question_navigation" data-question_id="' . $row["question_id"] . '" id="' . $row["question_id"] . '">' . $count . '</button>
+                        <button type="button" class="btn ' . $class . ' btn-sm btn-circle question_navigation" data-question_id="' . $row["question_id"] . '" id="' . $row["question_id"] . '">' . $count . '</button>
                     </div>
                     ';
                 $count++;
@@ -328,7 +328,7 @@ if ($_POST['action'] == "fetch") {
             <div class="card-footer">
             <label><button class ="btn btn-outline btn-sm btn-circle btn-primary ">i</button> Answered</label>
             <label><button class ="btn btn-outline btn-circle btn-success ">i</button>  Unvisited</label>
-            <label><button class ="btn btn-outline btn-circle btn-warning ">i</button> Not Answered</label>
+            <label><button class ="btn btn-outline btn-circle btn-danger ">i</button> Not Answered</label>
 			</div>
             </div>
 			';

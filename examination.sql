@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Apr 07, 2023 at 04:45 AM
+-- Host: 10.1.194.98:3306
+-- Generation Time: Apr 07, 2023 at 12:40 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -127,7 +127,6 @@ INSERT INTO `tbl_course` (`course_id`, `course_code`, `course_name`, `department
 (2, 'CS101', 'Introduction to Computer', 4, 5, 1),
 (3, 'CS201', 'Java programming', 4, 5, 2),
 (4, 'CS202', 'Data Structure', 4, 6, 2),
-(5, 'MAT201', 'Linear Aljebra', 2, 5, 2),
 (6, 'CS202', 'OOP', 4, 7, 2),
 (7, 'Em001', 'Emerging Technology', 4, 6, 2),
 (8, 'C001', 'C++', 4, 6, 2),
@@ -218,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `tbl_exam` (
 --
 
 INSERT INTO `tbl_exam` (`exam_id`, `course_id`, `time_duration`, `qns_per_set`, `status`, `added_date`, `exam_date`, `exam_type`) VALUES
-(1, 3, 30, 36, 'completed', '2023-04-04', '2023-04-04 12:25:00', 'Exit Exam'),
+(1, 3, 30, 36, 'completed', '2023-04-07', '2023-04-07 13:30:00', 'Exit Exam'),
 (2, 4, 180, 10, 'completed', '2023-03-23', '2021-05-28 10:45:00', 'Exit Exam'),
 (3, 2, 30, 4, 'completed', '2023-03-23', '2023-03-23 10:30:00', 'Exit Exam'),
 (7, 6, 5, 2, 'completed', '2022-03-19', '2022-03-19 12:05:00', 'Test'),
@@ -232,7 +231,7 @@ INSERT INTO `tbl_exam` (`exam_id`, `course_id`, `time_duration`, `qns_per_set`, 
 (21, 13, 30, 10, 'completed', '2023-04-04', '2023-04-04 16:35:00', 'Mock'),
 (22, 13, 30, 10, 'created', '2023-04-04', '2023-04-05 21:15:00', 'Quiz'),
 (23, 14, 90, 20, 'completed', '2023-04-05', '2023-04-05 14:20:00', 'Mock'),
-(24, 15, 90, 120, 'created', '2023-04-05', '2023-04-19 16:45:00', 'Final');
+(24, 15, 90, 120, 'started', '2023-04-07', '2023-04-07 15:25:00', '');
 
 -- --------------------------------------------------------
 
@@ -249,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `tbl_exam_activation_request` (
   `teacher_id` int NOT NULL,
   `request_status` varchar(255) NOT NULL DEFAULT 'Pending',
   PRIMARY KEY (`request_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=128 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=143 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_exam_activation_request`
@@ -340,7 +339,22 @@ INSERT INTO `tbl_exam_activation_request` (`request_id`, `student_id`, `request_
 (124, 61, '2023-04-05 15:33:31', 23, 5, 'Activated'),
 (125, 57, '2023-04-05 15:37:07', 23, 5, 'Activated'),
 (126, 69, '2023-04-05 15:45:33', 23, 5, 'Activated'),
-(127, 63, '2023-04-05 15:45:53', 23, 5, 'Activated');
+(127, 63, '2023-04-05 15:45:53', 23, 5, 'Activated'),
+(128, 8, '2023-04-07 11:54:11', 1, 5, 'Activated'),
+(129, 8, '2023-04-07 12:02:43', 1, 5, 'Activated'),
+(130, 8, '2023-04-07 12:07:13', 1, 5, 'Activated'),
+(131, 8, '2023-04-07 12:51:16', 1, 5, 'Activated'),
+(132, 57, '2023-04-07 13:27:38', 1, 5, 'Activated'),
+(133, 57, '2023-04-07 13:34:04', 1, 5, 'Activated'),
+(134, 57, '2023-04-07 13:44:16', 1, 5, 'Activated'),
+(135, 57, '2023-04-07 13:47:58', 1, 5, 'Activated'),
+(136, 57, '2023-04-07 13:51:25', 1, 5, 'Activated'),
+(137, 57, '2023-04-07 13:53:39', 1, 5, 'Activated'),
+(138, 57, '2023-04-07 14:00:49', 1, 5, 'Activated'),
+(139, 57, '2023-04-07 14:22:08', 1, 5, 'Pending'),
+(140, 90, '2023-04-07 15:28:06', 24, 119, 'Activated'),
+(141, 90, '2023-04-07 15:34:43', 24, 119, 'Activated'),
+(142, 90, '2023-04-07 15:37:19', 24, 119, 'Activated');
 
 -- --------------------------------------------------------
 
@@ -435,7 +449,7 @@ CREATE TABLE IF NOT EXISTS `tbl_question` (
   `updated_date` date NOT NULL,
   `image_name` blob NOT NULL,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=335 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=375 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `tbl_question`
@@ -448,7 +462,7 @@ INSERT INTO `tbl_question` (`question_id`, `exam_id`, `question`, `first_answer`
 (25, '1', '<p>The average (arithmetic mean) of the integers from 200 to 400, inclusive, is how<br />\r\nmuch greater than the average of the integers from 50 to 100, inclusive?</p>\r\n', '150', '175', '200', '225', '300', 4, 'In the list of integers from 200 to 400 inclusive, the middle value is 300. For every\r\ninteger above 300, there exists an integer below 300 that is the same distance away\r\nfrom 300; thus the average of the integers from 200 to 400, inclusive, will be kept\r\nat 300. In the same manner, the average of the integers from 50 to 100, inclusive,\r\nis 75. The difference is 300-75=225.', '2.00', 'yes', '2017-06-15', '2017-06-15', ''),
 (27, '1', '<p>The product of all the prime numbers less than 20 is closest to which of the<br />\r\nfollowing powers of 10?</p>\r\n', '109 ', '108', '107 ', '106 ', '105', 3, 'The prime numbers less than 20 are 2, 3, 5, 7, 11, 13, 17, and 19. Their product is 9,699,690. This is closest to 10000000\r\n', '4.00', 'yes', '2017-06-15', '0000-00-00', ''),
 (28, '1', '<p>If<strong><span style=\"color:#1abc9c\"> n</span></strong> is the product of the integers from <strong><span style=\"color:#1abc9c\">1</span></strong> to <strong><span style=\"color:#1abc9c\">8</span></strong>, inclusive, how many different prime<br />\nfactors greater than 1 does <span style=\"color:#1abc9c\"><strong>n</strong></span> have?</p>\n', 'Four', 'Five ', 'Six ', 'Seven', 'Eight', 1, '<p>If n is the product of the integers from 1 to 8, then its prime factors will be the prime numbers from 1 to 8. There are four prime numbers between <strong><span style=\"color:#1abc9c\">1 </span></strong>and <strong><span style=\"color:#1abc9c\">8</span></strong>: <span style=\"color:#e74c3c\">2, 3, 5</span>, and <span style=\"color:#e74c3c\">7</span>.</p>\n', '2.00', 'yes', '2021-06-05', '0000-00-00', ''),
-(35, '1', '<p>Of the 50 researchers in a workgroup, 40 percent will be assigned to Team A and<br />\r\nthe remaining 60 percent to Team B. However, 70 percent of the researchers prefer<br />\r\nTeam A and 30 percent prefer Team B. What is the lowest possible number of<br />\r\nresearchers who will NOT be assigned to the team they prefer?</p>\r\n', '15', '17', '20', '25 ', '30', 1, 'The number of researchers assigned to Team A will be (0.40)(50)=20, and so 30 will be assigned to Team B. The number of researchers who prefer Team A (0.70)(50)=35 is , and the rest, 15, prefer Team B. If all 15 who prefer Team B are assigned to Team B, which is to have 30 researchers, then 15 who prefer Team A will need to be assigned to Team B. Alternatively, since there are only 20 spots on Team A, 35 âˆ’ 20 = 15 who prefer Team A but will have to go to Team B instead.', '4.00', 'yes', '2017-06-15', '0000-00-00', ''),
+(35, '1', '<p>Of the 60 researchers in a workgroup, 40 percent will be assigned to Team A and<br />\r\nthe remaining 60 percent to Team B. However, 70 percent of the researchers prefer<br />\r\nTeam A and 30 percent prefer Team B. What is the lowest possible number of<br />\r\nresearchers who will NOT be assigned to the team they prefer?</p>\r\n', '15', '17', '20', '25 ', '30', 1, '<p>The number of researchers assigned to Team A will be (0.40)(50)=20, and so 30 will be assigned to Team B. The number of researchers who prefer Team A (0.70)(50)=35 is , and the rest, 15, prefer Team B. If all 15 who prefer Team B are assigned to Team B, which is to have 30 researchers, then 15 who prefer Team A will need to be assigned to Team B. Alternatively, since there are only 20 spots on Team A, 35 &acirc;&circ;&rsquo; 20 = 15 who prefer Team A but will have to go to Team B instead.</p>\r\n', '4.00', 'yes', '2023-04-07', '2023-04-07', ''),
 (36, '1', '<p>The positive two-digit integers x and y have the same digits, but in reverse order.<br />\r\nWhich of the following must be a factor of x + y?</p>\r\n', '6', '9', '10', '11', '14', 4, 'Let m and n be digits. If x = 10m + n, then y = 10n + m. Adding x and y gives x + y = (10m + n) + (10n + m) = 11m + 11n = 11(m + n), and therefore 11 is a factor of x + y.', '1.00', 'yes', '2017-06-15', '0000-00-00', ''),
 (63, '1', '<p>Asurge in new home sales and a drop in weekly<br />\r\nunemployment <u>claims suggest that the economy might<br />\r\nnot be as weak as some analysts previously thought.</u></p>\r\n', 'claims suggest that the economy might not be as weak as some analysts previouslycthought', ' claims suggests that the economy might not be so weak as some analysts have previously thought ', 'claims suggest that the economy might not be as weak as have been previously thought by some analysts ', 'claims, suggesting about the economy that it might not be so weak as previously thought by some analysts ', 'claims, suggesting the economy might not be as weak as previously thought to be by some analysts', 1, 'The plural subject of this sentence {surge and drop)\r\nrequires a plural verb, suggest. The object of this\r\nverb, the clause beginning with that, should be\r\npresented in as clear and direct a manner as\r\npossible.\r\nA Correct. The plural subject is matched with\r\na plural verb.\r\nB The singular verb suggests does not match\r\nthe plural subject of the sentence.\r\nC The sentence offers no plural subject to fit\r\nthe passive verb have been thought.\r\nD This construction is awkward, wordy, and\r\nimprecise; it also lacks a main verb; there is\r\nno reason to use passive voice, and suggesting\r\nabout the economy that it might... introduces\r\nextra words that contribute nothing to the\r\nmeaning of this sentence fragment.\r\nE The passive construction makes this\r\nunnecessarily wordy; the lack of a main verb\r\nmakes this a sentence fragment.\r\nThe correct answer is A.', '2.00', 'yes', '2017-06-16', '0000-00-00', ''),
 (65, '1', '<p>Warning that computers in the United States are not<br />\r\nsecure, the National Academy of Sciences has urged<br />\r\nthe nation to revamp computer security procedures,<br />\r\ninstitute new emergency response teams, <u>creating a<br />\r\nspecial nongovernment organization to take</u> charge of<br />\r\ncomputer security planning.</p>\r\n', 'creating a special nongovernment organization to take', 'creating a special non government organization that takes ', 'creating a special non government organization for taking ', 'and create a special non government organization for taking ', 'and create a special nongovernment organization to take', 5, 'This sentence contains a list of three elements,\r\nall of which should be parallel. The last element\r\nshould be preceded by the conjunction and. In\r\nthis sentence, the last element must be made\r\nparallel to the previous two: to (1) revamp computer\r\nsecurity procedures, (2) institute new emergency\r\nresponse iteams,,and{3) create a special\r\nnon government organization to take charge of\r\ncomputer security planning. Omitting and causes\r\nthe reader to anticipate still another element in\r\nthe series when there is none. Using the participle\r\ncreating not only violates parallelism but also\r\ncauses misreading since the participial phrase\r\ncould modify the first part of the sentence. To\r\ndoes not need to be repeated with institute and\r\ncreate because it is understood.\r\nCreating is not parallel to to revamp and\r\ninstitute; and is needed in this series.\r\nB Creating violates the parallelism of the\r\nprevious two elements; and is needed in this\r\nseries; since the organization does not yet\r\nexist, that takes is illogical.\r\nC Creating is not parallel to to revamp and\r\ninstitute\', and is needed in this series; to has\r\nthe sense of in order to, but/or taking is\r\nneither precise nor idiomatic.\r\nD In the construction create ...to take, the\r\nsense of to is in order to;for taking is not\r\nidiomatically correct.\r\nCorrect. The three elements in the series are\r\nparallel in this sentence, and the last is\r\npreceded by and.\r\nThe correct answer is E.', '2.00', 'yes', '2017-06-16', '0000-00-00', ''),
@@ -655,14 +669,55 @@ INSERT INTO `tbl_question` (`question_id`, `exam_id`, `question`, `first_answer`
 (324, '24', '<p>It is difficult to directly determining the tensile strength of plain concrete due to griping<br />\r\nproblem, but it can be indirectly determined by one of the following except<br />\r\n&nbsp;</p>\r\n', 'Cylindrical split test', 'Bending test', 'Slump Test', ' Empirical formulas', '', 3, '', '1.00', 'yes', '2023-04-06', '2023-04-06', ''),
 (325, '24', '<p>Which one of the following does not affect the vertical and horizontal spacing between<br />\r\nreinforcement in a given section<br />\r\n&nbsp;</p>\r\n', 'Diameter of Main Bar', 'Size of Aggregate', 'Grade of Concrete', 'Size of the Section', '', 3, '', '1.00', 'yes', '2023-04-06', '2023-04-06', ''),
 (326, '24', '<p>At intersection of roads, the traffic volume study is carried out to ascertain the number of<br />\r\nvehicles<br />\r\n&nbsp;</p>\r\n', 'Moving along straights', 'Turning left', 'Turning right', 'All the above', '', 4, '', '1.00', 'yes', '2023-04-06', '2023-04-06', ''),
-(327, '24', '<p>During building design for reinforcement which one of the following is a preferable because<br />\r\nof it has a ductile failure mode which reduce a catastrophic damage on occupants<br />\r\n&nbsp;</p>\r\n', 'Compression Failure', 'Tension Failure', 'Balanced Failure', 'Brittle Failure', '', 2, '', '1.00', 'yes', '2023-04-06', '2023-04-06', ''),
+(327, '24', '<p>During building design for reinforcement which one of the following is a preferable because&nbsp;of it has a ductile failure mode which reduce a catastrophic damage on occupants<br />\r\n&nbsp;</p>\r\n', 'Compression Failure', 'Tension Failure', 'Balanced Failure', 'Brittle Failure', '', 2, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
 (328, '24', '<p>Flexible pavement distributes the wheel load<br />\r\n&nbsp;</p>\r\n', 'Directly to sub-grade', 'Through structural action', 'Through a set of layers to the sub-grade', 'None of the above', '', 3, '', '1.00', 'yes', '2023-04-06', '2023-04-06', ''),
 (329, '24', '<p>During the design of rectangular beam section, if you are restricted to increase the depth of<br />\r\nthis section, due to some architectural reasons, you are going to design the beam as<br />\r\n&nbsp;</p>\r\n', 'Balanced Section', 'Double Reinforced Section', 'Single Reinforced Section', 'Under reinforced section', '', 2, '', '1.00', 'yes', '2023-04-06', '2023-04-06', ''),
 (330, '24', '<p>With respect to the shape of the flow-density curve, when the density reaches maximum the flow must be ______<br />\r\n&nbsp;</p>\r\n', 'Maximum', ' Infinite', 'Zero', 'Minimum', '', 3, '', '1.00', 'yes', '2023-04-06', '2023-04-06', ''),
 (331, '24', '<p>As a structural designer which one of the following has not significant failure effect on your<br />\r\nstructure, if you use it below the Codal standard.<br />\r\n&nbsp;</p>\r\n', 'Reinforcement Spacing', 'Section Depth', 'Reinforcement Area', 'Concrete Cover', '', 4, '', '1.00', 'yes', '2023-04-06', '2023-04-06', ''),
 (332, '24', '<p>In CBR test the value of CBR is calculated at<br />\r\n&nbsp;</p>\r\n', '2.5 mm penetration only', '5.0 mm penetration only', '7.5 mm penetration only', 'Both 2.5 mm and 5.0 mm penetrations', '', 4, '', '1.00', 'yes', '2023-04-06', '2023-04-06', ''),
 (333, '24', '<p>Most suitable material for highway embankments is<br />\r\n&nbsp;</p>\r\n', 'Granular soil', 'Organic soil', 'Silts', 'Clays', '', 1, '', '1.00', 'yes', '2023-04-06', '2023-04-06', ''),
-(334, '24', '<p>Which one of the following is not true about one-way rectangular solid slab<br />\r\n&nbsp;</p>\r\n', 'Main reinforcement is provided parallel to the shorter axis', 'Shrinkage reinforcement is provided parallel to shorter axis', ' Bending occurs in the shorter axis', 'The load is transferred to the shorter axis', '', 2, '', '1.00', 'yes', '2023-04-06', '2023-04-06', '');
+(334, '24', '<p>Which one of the following is not true about one-way rectangular solid slab<br />\r\n&nbsp;</p>\r\n', 'Main reinforcement is provided parallel to the shorter axis', 'Shrinkage reinforcement is provided parallel to shorter axis', ' Bending occurs in the shorter axis', 'The load is transferred to the shorter axis', '', 2, '', '1.00', 'yes', '2023-04-06', '2023-04-06', ''),
+(335, '24', '<p>To prevent compressive stresses in a rigid concrete pavement, the joint provided, is<br />\r\n&nbsp;</p>\r\n', 'Expansion joint', 'Contraction joint', 'Hinged joint', ' All the above', '', 4, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(336, '24', '<p>Assume a 3m plane concrete beam with cross sectional of 200mm*300mm, then self- weight of this beam will be<br />\r\n&nbsp;</p>\r\n', '1.50KN/m', '1.44KN/m', ' 1.22KN/m', ' 1.40KN/m', '', 2, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(337, '24', '<p>Side drains on both sides of a hill road, are essential when the road is<br />\r\n&nbsp;</p>\r\n', ' Along the spur curves', 'Along the re-entrant curves', 'In cutting', 'None of these', '', 3, '', '1.00', 'yes', '2023-04-07', '2023-04-07', '');
+INSERT INTO `tbl_question` (`question_id`, `exam_id`, `question`, `first_answer`, `second_answer`, `third_answer`, `fourth_answer`, `fifth_answer`, `answer`, `reason`, `marks`, `is_active`, `added_date`, `updated_date`, `image_name`) VALUES
+(338, '24', '<p>Assume X(m)*Y(m) one-way rectangular slab with minimum span ratio, is subjected to a total design load of 229.5KN over the slab, where 5KN/m2 is DL and 4KN/m2 is LL. Then what are the dimensions of slab.<br />\r\n&nbsp;</p>\r\n', '3m,6m', '4m,8m', ' 2.5m,5m', '5m,10m', '', 1, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(339, '24', '<p>If the limiting depth to span ration of a 200mm depth two-way rectangular slab is 20 and its<br />\r\nspan ratio is 1.5, then what will be the shorter and longer dimensions of the slab respectively.<br />\r\n&nbsp;</p>\r\n', '4m,8m', ' 4m,6m', ' 3m,6m', '4.5m,7m', '', 2, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(340, '24', '<p>If the limiting depth to span ration of a 200mm depth two-way rectangular slab is 20 and its<br />\r\nspan ratio is 1.5, then what will be the shorter and longer dimensions of the slab respectively.<br />\r\n&nbsp;</p>\r\n', '4m,8m', ' 4m,6m', ' 3m,6m', '4.5m,7m', '', 2, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(341, '24', '<p>A subsidiary area in a carriageway placed so as to control the movement of the traffic, is<br />\r\n&nbsp;</p>\r\n', 'Median strip', 'Island', ' Flower bed', 'Refuge', '', 2, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(342, '24', '<p>Which one of the following structural elements used as a horizontal diaphragm to maintain the stability of frame system in building structure.<br />\r\n&nbsp;</p>\r\n', 'Beams', 'columns', 'Floors', 'Stairs', '', 3, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(343, '24', '<p>The efficiency of the brakes of a vehicle depends upon<br />\r\n&nbsp;</p>\r\n', 'Condition of road surface', 'Condition of the tyres', 'Presence of the show moisture', 'All the above', '', 4, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(344, '24', '<p>Which one of the following is not true about of flat slab system<br />\r\n&nbsp;</p>\r\n', 'Applicable for large span up to 9m', 'Reduce the formwork requirement', 'Provide better room clearance height', 'Accommodate small load per unit area', '', 4, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(345, '24', '<p>Width of vehicles affects the width of<br />\r\n&nbsp;</p>\r\n', ' Lanes', 'Shoulders', 'Parking spaces', 'All the above', '', 4, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(346, '24', '<p>Which one of the following is not true about reinforcement detailing of a continuous beam<br />\r\n&nbsp;</p>\r\n', 'Negative bar is provided at the mid span', 'Reinforcement overlap at the top is done near to the mid span', 'Reinforcement overlap at the bottom is done at the support', 'Stirrup’s reinforcement has closer spacing near to the support than around the span', '', 1, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(347, '24', '<p>The maximum safe speed on roads, depends on the<br />\r\n&nbsp;</p>\r\n', 'Type of road surface', 'Type of curves', 'Sight distance', 'All the above', '', 4, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(348, '24', '<p>Which one of the following options represents the standard length, area and weight of a 10mm diameter reinforcement bar respectively?<br />\r\n&nbsp;</p>\r\n', '12m, 314mm2,0.93kg/m', '12m, 78.5mm2,0.62kg/m', '6m, 314mm2,0.62kg/m', '10m, 78.5mm2,0.8kg/m', '', 2, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(349, '24', '<p>According to ERA, If the cross slope of a country is 25% to 50%, the terrain is classified as<br />\r\n&nbsp;</p>\r\n', 'Flat', ' Rolling', 'Escarpment', 'Mountainous', '', 4, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(350, '24', '<p>Which one of the following is incorrectly matched with column classification criteria with the<br />\r\nitem classified<br />\r\n&nbsp;</p>\r\n', 'Slenderness ratio: short column', 'Loading type: axial column', 'Reinforcement type: slender column', 'Cross sectional shape: hexagonal column', '', 2, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(351, '24', '<p>Assume the cross-section of column is 300mm*300mm and steel ratio is 2% then, what will be the number of longitudinal reinforcements provided if ϕ <span style=\"font-size:8pt\">20mm </span>is used?<br />\r\n&nbsp;</p>\r\n', '6KN', '5KN', '3KN', '4KN', '', 1, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(352, '24', '<p>If the factored Dead load is 13KN/m and unfactored live load is 5KN/m then what will be the<br />\r\nunfactored design load?<br />\r\n&nbsp;</p>\r\n', '15KN/m', '21 KN/m', '24.9KN/m', '13KN/m', '', 1, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(353, '24', '<p>In flat slab construction Drop panel is provided to resist<br />\r\n&nbsp;</p>\r\n', 'Moment', 'Shear', 'Thrust', 'Torsion', '', 2, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(354, '24', '<p>When an up gradient of a highway meets a downgrade, the vertical curve provided, is<br />\r\nknown as<br />\r\n&nbsp;</p>\r\n', 'Valley curve', ' Sag curve', 'Summit curve', 'All the above', '', 3, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(355, '24', '<p>A square column section of size 400*400mm is reinforced with four bars of 24 mm diameter<br />\r\nand four bars of 16 mm, then the transverse steel/stirrups should be<br />\r\n&nbsp;</p>\r\n', '6mm dia @ 190mm C/C', '8mm dia @ 200mm C/C', '10mm dia @ 190mm C/C', '8mm dia @ 170mm C/C', '', 1, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(356, '24', '<p>Which one of the following methods of slab analysis is more advantageous for complex<br />\r\nshaped slab <span style=\"color:#ff0000\">and slabs subjected to concentrated load</span><br />\r\n&nbsp;</p>\r\n', 'Yield line method', 'Strip method', 'Coefficient method', ' Equivalent frame method', '', 1, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(357, '24', '<p>_______is a concrete achieving its design strength before the application of design load<br />\r\nthrough the process of pre-loading<br />\r\n&nbsp;</p>\r\n', 'Pre-stressed concrete', 'Post-stressed concrete', 'Reinforced concrete', 'Plain concrete', '', 1, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(358, '24', '<p>Which one of the following reinforcement types is technically different from functional<br />\r\naspects<br />\r\n&nbsp;</p>\r\n', 'Longitudinal reinforcement', 'Shearing reinforcement', 'Primary reinforcement', 'Secondary reinforcement', '', 2, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(359, '24', '<p>Queen closer may be placed in &hellip;&hellip;&hellip;...<br />\r\n&nbsp;</p>\r\n', 'Header course', 'Stretcher course', 'Header course next to first brick', 'Stretcher course next to first brick', '', 1, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(360, '24', '<p>The convexity provided to the carriageway between the crown and edge of the pavement, is<br />\r\nknown as<br />\r\n&nbsp;</p>\r\n', 'Super-elevation', 'Camber', 'Height of the pavement', 'None of these', '', 2, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(361, '24', '<p>Which one is false statement about Dutch bond for brick layouts?<br />\r\n&nbsp;</p>\r\n', 'It is an alternate course of headers and stretchers', 'It is similar to Flemish bond', 'Every stretcher course starts at the quoin with the three-quarter bat', 'In every alternate stretcher course, a header is placed next to the three- quarter brick bat provided at the quoin', 'None of the above', 2, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(362, '24', '<p>Along horizontal curves, if centrifugal force exceeds lateral friction, vehicles may<br />\r\n&nbsp;</p>\r\n', 'Skid', 'Slip', ' Not be affected', 'None of these', '', 1, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(363, '24', '<p>The foundations are placed below ground level, to increase<br />\r\n&nbsp;</p>\r\n', 'Strength', 'Workability', 'Stability of Structure', 'All the Above', '', 4, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(364, '24', '<p>Which of the following equations shows the correct relationship between flow, density, and<br />\r\nspace mean speed?<br />\r\n&nbsp;</p>\r\n', 'Flow = density/space mean speed', 'Flow = space mean speed /density', 'Density = flow x space mean speed', 'Flow = density x space mean speed', '', 4, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(365, '24', '<p>Pick up the correct statement from the following:<br />\r\n&nbsp;</p>\r\n', 'Louvered door is generally provided in bath rooms', 'Flush door is generally provided in dinning room', ' Revolving door is generally provided in cinema halls', 'Sliding door is generally provided in show rooms', 'All the above.', 5, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(366, '24', '<p>The piece of a brick cut with its one corner equivalent to half the length and half the width of<br />\r\na full brick, is known as<br />\r\n&nbsp;</p>\r\n', 'Queen Closer', ' Bevelled Closer', 'King Closer', 'Half King Closer', '', 1, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(367, '24', '<p>Greenberg model uses which analogy?<br />\r\n&nbsp;</p>\r\n', 'Fluid flow', 'Laws of motion', 'Secchi disk', 'Turbidity', '', 1, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(368, '24', '<p>The Greenberg model is used for which type of traffic condition?<br />\r\n&nbsp;</p>\r\n', ' Dense', ' Light', ' Uncongested', 'Unrestricted', '', 1, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(369, '24', '<p>Pick up the correct statement from the following:<br />\r\n&nbsp;</p>\r\n', 'During reconnaissance, the general route of the alignment is selected', 'After reconnaissance, a trace is cut for the alignment', 'Last stage is the detailed surveys for desired geometries\' of the highway', ' All the above', '', 4, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(370, '24', '<p>Among the following which one is the effects Dampness<br />\r\n&nbsp;</p>\r\n', 'Efflorescence', 'Bleaching of Paints', 'Crumbling of Plaster', 'Growth of Termites', '', 1, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(371, '24', '<p>Bottom most layer of pavement is known as<br />\r\n&nbsp;</p>\r\n', 'Wearing course', 'Base course', 'Sub-base course', ' Sub-grade', '', 4, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(372, '24', '<p>The vertical side member of a shutter frame, is known<br />\r\n&nbsp;</p>\r\n', 'Style', 'Reveal', 'Mullion', 'post', '', 1, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(373, '24', '<p>Which of the following tests measures the toughness of road aggregates?<br />\r\n&nbsp;</p>\r\n', 'Crushing strength test', 'Abrasion test', 'Impact test', 'Shape test', '', 3, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(374, '24', '<p>The loose parts in soil mass can be bridged safely by providing a raft foundation provided<br />\r\nthesoft area is smaller than<br />\r\n&nbsp;</p>\r\n', 'The Column Spacing', 'One-Third the Column Spacing', 'Half the Column Spacing', 'Three-Fourth the Column Spacing', '', 2, '', '1.00', 'yes', '2023-04-07', '2023-04-07', '');
 
 -- --------------------------------------------------------
 
@@ -682,7 +737,7 @@ CREATE TABLE IF NOT EXISTS `tbl_result` (
   `added_date` date NOT NULL,
   PRIMARY KEY (`result_id`),
   KEY `exam_id` (`exam_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2457 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2471 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `tbl_result`
@@ -710,7 +765,7 @@ INSERT INTO `tbl_result` (`result_id`, `exam_id`, `student_id`, `question_id`, `
 (23, 1, 8, 89, 1, 1, '1.00', '2022-02-17'),
 (24, 1, 8, 91, 4, 5, '2.00', '2022-02-17'),
 (25, 1, 8, 69, 2, 5, '2.00', '2022-02-17'),
-(26, 1, 8, 95, 3, 1, '2.00', '2023-03-23'),
+(26, 1, 8, 95, 3, 1, '2.00', '2023-04-07'),
 (27, 1, 8, 96, 1, 5, '1.00', '2022-02-17'),
 (28, 1, 8, 133, 4, 3, '2.00', '2023-03-23'),
 (29, 1, 8, 82, 3, 4, '3.00', '2022-02-17'),
@@ -3126,7 +3181,21 @@ INSERT INTO `tbl_result` (`result_id`, `exam_id`, `student_id`, `question_id`, `
 (2453, 23, 67, 250, 4, 4, '2.00', '2023-04-05'),
 (2454, 23, 67, 211, 4, 3, '2.00', '2023-04-05'),
 (2455, 23, 67, 220, 2, 2, '2.00', '2023-04-05'),
-(2456, 23, 67, 221, 3, 3, '2.00', '2023-04-05');
+(2456, 23, 67, 221, 3, 3, '2.00', '2023-04-05'),
+(2457, 1, 57, 25, 1, 4, '2.00', '2023-04-07'),
+(2458, 1, 57, 91, 1, 5, '2.00', '2023-04-07'),
+(2459, 1, 57, 88, 2, 5, '2.00', '2023-04-07'),
+(2460, 1, 57, 69, 3, 5, '2.00', '2023-04-07'),
+(2461, 1, 57, 22, 1, 2, '2.00', '2023-04-07'),
+(2462, 1, 57, 97, 1, 4, '1.00', '2023-04-07'),
+(2463, 1, 57, 72, 1, 2, '4.00', '2023-04-07'),
+(2464, 1, 57, 85, 3, 3, '1.00', '2023-04-07'),
+(2465, 1, 57, 23, 1, 3, '1.00', '2023-04-07'),
+(2466, 1, 57, 24, 2, 1, '2.00', '2023-04-07'),
+(2467, 1, 57, 28, 1, 1, '2.00', '2023-04-07'),
+(2468, 1, 57, 27, 1, 3, '4.00', '2023-04-07'),
+(2469, 1, 57, 63, 1, 1, '2.00', '2023-04-07'),
+(2470, 24, 90, 286, 5, 2, '1.00', '2023-04-07');
 
 -- --------------------------------------------------------
 
@@ -3242,7 +3311,7 @@ CREATE TABLE IF NOT EXISTS `tbl_student` (
   PRIMARY KEY (`student_id`),
   KEY `department_id` (`department_id`),
   KEY `study_year` (`study_year`)
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `tbl_student`
@@ -3250,7 +3319,7 @@ CREATE TABLE IF NOT EXISTS `tbl_student` (
 
 INSERT INTO `tbl_student` (`student_id`, `exam_id`, `first_name`, `last_name`, `email`, `username`, `password`, `contact`, `gender`, `study_year`, `department_id`, `academic_year`, `is_active`, `added_date`, `updated_date`) VALUES
 (8, 1, 'Nathan', 'Zewdie', 'nathan@gmail.com', 'Nathan', 'dtu1234', '123151555', 'Male', 2, 4, 2021, 'yes', '2021-05-19', '2021-05-19'),
-(57, NULL, 'ABEL', 'FASIL', 'abel12@gmail.com', 'DTU12R1278', '@computer', '9000000', 'Male', 4, 4, 2023, 'yes', '2023-03-31', '2023-04-04'),
+(57, NULL, 'ABEL', 'FASIL', 'abel12@gmail.com', 'DTU12R1278', 'dtu1234', '9000000', 'Male', 2, 4, 2023, 'yes', '2023-03-31', '2023-04-07'),
 (58, NULL, 'ANDEBET', 'SISAY', 'abel12@gmail.com', 'DTU12R0572', '@computer', '9000000', 'Male', 4, 4, 2023, 'yes', '2023-03-31', '2023-04-04'),
 (59, NULL, 'BEKALU', 'MULUYE', 'abel12@gmail.com', 'DTU12R1699', '@computer', '9000000', 'Male', 4, 4, 2023, 'yes', '2023-03-31', '2023-04-04'),
 (60, NULL, 'BEREKET', 'ABERA', 'abel12@gmail.com', 'DTU12R1701', '@computer', '9000000', 'Male', 4, 4, 2023, 'yes', '2023-03-31', '2023-04-04'),
@@ -3279,7 +3348,26 @@ INSERT INTO `tbl_student` (`student_id`, `exam_id`, `first_name`, `last_name`, `
 (83, NULL, 'YARED', 'MEKONNEN', 'abel12@gmail.com', 'DTU12R0789', '@computer', '9000000', 'Male', 4, 4, 2023, 'yes', '2023-03-31', '2023-04-04'),
 (84, NULL, 'YEABSIRA', 'HAILE', 'abel12@gmail.com', 'DTU12R1483', '@computer', '9000000', 'Male', 4, 4, 2023, 'yes', '2023-03-31', '2023-04-04'),
 (85, NULL, 'YOHANNES', 'MULAT', 'abel12@gmail.com', 'DTU12R1275', '@computer', '9000000', 'Male', 4, 4, 2023, 'yes', '2023-03-31', '2023-04-04'),
-(86, NULL, 'YORDANOS', 'FIKADU', 'abel12@gmail.com', 'DTU12R0172', '@computer', '9000000', 'Male', 4, 4, 2023, 'yes', '2023-03-31', '2023-04-04');
+(86, NULL, 'YORDANOS', 'FIKADU', 'abel12@gmail.com', 'DTU12R0172', '@computer', '9000000', 'Male', 4, 4, 2023, 'yes', '2023-03-31', '2023-04-04'),
+(90, NULL, 'AGERAW', 'MARU', 'abc@gmail.com', 'Ceng(ex)009/10', 'git1234', '9090909', 'Male', 5, 2, 2023, 'yes', '2023-04-07', '2023-04-07'),
+(91, NULL, 'ALELIGNE', 'TADIE', 'abc2@gmail.com', 'Ceng(ex)011/10', 'git1234', '9090910', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(92, NULL, 'ALEMAYEHU', 'DESSIE', 'abc3@gmail.com', 'Ceng(ex)013/10', 'git1234', '9090911', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(93, NULL, 'ARAGAW', 'MASIRE', 'abc4@gmail.com', 'Eng(Exe)035/08', 'git1234', '9090912', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(94, NULL, 'BAMLAKU', 'FENTYE', 'abc5@gmail.com', 'CIVIL/SUM/009/09', 'git1234', '9090913', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(95, NULL, 'BANTAYEW', 'BILEWU', 'abc6@gmail.com', 'Ceng(ex)023/10', 'git1234', '9090914', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(96, NULL, 'ENDALAMAW', 'MARU', 'abc7@gmail.com', 'Ceng(ex)037/10', 'git1234', '9090915', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(97, NULL, 'GETACHEW', 'KINDU', 'abc8@gmail.com', 'Ceng(ex)043/10', 'git1234', '9090916', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(98, NULL, 'HABETAMU', 'ZEMENE', 'abc9@gmail.com', 'Ceng(ex)049/10', 'git1234', '9090917', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(99, NULL, 'KEFEYALEW', 'SEMEGN', 'abc11@gmail.com', 'Ceng(ex)053/10', 'git1234', '9090918', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(100, NULL, 'MASTEWAL', 'ADUGNAW', 'abc12@gmail.com', 'Ceng(ex)055/10', 'git1234', '9090919', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(101, NULL, 'MEKOYA', 'AMBACHEW', 'abc13@gmail.com', 'Ceng(ex)057/10', 'git1234', '9090920', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(102, NULL, 'MELESE', 'MISGANAW', 'abc14@gmail.com', 'CUIL/SUM/023/09', 'git1234', '9090921', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(103, NULL, 'NEGA', 'WUBIE', 'abc15@gmail.com', 'Ceng(ex)071/10', 'git1234', '9090922', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(104, NULL, 'NIGUS', 'TAKELE', 'abc16@gmail.com', 'Ceng(ex)073/10', 'git1234', '9090923', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(105, NULL, 'SEYENEW', 'TEGAW', 'abc17@gmail.com', 'Eng(Exe)111/08', 'git1234', '9090924', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(106, NULL, 'Tadilo', 'ALELIGN', 'abc18@gmail.com', 'Ceng(ex)075/10', 'git1234', '9090925', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(107, NULL, 'TEMESGEN', 'Lakew', 'abc19@gmail.com', 'Ceng(ex)081/10', 'git1234', '9090926', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07'),
+(108, NULL, 'Zigale', 'Yiteyew', 'abc20@gmail.com', 'Ceng(ex)083/10', 'git1234', '9090927', 'Male', 5, 2, 2023, 'no', '2023-04-07', '2023-04-07');
 
 -- --------------------------------------------------------
 
@@ -3296,14 +3384,14 @@ CREATE TABLE IF NOT EXISTS `tbl_student_exam_enrol` (
   `login_history` int DEFAULT NULL,
   PRIMARY KEY (`student_exam_enrol_id`),
   KEY `student_id` (`student_id`,`exam_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_student_exam_enrol`
 --
 
 INSERT INTO `tbl_student_exam_enrol` (`student_exam_enrol_id`, `student_id`, `exam_id`, `attendance_status`, `login_history`) VALUES
-(73, 8, 1, 'Present', 0),
+(73, 8, 1, 'Present', 1),
 (75, 8, 7, 'Absent', 0),
 (76, 8, 6, 'Absent', 0),
 (77, 13, 1, 'Absent', 0),
@@ -3403,7 +3491,9 @@ INSERT INTO `tbl_student_exam_enrol` (`student_exam_enrol_id`, `student_id`, `ex
 (186, 70, 23, 'Present', 1),
 (187, 65, 23, 'Present', 1),
 (188, 64, 23, 'Present', 1),
-(189, 82, 23, 'Present', 1);
+(189, 82, 23, 'Present', 1),
+(190, 57, 1, 'Present', 0),
+(191, 90, 24, 'Present', 0);
 
 -- --------------------------------------------------------
 
