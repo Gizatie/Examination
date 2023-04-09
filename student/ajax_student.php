@@ -101,7 +101,8 @@ function get_user_answer($conn, $obj, $student_id, $exam_id, $question_id)
         $row = $obj->fetch_data($res);
     return $row['user_answer'];
 }
-function request_already_sent($conn,$obj,$student_id,$exam_id){
+function request_already_sent($conn, $obj, $student_id, $exam_id)
+{
     $tbl_name = 'tbl_exam_activation_request';
     $where = 'exam_id = "' . $exam_id . '" and student_id="' . $student_id . '"  and request_status="Pending"';
     $query = $obj->select_data($tbl_name, $where);
@@ -201,29 +202,30 @@ if ($_POST['action'] == "fetch") {
             $output .= '<div class="row">';
 
             $output .= '<div class="col-md-6" >
-                            <div class="i-checks">
-                                <label><h4><input type="radio" name="option_1"  value ="1" class="answer_option" data-question_id="' . $row["question_id"] . '" required = "true" ' . $check_1 . '/>&nbsp;' . $row["first_answer"] . '</h4></label>
-                            </div>
+                                <label>
+                                <h4><input type="radio" name="option_1"  value ="1" class="answer_option" data-question_id="' . $row["question_id"] . '" required = "true" ' . $check_1 . '/>
+                                &nbsp;<span>A</span>'.$row["first_answer"] . '</h4>
+                                </label>
                         </div>';
             $output .= '<div class="col-md-6">
-                            <div class="i-checks">
-                                <label><h4><input type="radio" name="option_1"  value ="2" class="answer_option" data-question_id="' . $row["question_id"] . '" required ="true" ' . $check_2 . '/>&nbsp;' . $row["second_answer"] . '</h4></label>
-                            </div>
+                                <label>
+                                <h4><input type="radio" name="option_1"  value ="2" class="answer_option" data-question_id="' . $row["question_id"] . '" required ="true" ' . $check_2 . '/>
+                                &nbsp;<span>B</span>'.$row["second_answer"] . '</h4></label>
                         </div>';
             $output .= '<div class="col-md-6">
-                            <div class="i-checks">
-                                <label><h4><input type="radio" name="option_1"  value ="3" class="answer_option" data-question_id="' . $row["question_id"] . '"required ="true" ' . $check_3 . '/>&nbsp;' . $row["third_answer"] . '</h4></label>
-                            </div>
+                                <label>
+                                <h4><input type="radio" name="option_1"  value ="3" class="answer_option" data-question_id="' . $row["question_id"] . '"required ="true" ' . $check_3 . '/>
+                                &nbsp;<span>C</span>'.$row["third_answer"] . '</h4></label>
                         </div>';
             $output .= '<div class="col-md-6">
-                            <div class="i-checks">
-                                <label><h4><input type="radio" name="option_1"  value ="4" class="answer_option" data-question_id="' . $row["question_id"] . '"required ="true"' . $check_4 . '/>&nbsp;' . $row["fourth_answer"] . '</h4></label>
-                            </div>
+                                <label>
+                                <h4><input type="radio" name="option_1"  value ="4" class="answer_option" data-question_id="' . $row["question_id"] . '"required ="true"' . $check_4 . '/>
+                                &nbsp;<span>D</span>'.$row["fourth_answer"] . '</h4></label>
                         </div>';
             $output .= '<div class="col-md-6">
-                            <div class="i-checks">
-                                <label ><h4><input type="radio" name="option_1" value ="5" class="answer_option" data-question_id="' . $row["question_id"] . '" required ="true"' . $check_5 . '/>&nbsp;' . $row["fifth_answer"] . '</h4></label>
-                            </div>
+                                <label >
+                                <h4><input type="radio" name="option_1" value ="5" class="answer_option" data-question_id="' . $row["question_id"] . '" required ="true"' . $check_5 . '/>
+                                &nbsp; <span>E</span>'. $row["fifth_answer"] . '</h4></label>
                         </div>';
             $output .= '<input type="hidden" name="right_answer" id = "right_answer" value="' . $row['answer'] . '" />';
             $output .= '<input type="hidden" name="marks" id = "marks" value="' . $row['marks'] . '" />';
@@ -263,12 +265,12 @@ if ($_POST['action'] == "fetch") {
             }
 
             // $prev_next = '
-			// 		<br />
-			// 	  	<div align="center">
-			// 	   		<button type="button" name="previous" class="btn  btn-primary btn-outline btn-rounded btn-lg previous" id="' . $previous_id . '" ' . $if_previous_disable . '>Previous</button>
-			// 	   		<button type="button" name="next" class="btn btn-primary  btn-lg btn-outline btn-rounded next" id="' . $next_id . '" ' . $if_next_disable . '>Next</button>
-			// 	  	</div>
-			// 	  	<br />';
+            // 		<br />
+            // 	  	<div align="center">
+            // 	   		<button type="button" name="previous" class="btn  btn-primary btn-outline btn-rounded btn-lg previous" id="' . $previous_id . '" ' . $if_previous_disable . '>Previous</button>
+            // 	   		<button type="button" name="next" class="btn btn-primary  btn-lg btn-outline btn-rounded next" id="' . $next_id . '" ' . $if_next_disable . '>Next</button>
+            // 	  	</div>
+            // 	  	<br />';
             // $output .= $prev_next;
             $var = $row['question_id'];
             if (if_question_is_answered($conn, $obj, $_SESSION['student_id'], $_POST['exam_id'], $row['question_id'])) {
@@ -308,7 +310,7 @@ if ($_POST['action'] == "fetch") {
                 if (if_question_is_answered($conn, $obj, $_SESSION['student_id'], $_POST['exam_id'], $row['question_id'])) {
                     $class = 'btn-primary';
                 } else
-                    $class = 'btn-success';
+                    $class = 'btn-danger';
                 $output .= '
                     <div class="col-sm-2" style="margin-bottom:10px;">
                         <button type="button" class="btn ' . $class . ' btn-sm btn-circle question_navigation" data-question_id="' . $row["question_id"] . '" id="' . $row["question_id"] . '">' . $count . '</button>
@@ -326,9 +328,8 @@ if ($_POST['action'] == "fetch") {
             </div>
 			</div>
             <div class="card-footer">
-            <label><button class ="btn btn-outline btn-sm btn-circle btn-primary ">i</button> Answered</label>
-            <label><button class ="btn btn-outline btn-circle btn-success ">i</button>  Unvisited</label>
-            <label><button class ="btn btn-outline btn-circle btn-danger ">i</button> Not Answered</label>
+            <label><button class ="btn btn-sm btn-circle btn-primary "></button> Answered</label>
+            <label><button class ="btn btn-circle btn-danger "></button> Not Answered</label>
 			</div>
             </div>
 			';
@@ -570,6 +571,33 @@ if ($_POST['action'] == "fetch") {
         }
         echo json_encode($output);
     }
+    if($_POST['page'] == 'time_counter'){
+        $remaining_minutes = '';
+        $examm_id = '';
+        $exam_status = '';
+        $exam_date = '';
+        $login_history = '';
+        $who_teaches_this_course = ''; //teacher_id
+    
+        $tbl_name = "tbl_exam join tbl_course on tbl_exam.course_id=tbl_course.course_id";
+        $where = "exam_id = '" . $_POST['exam_id'] . "'";
+        $query = $obj->select_data($tbl_name, $where);
+        $res = $obj->execute_query($conn, $query);
+        if ($res) {
+            $row = $obj->fetch_data($res);
+            $exam_star_time  = $row['exam_date'];
+            $exam_date  = $row['exam_date'];
+            $exam_status = $row['status'];
+            $duration = $row['time_duration'] . ' minute';
+            $exam_end_time = strtotime($exam_star_time . '+' . $duration);
+            $_SESSION['exam_cocurse_name'] = $row['course_name'];
+            $exam_end_time = date('Y-m-d H:i:s', $exam_end_time);
+            $remaining_minutes = strtotime($exam_end_time) - time();
+            $until_start = strtotime($exam_star_time) - time();
+            }
+
+            echo json_encode(array('remaining_time' => $remaining_minutes));
+    }
 }
 
 if ($_POST['action'] == 'Add') {
@@ -647,7 +675,7 @@ if ($_POST['action'] == 'Add') {
             request_time = '" . date('Y-m-d H:i:s') . "'
         ";
 
-        if(!request_already_sent($conn, $obj, $_POST['student_id'], $_POST['exam_id'])){
+        if (!request_already_sent($conn, $obj, $_POST['student_id'], $_POST['exam_id'])) {
             $query = $obj->insert_data($tbl_name, $data);
             $res = $obj->execute_query($conn, $query);
             if ($res) {
@@ -655,8 +683,7 @@ if ($_POST['action'] == 'Add') {
             } else {
                 $response = array('success' => 'request_failed');
             }
-        }
-        else {
+        } else {
             $response = array('success' => 'already_exists');
         }
         echo json_encode($response);

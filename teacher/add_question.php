@@ -4,9 +4,6 @@
 
 <!DOCTYPE html>
 <html>
-
-
-
 <head>
     <link rel="shortcut icon" href="<?php echo SITEURL ?>images/logo.jpg" />
 
@@ -43,8 +40,6 @@
 
     <div id="wrapper">
         <?php include('sidenav.php'); ?>
-
-
         <div id="page-wrapper" class="gray-bg">
             <div class="row border-bottom">
                 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
@@ -266,37 +261,37 @@
                                                                 <input id="logo" type="file" name="question_image" class="custom-file-input form-control">
                                                                 <label for="logo" class="custom-file-label">Choose file...</label>
                                                             </div>
-                                                            <span class="name">First Answer</span>
-                                                            <input type="text" name="first_answer" id="first_answer" class="form-control" placeholder="First Answer" required="true" /><br />
+                                                            <span class="name"><h3>A</h3></span>
+                                                            <input type="text" name="first_answer" id="first_answer" class="form-control" placeholder="First choice" required="true" /><br />
 
-                                                            <span class="name">Second Answer</span>
-                                                            <input type="text" name="second_answer" id="second_answer" class=" form-control" placeholder="Second Answer" required="true" /><br />
+                                                            <span class="name"><h3>B</h3></span>
+                                                            <input type="text" name="second_answer" id="second_answer" class=" form-control" placeholder="Second choice" required="true" /><br />
 
-                                                            <span class="name">Third Answer</span>
-                                                            <input type="text" name="third_answer" id="third_answer" class="form-control" placeholder="Third Answer" required="true" /><br />
+                                                            <span class="name"><h3>C</h3></span>
+                                                            <input type="text" name="third_answer" id="third_answer" class="form-control" placeholder="Third choice" required="true" /><br />
 
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <span class="name">Fourth Answer</span>
-                                                        <input type="text" name="fourth_answer" id="fourth_answer" class="form-control" placeholder="Fourth Answer" required="true" /><br />
+                                                        <span class="name"><h3>D</h3></span>
+                                                        <input type="text" name="fourth_answer" id="fourth_answer" class="form-control" placeholder="Fourth choice" required="true" /><br />
 
-                                                        <span class="name">Fifth Answer</span>
-                                                        <input type="text" name="fifth_answer" id="fifth_answer" class="form-control" placeholder="Fifth Answer" /><br />
+                                                        <span class="name"><h3>E</h3></span>
+                                                        <input type="text" name="fifth_answer" id="fifth_answer" class="form-control" placeholder="Fifth choice" /><br />
 
 
                                                         <span class="name">Answer</span>
                                                         <select name="answer" class="form-control select2_answer" id="right_answer" required="true" style="width: 100%;">
                                                             <option value=""></option>
-                                                            <option value="1">First Answer</option>
-                                                            <option value="2">Second Answer</option>
-                                                            <option value="3">Third Answer</option>
-                                                            <option value="4">Fourth Answer</option>
-                                                            <option value="5">Fifth Answer</option>
+                                                            <option value="1"><h3>A</h3></option>
+                                                            <option value="2"><h3>B</h3></option>
+                                                            <option value="3"><h3>C</h3></option>
+                                                            <option value="4"><h3>D</h3></option>
+                                                            <option value="5"><h3>E</h3></option>
                                                         </select>
                                                         <span class="name">Marks</span>
-                                                        <input type="number" name="marks" id="marks" step="0.05"class="form-control" required="true" placeholder="Marks for this question" />
+                                                        <input type="number" name="marks" id="marks" step="any"class="form-control" required="true" placeholder="Marks for this question" />
                                                         <input type="hidden" name="exam_id" id="exam_id" value="<?php echo $_GET['exam_code'] ?>" />
                                                         <input type="hidden" name="page" value="question" />
                                                         <input type="hidden" name="question_id" id='question_id' value="" />
