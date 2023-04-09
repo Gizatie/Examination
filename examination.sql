@@ -2,8 +2,8 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 10.1.194.98:3306
--- Generation Time: Apr 07, 2023 at 12:40 PM
+-- Host: 10.1.196.237:3306
+-- Generation Time: Apr 08, 2023 at 06:57 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `tbl_course` (
   KEY `department_id` (`department_id`),
   KEY `teacher_id` (`teacher_id`),
   KEY `study_year` (`study_year`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_course`
@@ -136,7 +136,8 @@ INSERT INTO `tbl_course` (`course_id`, `course_code`, `course_name`, `department
 (13, 'IT002', 'Network device and configuration', 3, 113, 4),
 (14, 'CoSc1212', 'MOCK Exam for Computer Science (Graduate 2015 E.C)', 4, 5, 4),
 (15, 'M12123', 'Mock Exam for Civil Engineering (Graduate 2015 E.C', 2, 119, 5),
-(17, 'M12123', 'Mock Exam for Civil Engineering (Graduate 2015 E.C', 2, 118, 5);
+(17, 'M12123', 'Mock Exam for Civil Engineering (Graduate 2015 E.C', 2, 118, 5),
+(18, 'CoSc013', 'Introduction to Distributed System', 4, 5, 4);
 
 -- --------------------------------------------------------
 
@@ -210,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `tbl_exam` (
   `exam_type` varchar(255) NOT NULL,
   PRIMARY KEY (`exam_id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_exam`
@@ -230,8 +231,9 @@ INSERT INTO `tbl_exam` (`exam_id`, `course_id`, `time_duration`, `qns_per_set`, 
 (18, 12, 5, 15, 'completed', '2023-04-04', '2023-04-04 05:55:00', ''),
 (21, 13, 30, 10, 'completed', '2023-04-04', '2023-04-04 16:35:00', 'Mock'),
 (22, 13, 30, 10, 'created', '2023-04-04', '2023-04-05 21:15:00', 'Quiz'),
-(23, 14, 90, 20, 'completed', '2023-04-05', '2023-04-05 14:20:00', 'Mock'),
-(24, 15, 90, 120, 'started', '2023-04-07', '2023-04-07 15:25:00', '');
+(23, 14, 90, 20, 'created', '2023-04-08', '2023-04-08 14:10:00', 'Mock'),
+(24, 15, 90, 120, 'created', '2023-04-07', '2023-04-08 03:00:00', ''),
+(25, 18, 60, 26, 'created', '2023-04-07', '2023-04-08 14:10:00', 'Final Exam');
 
 -- --------------------------------------------------------
 
@@ -351,7 +353,7 @@ INSERT INTO `tbl_exam_activation_request` (`request_id`, `student_id`, `request_
 (136, 57, '2023-04-07 13:51:25', 1, 5, 'Activated'),
 (137, 57, '2023-04-07 13:53:39', 1, 5, 'Activated'),
 (138, 57, '2023-04-07 14:00:49', 1, 5, 'Activated'),
-(139, 57, '2023-04-07 14:22:08', 1, 5, 'Pending'),
+(139, 57, '2023-04-07 14:22:08', 1, 5, 'Activated'),
 (140, 90, '2023-04-07 15:28:06', 24, 119, 'Activated'),
 (141, 90, '2023-04-07 15:34:43', 24, 119, 'Activated'),
 (142, 90, '2023-04-07 15:37:19', 24, 119, 'Activated');
@@ -449,7 +451,7 @@ CREATE TABLE IF NOT EXISTS `tbl_question` (
   `updated_date` date NOT NULL,
   `image_name` blob NOT NULL,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=375 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=406 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `tbl_question`
@@ -717,7 +719,38 @@ INSERT INTO `tbl_question` (`question_id`, `exam_id`, `question`, `first_answer`
 (371, '24', '<p>Bottom most layer of pavement is known as<br />\r\n&nbsp;</p>\r\n', 'Wearing course', 'Base course', 'Sub-base course', ' Sub-grade', '', 4, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
 (372, '24', '<p>The vertical side member of a shutter frame, is known<br />\r\n&nbsp;</p>\r\n', 'Style', 'Reveal', 'Mullion', 'post', '', 1, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
 (373, '24', '<p>Which of the following tests measures the toughness of road aggregates?<br />\r\n&nbsp;</p>\r\n', 'Crushing strength test', 'Abrasion test', 'Impact test', 'Shape test', '', 3, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
-(374, '24', '<p>The loose parts in soil mass can be bridged safely by providing a raft foundation provided<br />\r\nthesoft area is smaller than<br />\r\n&nbsp;</p>\r\n', 'The Column Spacing', 'One-Third the Column Spacing', 'Half the Column Spacing', 'Three-Fourth the Column Spacing', '', 2, '', '1.00', 'yes', '2023-04-07', '2023-04-07', '');
+(374, '24', '<p>The loose parts in soil mass can be bridged safely by providing a raft foundation provided<br />\r\nthesoft area is smaller than<br />\r\n&nbsp;</p>\r\n', 'The Column Spacing', 'One-Third the Column Spacing', 'Half the Column Spacing', 'Three-Fourth the Column Spacing', '', 2, '', '1.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(375, '25', '<p style=\"margin-left:0in; margin-right:0in; text-align:justify\"><span style=\"font-size:12pt\"><span style=\"font-family:&quot;Liberation Serif&quot;,serif\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\">Which of the following is <strong>False</strong> about centralized algorithm in distributed system? </span></span></span></p>\r\n', 'A coordinator is appointed', 'The messages are request, grant, release', 'Guarantees mutual exclusion', 'There is starvation', 'None', 4, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(376, '25', '<p>Which of the following algorithm attempt to locate the process with the highest process number?</p>\r\n', 'Bully', 'Centralized', 'Distributed', 'None of the above', '', 1, '<div style=\"margin-bottom:0pt; margin-left:.25in; margin-top:0pt; text-align:left\"><span style=\"font-size:16px\"><span style=\"font-family:&quot;Cambria Math&quot;\"><span style=\"color:#954f72\">The Bully Algorithm</span><span style=\"color:black\"> (the biggest person wins)</span></span></span></div>\r\n', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(377, '25', '<p>In single processor systems, critical regions are protected using_____________.</p>\r\n', 'Semaphores', 'Monitors', 'Both', 'None of the above', '', 3, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(378, '25', '<p>__________is a mechanism that enables an object on one Java virtual machine to invoke methods on an object in another Java virtual machine.</p>\r\n', 'Remote object', 'RPC', 'RMI', 'None of the above', '', 3, '<p>RMI&nbsp;is&nbsp;<strong>Remote Method Invocation</strong>. It is a mechanism that enables an object on one Java virtual machine to invoke methods on an object in another Java virtual machine. Any object that can be invoked this way must implement the Remote interface.</p>\r\n', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(379, '25', '<p>__________it gets a request, examines it, and carries it out to completion before getting the next request.</p>\r\n', 'Distributed System', 'RPC', 'Single threaded', 'Multithreaded', '', 3, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(380, '25', '<p>__________for multimedia to support the continuous flow of messages with timing constraints.</p>\r\n', 'Stream-Oriented Communication', 'Multicast Communication', 'RMI', 'None of the above', '', 1, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(381, '25', '<p>Which refers to the probability that the system is operating correctly at any given time, defined in terms of an instant in time.</p>\r\n', 'Maintainability', 'Availability', 'Safety', 'Reliability', '', 2, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(382, '25', '<p>In which communication system a message that has been submitted for transmission is stored by the communication system only as long as the sending and receiving applications are executing.</p>\r\n', 'Synchronous', 'Asynchronous', 'Transient', 'Persistent', '', 3, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(383, '25', '<p>Which one of the following is <strong>odd</strong>?</p>\r\n', 'Token based Algorithm', 'Berkley Algorithm', 'UTC (Universal coordinate timer)', 'Cristian’s Algorithm', 'None', 3, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(384, '25', '<p>Which one of the following is incorrect about Lamport&rsquo;s logical Clock algorithm?</p>\r\n', 'For every event X, we can assign a time value C(X) on which all processes agree; if X ->Y, then C(X) < C(Y)', 'If Y->X in the same process, then C(Y) < C(X)', 'For all distinctive events X and Y, C(Y)->C(X)', 'If X and Y represent the sending and receiving of a message, respectively, then C(Y) < C(X)', 'None', 3, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(385, '25', '<p>Which one of the following is <strong>incorrect </strong>about mutual exclusion centralized algorithms?</p>\r\n', 'A coordinator is appointed and is in charge of granting permissions.', 'There is some problems of starvations when we implement it.', 'It is easy to implement, requires three messages and it uses first come first serve ordering.', 'None', '', 2, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(386, '25', '<p>In which communication mechanism the sender is blocked until it receives a reply message from the receiver?</p>\r\n', 'Delivery-based transient synchronous communication', 'Receipt-based transient synchronous communication', 'Persistent synchronous communication', 'Response-based transient synchronous communication', 'None', 1, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(387, '25', '<p>In which data consistency model does absolute time ordering of all shared access matters.</p>\r\n', 'Sequential consistency', 'Casual consistency', 'Strict consistency', 'Entry consistency', 'None', 3, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(388, '25', '<p>Which one of the following is incorrect about multicast based stream oriented communication?</p>\r\n', 'Communication is one-to-many', 'Multicast group must be identified before communication', 'Communication is one-to-one', 'Destination identified by the group address', 'None', 3, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(389, '25', '<p>_________is in file server the requests coming on the network by reading the threads for file operation from clients and pass it to an idle worker thread.</p>\r\n', 'File server', 'Dispatcher thread', 'thread', 'Operating System', 'None', 2, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(390, '25', '<p>Assume running multiple operating systems and applications on a single server, consolidate hardware to get vastly higher productivity from fewer servers and simplify the management, maintenance, and the deployment of new applications.</p>\r\n', 'Multithreading', 'Virtualization', 'Transparency', 'Single thread', 'None', 2, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(391, '25', '<p>Which type of layer is the data presentation to applications; concerned with the syntax and semantics of the information transmitted: -</p>\r\n', 'Application', 'Session', 'Presentation', 'Application', 'None', 3, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(392, '25', '<p>Assume a client to invoke the procedure or method from the server through establishing communication between client and server. Which one is only supports procedural programming?</p>\r\n', 'Asynchronous RPC', 'Synchronous RPC', 'RMI', 'RPC', 'None', 4, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(393, '25', '<p>Which of the following is used as a reference time clock for the nodes in the system.</p>\r\n', 'Clock', 'UTC', 'Synchronization', 'None', '', 2, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(394, '25', '<p>Assume if all machines agree on the same time, rather than with the real time; it needs internal consistency of the clocks rather than being close to the real time. What type of cock we say?</p>\r\n', 'Physical clock', 'Logical clock', 'UTC (Universal coordinate timer)', 'Clock', 'None', 2, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(395, '25', '<p>_______it passes a request to a separate process or thread and waits for the next incoming request.</p>\r\n', 'Iterative server', 'Single server', 'Concurrent server', 'None', '', 3, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(396, '25', '<p>RMI is used to build distributed applications; it provides remote communication between Java programs.</p>\r\n', 'True', 'False', '-------', '-----------', '------------', 1, '<p>RMI is used to build distributed applications; it provides remote communication between Java programs. It is provided in the package java.</p>\r\n', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(397, '25', '<p>The RPCs and RMIs are adequate for all distributed system applications.</p>\r\n', 'True', 'False', '---------------', '-------------', '-------------', 2, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(398, '25', '<p>In synchronous transmission mode, there is a maximum end-to-end delay defined for each unit in a data stream</p>\r\n', 'True', 'False', '-------', '-----------', '------------', 1, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(399, '25', '<p><span style=\"font-size:12px\">Sequential consistency is weaker than strict consistency, which&nbsp;requires a read from a location to return the value of the last write to that location; strict consistency demands that operations be seen in the order in which they were actually issued.</span></p>\r\n', 'True', 'False', '-------', '-----------', '------------', 1, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(400, '25', '<p>Processes should not interfere with each other.</p>\r\n', 'True', 'False', '-------', '-----------', '------------', 1, '', '1.50', 'yes', '2023-04-07', '2023-04-07', ''),
+(401, '23', '<p><span style=\"font-size:11.5pt\"><span style=\"background-color:white\"><span style=\"font-family:&quot;Arial&quot;,sans-serif\"><span style=\"color:#3a3a3a\">The updated MySQL extension released with PHP 5 is typically referred to as _______________</span></span></span></span></p>\r\n', 'MySQL', 'mysql', 'mysqli', 'mysqly', '', 3, '', '2.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(402, '23', '<p><span style=\"font-size:11.5pt\"><span style=\"background-color:white\"><span style=\"font-family:&quot;Arial&quot;,sans-serif\"><span style=\"color:#333333\">Variable name in PHP starts with -</span></span></span></span></p>\r\n', '! (Exclamation)', '$ (Dollar)', '& (Ampersand)', '# (Hash)', '', 2, '', '2.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(403, '23', '<p>Which of the following scheduling algorithms is preemptive scheduling?</p>\r\n', 'FCFS Scheduling', 'SJF Scheduling', 'Network Scheduling', 'SRTF Scheduling', 'None', 4, '', '2.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(404, '23', '<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\">Which of the following provides the ability to query information from the database and insert tuples into, delete tuples from, and modify tuples in the database?</span></span></span></span></p>\r\n', 'Data Manipulation Language', 'Data Definition Language', 'Query', 'Relational Schema', '', 1, '<p>The term &quot;DML&quot; stands for the&nbsp;<strong>Data Manipulation Language</strong>&nbsp;used to perform the required changes in the relation&#39;s values.</p>\r\n', '2.00', 'yes', '2023-04-07', '2023-04-07', ''),
+(405, '23', '<p style=\"text-align:justify\"><span style=\"font-size:11pt\"><span style=\"background-color:white\"><span style=\"font-family:Calibri,sans-serif\"><span style=\"font-size:12.0pt\"><span style=\"font-family:&quot;Times New Roman&quot;,serif\"><span style=\"color:black\">Which of the following refers to the level of data abstraction that describes exactly how the data actually stored?</span></span></span></span></span></span></p>\r\n', 'Conceptual Level', 'Physical Level', 'File Level', 'Logical level', 'None', 2, '', '2.00', 'yes', '2023-04-07', '2023-04-07', '');
 
 -- --------------------------------------------------------
 
@@ -3319,7 +3352,7 @@ CREATE TABLE IF NOT EXISTS `tbl_student` (
 
 INSERT INTO `tbl_student` (`student_id`, `exam_id`, `first_name`, `last_name`, `email`, `username`, `password`, `contact`, `gender`, `study_year`, `department_id`, `academic_year`, `is_active`, `added_date`, `updated_date`) VALUES
 (8, 1, 'Nathan', 'Zewdie', 'nathan@gmail.com', 'Nathan', 'dtu1234', '123151555', 'Male', 2, 4, 2021, 'yes', '2021-05-19', '2021-05-19'),
-(57, NULL, 'ABEL', 'FASIL', 'abel12@gmail.com', 'DTU12R1278', 'dtu1234', '9000000', 'Male', 2, 4, 2023, 'yes', '2023-03-31', '2023-04-07'),
+(57, NULL, 'ABEL', 'FASIL', 'abel12@gmail.com', 'DTU12R1278', 'dtu1234', '9000000', 'Male', 4, 4, 2023, 'yes', '2023-03-31', '2023-04-07'),
 (58, NULL, 'ANDEBET', 'SISAY', 'abel12@gmail.com', 'DTU12R0572', '@computer', '9000000', 'Male', 4, 4, 2023, 'yes', '2023-03-31', '2023-04-04'),
 (59, NULL, 'BEKALU', 'MULUYE', 'abel12@gmail.com', 'DTU12R1699', '@computer', '9000000', 'Male', 4, 4, 2023, 'yes', '2023-03-31', '2023-04-04'),
 (60, NULL, 'BEREKET', 'ABERA', 'abel12@gmail.com', 'DTU12R1701', '@computer', '9000000', 'Male', 4, 4, 2023, 'yes', '2023-03-31', '2023-04-04'),
