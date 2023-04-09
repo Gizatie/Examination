@@ -33,7 +33,7 @@ if (isset($_POST['uploadstudent'])) {
       last_name = '$last_name',
       email = '$email',
       username = '$username',
-      password = 'git1234',
+      password = 'it1234',
       contact = '$contact',
       gender = '$gender',
       study_year = '$study_year',
