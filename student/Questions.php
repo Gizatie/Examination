@@ -95,11 +95,12 @@
                                 <div id="single_question_area">
                                     <!--The question gets displayed here. -->
                                 </div>
-                               
+
                             </div>
                             <div class="card-footer"></div>
-                            <div id="exam_timer" data-timer="<?php echo $remaining_minutes ?>" style="max-width:400px; width: 100%; height: 200px;">
-                        </div>
+                            <div id="exam_timer" data-timer="<?php echo $remaining_minutes ?>" style="max-width:400px; width: 50%; height: 200px;">
+                            </div>
+                            <div id="refresh-timer" data-exam_id="<?php echo $_GET['exam_code']?>"><i class="fa fa-refresh fa-5x" style="color: #1ab394;"></i></div>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -180,15 +181,11 @@
 <script src="<?php echo SITEURL ?>asset2/js/inspinia.js"></script>
 <script src="<?php echo SITEURL ?>asset2/js/plugins/pace/pace.min.js"></script>
 
-<!-- iCheck -->
-<script src="<?php echo SITEURL ?>asset2/js/plugins/iCheck/icheck.min.js"></script>
-
-
-
 
 <script>
     $(document).ready(function() {
-        $("#exam_timer").TimeCircles({
+        const updateTimeCircle = () => {
+            $("#exam_timer").TimeCircles({
             time: {
                 Days: {
                     show: false,
@@ -210,10 +207,13 @@
             // use_background: false
 
         });
+        updateTimeCircle();
+        }
+        $('#refresh-timer').on('click', () => {
+            exam_id = $('#refresh-timer').data('exam_id');
+            remaining_seconds(exam_id);
+        });
 
-
-        // toggleFullScreen();
-        // fullScreenListener();
         question_navigation();
         load_question();
 
@@ -251,8 +251,7 @@
                         )
                     } else if (jQuery.parseJSON(data).success == 'request_failed') {
                         alert('you request failed')
-                    }
-                    else if (jQuery.parseJSON(data).success == 'already_exists') {
+                    } else if (jQuery.parseJSON(data).success == 'already_exists') {
                         swal(
                             '',
                             'Your request is already sent. Please wait for approval...',
@@ -273,9 +272,8 @@
                     action: 'fetch'
                 },
                 success: function(minute) {
-                    $('#exam_timer').data("data-timer", minute);
+                    $('#exam_timer').attr("data-timer", JSON.parse(minute).remaining_time);
                 }
-
             });
         }
         load_user_details();
@@ -317,7 +315,7 @@
             });
         }
 
-        function load_question(question_id = '') {
+        function load_question(question_id = '', question_number) {
             $.ajax({
                 url: "<?php echo SITEURL; ?>student/ajax_student.php",
                 type: 'POST',
@@ -332,6 +330,7 @@
                     var res = JSON.parse(data);
                     if (res.question_id != "") {
                         $('#single_question_area').html(res.question);
+                        $('#single_question_area').prepend(`<button class ="btn btn-circle btn-success ">${question_number? question_number : 1}</button>`)
                     } else if (res.question_id == 0) {
                         $('#single_question_area').html("<font color='red'><b>No more question in this direction.</b></font>");
 
@@ -344,10 +343,6 @@
                         $('#question_navigation_area #' + res.question_id).removeClass('btn-danger');
                     $('#question_navigation_area #' + res.question_id).addClass(res.class);
                     $('#question_navigation_area #' + res.question_id).addClass("active");
-                    $('#single_question_area').iCheck({
-                        checkboxClass: 'icheckbox_square-green',
-                        radioClass: 'iradio_square-green',
-                    });
                 },
                 error: function(response) {
                     $('#single_question_area').html(response.responseText);
@@ -385,13 +380,8 @@
             })
         }
 
-        function countdown_timer() {
-
-        }
-        countdown_timer();
         $(document).on('click', '.next', function() {
             var question_id = $(this).attr('id');
-            // $('#' + question_id).toggleClass('active');
             load_question(question_id);
         });
         $(document).on('click', '.previous', function() {
@@ -401,13 +391,14 @@
 
         $(document).on('click', '.question_navigation', function() {
             var question_id = $(this).data('question_id');
+            let question_number = $(this).html();
             if ($('#question_navigation_area #' + question_id).hasClass('btn-success')) {
                 $('#question_navigation_area #' + question_id).removeClass("btn-success");
                 $('#question_navigation_area #' + question_id).addClass("btn-warning");
             }
-            load_question(question_id);
+            load_question(question_id, question_number);
         });
-        $(document).on('ifClicked', '.answer_option', function() {
+        $(document).on('click', '.answer_option', function() {
             var exam_id = "<?php echo $_GET['exam_code'] ?>";
             var question_id = $(this).data('question_id');
             var user_answer = $(this).val();
@@ -451,5 +442,58 @@
 
     });
 </script>
+<style>
+    #single_question_area input[type="radio"] {
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        border: 2px solid #1ab394;
+        background-color: white;
+        -webkit-appearance: none;
+        /*to disable the default appearance of radio button*/
+        -moz-appearance: none;
+    }
+
+    #single_question_area input[type="radio"]:focus {
+        /*no need, if you don't disable default appearance*/
+        outline: none;
+        /*to remove the square border on focus*/
+    }
+
+    #single_question_area input[type="radio"]:checked {
+        /*no need, if you don't disable default appearance*/
+        background-color: #1ab394;
+    }
+
+    #single_question_area input[type="radio"]:checked~span:first-of-type {
+        color: white;
+    }
+
+    #single_question_area label span:first-of-type {
+        position: relative;
+        left: -27px;
+        font-size: 15px;
+        color: #1ab394;
+    }
+
+    #single_question_area label span {
+        position: relative;
+        top: -12px;
+        left: -12px;
+    }
+
+    button.question_navigation:focus {
+        background-color: #1c84c6;
+    }
+
+    #refresh-timer {
+        position: relative;
+        top: -150px;
+        right: -600px;
+        height: 60px;
+        width: 60px;
+        cursor: pointer;
+    }
+</style>
 
 </html>
