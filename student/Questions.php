@@ -207,8 +207,8 @@
             // use_background: false
 
         });
-        updateTimeCircle();
-        }
+    }
+    updateTimeCircle();
         $('#refresh-timer').on('click', () => {
             exam_id = $('#refresh-timer').data('exam_id');
             remaining_seconds(exam_id);
@@ -273,6 +273,7 @@
                 },
                 success: function(minute) {
                     $('#exam_timer').attr("data-timer", JSON.parse(minute).remaining_time);
+                    // updateTimeCircle();
                 }
             });
         }
@@ -449,8 +450,8 @@
         border-radius: 15px;
         border: 2px solid #1ab394;
         background-color: white;
+        appearance: none;
         -webkit-appearance: none;
-        /*to disable the default appearance of radio button*/
         -moz-appearance: none;
     }
 
