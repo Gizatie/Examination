@@ -100,7 +100,7 @@
                             <div class="card-footer"></div>
                             <div id="exam_timer" data-timer="<?php echo $remaining_minutes ?>" style="max-width:400px; width: 50%; height: 200px;">
                             </div>
-                            <div id="refresh-timer" data-exam_id="<?php echo $_GET['exam_code']?>"><i class="fa fa-refresh fa-5x" style="color: #1ab394;"></i></div>
+                            <div id="refresh-timer" data-exam_id="<?php echo $_GET['exam_code'] ?>"><i class="fa fa-refresh fa-5x" style="color: #1ab394;"></i></div>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -186,29 +186,28 @@
     $(document).ready(function() {
         const updateTimeCircle = () => {
             $("#exam_timer").TimeCircles({
-            time: {
-                Days: {
-                    show: false,
-                    color: "#1AB394"
+                time: {
+                    Days: {
+                        show: false,
+                        color: "#1AB394"
+                    },
+                    Hours: {
+                        show: true,
+                        color: "#1AB394"
+                    },
+                    Minutes: {
+                        color: "#1AB394"
+                    },
+                    Seconds: {
+                        color: "#1AB394"
+                    }
                 },
-                Hours: {
-                    show: true,
-                    color: "#1AB394"
-                },
-                Minutes: {
-                    color: "#1AB394"
-                },
-                Seconds: {
-                    color: "#1AB394"
-                }
-            },
 
-            circle_bg_color: "#FFF",
-            // use_background: false
-
-        });
-    }
-    updateTimeCircle();
+                circle_bg_color: "#ccc",
+                // use_background: false
+            });
+        }
+        updateTimeCircle();
         $('#refresh-timer').on('click', () => {
             exam_id = $('#refresh-timer').data('exam_id');
             remaining_seconds(exam_id);
@@ -272,8 +271,9 @@
                     action: 'fetch'
                 },
                 success: function(minute) {
-                    $('#exam_timer').attr("data-timer", JSON.parse(minute).remaining_time);
-                    // updateTimeCircle();
+                    $('#exam_timer')
+                    .attr("data-timer", JSON.parse(minute).remaining_time)
+                    .TimeCircles().rebuild().restart();
                 }
             });
         }
@@ -456,13 +456,10 @@
     }
 
     #single_question_area input[type="radio"]:focus {
-        /*no need, if you don't disable default appearance*/
         outline: none;
-        /*to remove the square border on focus*/
     }
 
     #single_question_area input[type="radio"]:checked {
-        /*no need, if you don't disable default appearance*/
         background-color: #1ab394;
     }
 
@@ -479,8 +476,8 @@
 
     #single_question_area label span {
         position: relative;
-        top: -12px;
-        left: -12px;
+        top: -11px;
+        left: -12.5px;
     }
 
     button.question_navigation:focus {
