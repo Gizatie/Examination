@@ -109,7 +109,8 @@ if (!isset($_SESSION['teacher'])) {
                                                 <th>Study Year</th>
                                                 <th>Result</th>
                                                 <th>Question</th>
-                                                <th></th>
+                                                <th>View Questions</th>
+                                                <th>Exam actions</th>
                                             </tr>
                                         </thead>
 
@@ -125,6 +126,7 @@ if (!isset($_SESSION['teacher'])) {
                                                 <th>Study Year</th>
                                                 <th>Result</th>
                                                 <th>Question</th>
+                                                <th></th>
                                                 <th></th>
                                             </tr>
                                         </tfoot>

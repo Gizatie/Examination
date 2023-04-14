@@ -205,7 +205,6 @@
 
                 circle_bg_color: "#ccc",
                 // use_background: false
-
             });
         }
         updateTimeCircle();
@@ -430,11 +429,10 @@
                         toastr.success('Your answer is saved!.');
                     else
                         toastr.warning("You updated your answer!");
-                    if ($('#question_navigation_area #' + question_id).hasClass('btn-warning')) {
-                        $('#question_navigation_area #' + question_id).removeClass('btn-warning');
+                    if ($('#question_navigation_area #' + question_id).hasClass('btn-danger')) {
+                        $('#question_navigation_area #' + question_id).removeClass('btn-danger');
                     }
-                    $('#question_navigation_area #' + question_id).addClass(data.class);
-                    question_navigation();
+                    $('#question_navigation_area #' + question_id).addClass('btn-primary');
 
                 }
             })
@@ -451,6 +449,7 @@
         border-radius: 15px;
         border: 2px solid #1ab394;
         background-color: white;
+        appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
     }
