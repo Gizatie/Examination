@@ -429,11 +429,10 @@
                         toastr.success('Your answer is saved!.');
                     else
                         toastr.warning("You updated your answer!");
-                    if ($('#question_navigation_area #' + question_id).hasClass('btn-warning')) {
-                        $('#question_navigation_area #' + question_id).removeClass('btn-warning');
+                    if ($('#question_navigation_area #' + question_id).hasClass('btn-danger')) {
+                        $('#question_navigation_area #' + question_id).removeClass('btn-danger');
                     }
-                    $('#question_navigation_area #' + question_id).addClass(data.class);
-                    question_navigation();
+                    $('#question_navigation_area #' + question_id).addClass('btn-primary');
 
                 }
             })

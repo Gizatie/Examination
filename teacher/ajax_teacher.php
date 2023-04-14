@@ -517,8 +517,8 @@ if ($_POST['action'] == 'fetch') {
             }
             if ($row['status'] != 'started')
                 $sub_array[] .= '<span><a type="button" class="edit_exam" data-toggle="tooltip" data-placement="top" title="Click to edit the exam." data-course-id ="' . $row['course_id'] . '" data-exam-id="' . $row['exam_id'] . '"><i class="fa fa-lg fa-pencil " style="color:#1AB394"> </i></a>
-            &nbsp; <a type= "button" class="delete_exam" data-toggle="tooltip" data-placement="top" title="Click to delete the exam." data-exam-id="' . $row['exam_id'] . '"><i class = "fa fa-trash fa-lg" style = "color:red"  ></i> </a></span>';
-            else if ($row['status'] == 'started') {
+            &nbsp;<a type= "button" class="delete_exam" data-toggle="tooltip" data-placement="top" title="Click to delete the exam." data-exam-id="' . $row['exam_id'] . '"><i class = "fa fa-trash fa-lg" style = "color:red"  ></i> </a></span>';
+            if ($row['status'] == 'started') {
                 $sub_array[] .= '<span><a type="button" class="edit_exam" data-toggle="tooltip" data-placement="top" title="Click to edit the exam." data-course-id ="' . $row['course_id'] . '" data-exam-id="' . $row['exam_id'] . '"><i class="fa fa-lg fa-pencil " style="color:#1AB394"> </i></a>
                 &nbsp; </span>';
             } else
