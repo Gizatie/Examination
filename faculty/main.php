@@ -20,6 +20,10 @@ switch ($page) {
             include('department.php');
         }
         break;
+        case "index3": {
+            include('index3.php');
+        }
+        break;
 
     case "exams": {
             include('exams.php');

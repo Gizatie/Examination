@@ -293,7 +293,7 @@ if ($_POST['action'] == "fetch") {
         $tbl_name = "tbl_question";
         $where = "
 				exam_id = '" . $_POST["exam_id"] . "' 
-				ORDER BY question_id ASC 
+				ORDER BY RAND() 
 				";
         $query = $obj->select_data($tbl_name, $where);
         $res = $obj->execute_query($conn, $query);

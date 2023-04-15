@@ -19,21 +19,20 @@ if (isset($_POST['uploadstudent'])) {
       fgetcsv($csvFile);
       while (($line = fgetcsv($csvFile)) !== FALSE) {
         // Get row data
-        $id = $line[0];
-        $first_name = $line[1];
-        $last_name  = $line[2];
-        $email  = $line[3];
-        $username  = $line[4];
-        $contact = $line[5];
-        $gender = $line[6];
-        $study_year = $line[7][0];
+        $first_name = $line[0];
+        $last_name  = $line[1];
+        $email  = $line[2];
+        $username  = $line[3];
+        $contact = $line[4];
+        $gender = $line[5];
+        $study_year = $line[6][0];
         // Check whether member already exists in the database with the same email
         $tbl_name = "tbl_student";
         $data = "first_name = '$first_name',
       last_name = '$last_name',
       email = '$email',
       username = '$username',
-      password = 'it1234',
+      password = 'git1234',
       contact = '$contact',
       gender = '$gender',
       study_year = '$study_year',
