@@ -70,7 +70,6 @@ if (!isset($_SESSION['teacher'])) {
                 </div>
                 <div class="col-sm-8">
                     <div class="title-action">
-                        <!-- <a href="#" class="btn btn-outline btn-rounded btn-primary">Check Invigilation</a> -->
                     </div>
                 </div>
             </div>
@@ -110,7 +109,6 @@ if (!isset($_SESSION['teacher'])) {
                                                 <th>Result</th>
                                                 <th>Question</th>
                                                 <th>View Questions</th>
-                                                <th>Exam actions</th>
                                             </tr>
                                         </thead>
 
@@ -126,7 +124,6 @@ if (!isset($_SESSION['teacher'])) {
                                                 <th>Study Year</th>
                                                 <th>Result</th>
                                                 <th>Question</th>
-                                                <th></th>
                                                 <th></th>
                                             </tr>
                                         </tfoot>
@@ -154,9 +151,7 @@ if (!isset($_SESSION['teacher'])) {
                 </div>
                 <div class="modal-body">
                     <form method="POST" class="wizard-big" id="insert_form">
-                        <!-- <div class="form-group"><label>Course Code</label>
-                                    <input class="form-control input-sm validate[required]" name="course_code" id="course_code" type="text" placeholder=" Enter Course Code">
-                                </div> -->
+
                         <div class="form-group"><label>Exam Type</label>
                             <select name="online_exam_type" id="online_exam_type" class="form-control" style="width: 100%">
                                 <option>Select Exam type here.</option>

@@ -518,7 +518,7 @@ if ($_POST['action'] == 'fetch') {
             if ($row['status'] != 'started')
                 $sub_array[] .= '<span><a type="button" class="edit_exam" data-toggle="tooltip" data-placement="top" title="Click to edit the exam." data-course-id ="' . $row['course_id'] . '" data-exam-id="' . $row['exam_id'] . '"><i class="fa fa-lg fa-pencil " style="color:#1AB394"> </i></a>
             &nbsp;<a type= "button" class="delete_exam" data-toggle="tooltip" data-placement="top" title="Click to delete the exam." data-exam-id="' . $row['exam_id'] . '"><i class = "fa fa-trash fa-lg" style = "color:red"  ></i> </a></span>';
-            if ($row['status'] == 'started') {
+            elseif ($row['status'] == 'started') {
                 $sub_array[] .= '<span><a type="button" class="edit_exam" data-toggle="tooltip" data-placement="top" title="Click to edit the exam." data-course-id ="' . $row['course_id'] . '" data-exam-id="' . $row['exam_id'] . '"><i class="fa fa-lg fa-pencil " style="color:#1AB394"> </i></a>
                 &nbsp; </span>';
             } else
@@ -718,32 +718,6 @@ if ($_POST['action'] == 'fetch') {
         echo $output;
     }
     if ($_POST['page'] == 'student_result') {
-        // $tbl_name1 = '
-        //     TBL_RESULT AS RE 
-        //     INNER JOIN TBL_EXAM AS E ON RE.EXAM_ID = E.EXAM_ID
-        //     INNER JOIN TBL_COURSE  AS C ON E.COURSE_ID = C.COURSE_ID
-        //     INNER JOIN TBL_STUDENT AS S ON  RE.STUDENT_ID = S.STUDENT_ID
-        // ';
-        // $tbl_name2 = 'TBL_RESULT';
-        // $tbl_name3 = 'TBL_QUESTION';
-        // $where2 = ' re.exam_id ="' . $_POST['exam_id'] . '" GROUP BY STUDENT_ID';
-        // $where1 = ' re.exam_id ="' . $_POST['exam_id'] . '" and re.right_answer = re.user_answer
-        // AND ';
-        // if (isset($_POST['search']['value'])) {
-        //     $where1 .= "(";
-        //     $where1 .= 'first_name LIKE "%' . $_POST["search"]["value"] . '%" ';
-        //     $where1 .= 'OR re.student_id LIKE "%' . $_POST["search"]["value"] . '%" ';
-        //     $where1 .= 'OR last_name LIKE "%' . $_POST["search"]["value"] . '%" ';
-        //     // $where .= 'OR score LIKE "%' . $_POST["search"]["value"] . '%" ';
-        //     $where1 .= ")";
-        // }
-
-        // $where .= ' GROUP BY re.student_id';
-        // $other = '';
-        // if ($_POST['length'] != -1) {
-        //     $other .= ' LIMIT ' . $_POST['start'] . ', ' . $_POST['length'];
-        // }
-
         $query = $obj->get_student_result($_POST['exam_id']);
         $res = $obj->execute_query($conn, $query);
         $filtered_rows = $obj->num_rows($res);
