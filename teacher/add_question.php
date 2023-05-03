@@ -4,6 +4,7 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <link rel="shortcut icon" href="<?php echo SITEURL ?>images/logo.jpg" />
 
@@ -35,6 +36,16 @@
 
 
 </head>
+<script>
+    function formToggle(ID) {
+        var element = document.getElementById(ID);
+        if (element.style.display === "none") {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
+        }
+    }
+</script>
 
 <body class="md-skin pace-done">
 
@@ -215,9 +226,43 @@
                                     </div>
                                 </div>
                                 <div class="ibox-content">
-                                    <h4>
-                                        Add Question Here
-                                    </h4>
+                                    <div style="width: 100%;display: flex; justify-content: space-between">
+
+                                        <h4>
+                                            Add Question Here
+                                        </h4>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-6 head panel panel-primary" id="importform" style="padding: 15px;display:none">
+                                                    <form method="POST" action="read_from_word.php?exam_code=<?php echo $_GET['exam_code']?>" id="upload_form" enctype="multipart/form-data">
+                                                        <div class="col-md-6">
+                                                            <input type="file" name="file" class="form-control-file" id="upload_questions">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <input type="submit" value="Import" name="upload_questions" class="btn btn-primary btn-outline " id='cvs_upload' />
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <a href="javascript:void(0);" class=" btn btn-sm btn-primary btn-outline btn-rounded " onclick="formToggle('importform');"><span class=" fa fa-upload"></span> Import Docx </a>
+                                                </div>
+                                                <div class="col" style="padding: 15px;">
+                                                    <?php
+                                                    if (isset($_GET['status'])) {
+                                                        if ($_GET['status'] == 'succ') {
+                                                            echo '<span class ="alert alert-success">File imported successfully.</span>';
+                                                        } elseif ($_GET['status'] == 'invalid_file') {
+                                                            echo '<span class ="alert alert-danger">Please upload valid file.</span>';
+                                                        } elseif ($_GET['status'] == 'err') {
+                                                            echo '<span class ="alert alert-danger">The file uploaded is not CSV file.</span>';
+                                                        }
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <!-- <span id="upload_information" class=" alert alert-primary"></span> -->
+                                        </div>
+                                    </div>
                                     <p>
                                         Carefully fill each fields
                                         <br>
@@ -261,37 +306,57 @@
                                                                 <input id="logo" type="file" name="question_image" class="custom-file-input form-control">
                                                                 <label for="logo" class="custom-file-label">Choose file...</label>
                                                             </div>
-                                                            <span class="name"><h3>A</h3></span>
+                                                            <span class="name">
+                                                                <h3>A</h3>
+                                                            </span>
                                                             <input type="text" name="first_answer" id="first_answer" class="form-control" placeholder="First choice" required="true" /><br />
 
-                                                            <span class="name"><h3>B</h3></span>
+                                                            <span class="name">
+                                                                <h3>B</h3>
+                                                            </span>
                                                             <input type="text" name="second_answer" id="second_answer" class=" form-control" placeholder="Second choice" required="true" /><br />
 
-                                                            <span class="name"><h3>C</h3></span>
+                                                            <span class="name">
+                                                                <h3>C</h3>
+                                                            </span>
                                                             <input type="text" name="third_answer" id="third_answer" class="form-control" placeholder="Third choice" required="true" /><br />
 
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <span class="name"><h3>D</h3></span>
+                                                        <span class="name">
+                                                            <h3>D</h3>
+                                                        </span>
                                                         <input type="text" name="fourth_answer" id="fourth_answer" class="form-control" placeholder="Fourth choice" required="true" /><br />
 
-                                                        <span class="name"><h3>E</h3></span>
+                                                        <span class="name">
+                                                            <h3>E</h3>
+                                                        </span>
                                                         <input type="text" name="fifth_answer" id="fifth_answer" class="form-control" placeholder="Fifth choice" /><br />
 
 
                                                         <span class="name">Answer</span>
                                                         <select name="answer" class="form-control select2_answer" id="right_answer" required="true" style="width: 100%;">
                                                             <option value=""></option>
-                                                            <option value="1"><h3>A</h3></option>
-                                                            <option value="2"><h3>B</h3></option>
-                                                            <option value="3"><h3>C</h3></option>
-                                                            <option value="4"><h3>D</h3></option>
-                                                            <option value="5"><h3>E</h3></option>
+                                                            <option value="1">
+                                                                <h3>A</h3>
+                                                            </option>
+                                                            <option value="2">
+                                                                <h3>B</h3>
+                                                            </option>
+                                                            <option value="3">
+                                                                <h3>C</h3>
+                                                            </option>
+                                                            <option value="4">
+                                                                <h3>D</h3>
+                                                            </option>
+                                                            <option value="5">
+                                                                <h3>E</h3>
+                                                            </option>
                                                         </select>
                                                         <span class="name">Marks</span>
-                                                        <input type="number" name="marks" id="marks" step="any"class="form-control" required="true" placeholder="Marks for this question" />
+                                                        <input type="number" name="marks" id="marks" step="any" class="form-control" required="true" placeholder="Marks for this question" />
                                                         <input type="hidden" name="exam_id" id="exam_id" value="<?php echo $_GET['exam_code'] ?>" />
                                                         <input type="hidden" name="page" value="question" />
                                                         <input type="hidden" name="question_id" id='question_id' value="" />
@@ -330,7 +395,7 @@
                                                 <hr>
                                                 <hr>
                                             </div>
-                                                <span id="answer"></span>
+                                            <span id="answer"></span>
 
                                             <h4>Answer Description</h4>
                                             <span id="desc"></span>
@@ -398,11 +463,11 @@
         const queryString = window.location.search;
         // console.log(queryString);
         const urlParams = new URLSearchParams(queryString);
-        if(urlParams.has('question_id')){
-            $('#question-'+urlParams.get('question_id')).addClass('active');
-            $('#question-'+urlParams.get('question_id')).trigger('click');
+        if (urlParams.has('question_id')) {
+            $('#question-' + urlParams.get('question_id')).addClass('active');
+            $('#question-' + urlParams.get('question_id')).trigger('click');
         }
-     
+
         $("#choice_form").steps({
             bodyTag: "fieldset",
             onStepChanging: function(event, currentIndex, newIndex) {

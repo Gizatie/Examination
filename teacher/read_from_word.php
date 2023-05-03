@@ -14,7 +14,6 @@ if(isset($_POST['upload_questions'])){
       $file_dir = './uploaded_question_docs/';
       move_uploaded_file($_FILES['file']['tmp_name'], $file_dir . $_FILES['file']['name']);
       $objReader = WordIOFactory::createReader('Word2007');
-      // echo $file_dir . $_FILES['file']['name'];
       $phpWord = $objReader->load($file_dir.$_FILES['file']['name']);
       $text = '';
 
@@ -39,10 +38,6 @@ if(isset($_POST['upload_questions'])){
 
       $text = str_replace('\n', "<br>", $text);
       $questions = explode("~~~", $text);
-
-
-      //Get all values from the forms
-
       $exam_code = $_GET['exam_code'];
       $added_date = date('Y-m-d');
 
@@ -90,12 +85,10 @@ if(isset($_POST['upload_questions'])){
       unlink($file_dir . $_FILES['file']['name']);
       $qstring = 'status=succ';
     }else {
-      echo "error: file not uploaded";    
       $qstring = 'status=err';
     }
 
   } else{
-    echo "invalid file";
     $qstring = 'status=invalid_file';
   }
 
