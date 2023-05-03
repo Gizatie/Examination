@@ -4,7 +4,6 @@ if (!isset($_SESSION['teacher'])) {
     header('location:' . SITEURL . 'teacher/index.php?page=login');
 }
 
-
 ?>
 <html>
 
@@ -38,9 +37,6 @@ if (!isset($_SESSION['teacher'])) {
     <link href="<?php echo SITEURL ?>asset2/css/style.css" rel="stylesheet">
     <link href="<?php echo SITEURL ?>asset2/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="<?php echo SITEURL ?>asset2/css/bootstrap-datetimepicker.css" rel="stylesheet">
-
-
-
 </head>
 
 <body class="md-skin pace-done">
@@ -206,7 +202,6 @@ if (!isset($_SESSION['teacher'])) {
     <script>
         $.fn.dataTable.Buttons.defaults.dom.button.className = 'btn btn-white btn-sm';
         $(document).ready(function() {
-            // $('[data-toggle="tooltip"]').tooltip();
             $("body").tooltip({
                 selector: '[data-toggle=tooltip]'
             });
@@ -277,7 +272,6 @@ if (!isset($_SESSION['teacher'])) {
                     request_id: request_id
                 },
                 success: function(data) {
-                    // alert(typeof jQuery.parseJSON(data).number_of_requests)
                     if (jQuery.parseJSON(data).number_of_requests == 0) {
                         $('#number_of_requests').hide()
                     } else {
@@ -285,15 +279,12 @@ if (!isset($_SESSION['teacher'])) {
                         $('#number_of_requests').html(jQuery.parseJSON(data).number_of_requests);
                     }
                     $('.dropdown-messages').html(jQuery.parseJSON(data).drop_down_component);
-                    // alert(jQuery.parseJSON(data).drop_down_component)
                 },
 
             });
 
         });
         $(document).on('click', '.cancel_request', function() {
-            // console.log('cancel button clicked')
-
             const request_id = $(this).data('request_id');
             const request_value = $(this).data('request_value')
             $.ajax({
@@ -306,7 +297,6 @@ if (!isset($_SESSION['teacher'])) {
                     request_id: request_id
                 },
                 success: function(data) {
-                    // alert(typeof jQuery.parseJSON(data).number_of_requests)
                     if (jQuery.parseJSON(data).number_of_requests == 0) {
                         $('#number_of_requests').hide()
                     } else {
@@ -314,7 +304,6 @@ if (!isset($_SESSION['teacher'])) {
                         $('#number_of_requests').html(jQuery.parseJSON(data).number_of_requests);
                     }
                     $('.dropdown-messages').html(jQuery.parseJSON(data).drop_down_component);
-                    // alert(jQuery.parseJSON(data).drop_down_component)
                 },
 
             });
@@ -341,7 +330,6 @@ if (!isset($_SESSION['teacher'])) {
                         $('#online_exam_type').trigger('change');
                         $('#total_questions').val(data.total_question);
                         $('#insert').val("Update Exam");
-                        // alert($('#deanid').attr("value"));
                         $('#action').val("update");
                         $('#add_exam').modal('show');
                     },
@@ -367,11 +355,8 @@ if (!isset($_SESSION['teacher'])) {
                     },
                     complete: function(status) {
                         if (status != "error" && status != "timeout") {
-                            //$("#insert").val("Inserted");
                             $('#add_information').html("Operation successful");
                             $('.dataTables-example').DataTable().ajax.reload();
-                            // $("#add_faculty").modal('toggle');
-
                         }
                     },
                     error: function(responseObj) {
