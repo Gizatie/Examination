@@ -719,13 +719,24 @@ if ($_POST['action'] == 'fetch') {
     }
     if ($_POST['page'] == 'student_result') {
         $query = $obj->get_student_result($_POST['exam_id']);
-        $res = $obj->execute_query($conn, $query);
+        $where = 'WHERE RE.EXAM_ID = '.$_POST['exam_id']. ' AND';
+        if (isset($_POST['search']['value'])) {
+            $where .= "(";
+            $where .= 'FIRST_NAME LIKE "%' . $_POST["search"]["value"] . '%" ';
+            $where .= 'OR LAST_NAME LIKE "%' . $_POST["search"]["value"] . '%" ';
+
+            $where .= ")";
+        }
+      
+
+        $other = 'GROUP BY S.STUDENT_ID';
+        $res = $obj->execute_query($conn, $query.$where.$other);
         $filtered_rows = $obj->num_rows($res);
         $data = array();
         $course_name  = '';
         while ($row = $obj->fetch_data($res)) {
             $sub_array = array();
-            $sub_array[] .= $row['STUDENT_ID'];
+            $sub_array[] .= $row['USERNAME'];
             $sub_array[] .= $row['FIRST_NAME'];
             $sub_array[] .= $row['LAST_NAME'];
             $sub_array[] .= $row['SCORE'] == '' ? '<font color =  "red"><b>0</b></font>' : $row['SCORE'];

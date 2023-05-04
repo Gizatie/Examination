@@ -82,7 +82,7 @@
                         <div class="col-lg-12">
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
-                                    <div class="label label-primary">
+                                    <div class="label label-primary" style="padding: 0.5rem; font-size: 1rem;">
                                         <?php
                                         $tbl_name  = "tbl_exam join tbl_course on tbl_exam.course_id = tbl_course.course_id ";
                                         $where =  "exam_id = '" . $_GET['exam_id'] . "'";
@@ -155,16 +155,15 @@
     </div>
 
     <?php include("includes/scripts3.php") ?>
-    <script src="<?php echo SITEURL ?>asset2/js/bootstrap-datetimepicker.js"></script>
-    <script src="<?php echo SITEURL ?>asset2/js/TimeCircles.js"></script>
-    <script src="<?php echo SITEURL ?>asset2/js/inspinia.js"></script>
+    <!-- <script src="<?php echo SITEURL ?>asset2/js/bootstrap-datetimepicker.js"></script> -->
+    <!-- <script src="<?php echo SITEURL ?>asset2/js/TimeCircles.js"></script> -->
 
 
 </body>
 
 <script>
     $.fn.dataTable.Buttons.defaults.dom.button.className = 'btn btn-white btn-sm';
-    $(document).ready(function nme() {
+    $(document).ready(function() {
 
         $(document).on('click', '.activate_request', function() {
             // console.log('activate button clicked')
